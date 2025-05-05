@@ -1,5 +1,6 @@
 #pragma once
 #include "data/Class.hpp"
+#include "data/Condition.hpp"
 #include "data/CreatureData.hpp"
 #include "data/Race.hpp"
 
@@ -102,6 +103,14 @@ public:
     }
     void setInitiativeDisadvantage(const bool val) { initiativeDisadvantage = val; }
 
+    void addCondition(const ConditionType ct) { conditions.emplace(ct); }
+    void removeCondition(const ConditionType ct) { conditions.erase(ct); }
+    bool hasCondition(const ConditionType ct) { return conditions.find(ct) != conditions.end(); }
+
+    void addImmunity(const ConditionType ct) { conditionImmunities.emplace(ct); }
+    void removeImmunity(const ConditionType ct) { conditionImmunities.erase(ct); }
+    bool hasImmunity(const ConditionType ct) { return conditionImmunities.find(ct) != conditionImmunities.end(); }
+
 private:
     std::string name;
 
@@ -124,4 +133,7 @@ private:
     std::set<AbilityType> abilityDisadvantages;
     bool initiativeAdvantage = false;
     bool initiativeDisadvantage = false;
+
+    std::set<ConditionType> conditions;
+    std::set<ConditionType> conditionImmunities;
 };

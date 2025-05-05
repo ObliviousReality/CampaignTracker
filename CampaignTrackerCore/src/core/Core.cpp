@@ -36,6 +36,24 @@ void CTCore::initalise()
     races.emplace(RaceType::Genasi, std::make_shared<Race>("Genasi"));
     races.emplace(RaceType::HalfOrc, std::make_shared<Race>("Half Orc"));
     races.emplace(RaceType::Gith, std::make_shared<Race>("Githyanki"));
+
+    // init conditions
+
+    conditions.emplace(ConditionType::Blinded, std::make_shared<Condition>("Blinded"));
+    conditions.emplace(ConditionType::Charmed, std::make_shared<Condition>("Charmed"));
+    conditions.emplace(ConditionType::Deafened, std::make_shared<Condition>("Deafened"));
+    conditions.emplace(ConditionType::Frightened, std::make_shared<Condition>("Frightened"));
+    conditions.emplace(ConditionType::Grappled, std::make_shared<Condition>("Grappled"));
+    conditions.emplace(ConditionType::Incapacitated, std::make_shared<Condition>("Incapacitated"));
+    conditions.emplace(ConditionType::Invisible, std::make_shared<Condition>("Invisible"));
+    conditions.emplace(ConditionType::Paralysed, std::make_shared<Condition>("Paralysed"));
+    conditions.emplace(ConditionType::Petrified, std::make_shared<Condition>("Petrified"));
+    conditions.emplace(ConditionType::Poisoned, std::make_shared<Condition>("Poisoned"));
+    conditions.emplace(ConditionType::Prone, std::make_shared<Condition>("Prone"));
+    conditions.emplace(ConditionType::Restrained, std::make_shared<Condition>("Restrained"));
+    conditions.emplace(ConditionType::Stunned, std::make_shared<Condition>("Stunned"));
+    conditions.emplace(ConditionType::Unconscious, std::make_shared<Condition>("Unconscious"));
+    conditions.emplace(ConditionType::Exhaustion, std::make_shared<Condition>("Exhaustion"));
 }
 
 void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }
