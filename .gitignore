@@ -1,3 +1,7 @@
+# Exclude
+!third-party/binaries
+!third-party\binaries\premake\windows\premake5.exe
+
 # Prerequisites
 *.d
 
@@ -27,6 +31,18 @@
 *.lib
 
 # Executables
-*.exe
 *.out
 *.app
+
+# Directories
+.vs/
+bin/
+
+# Files
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+*.sln
+*.log
+Makefile
+
