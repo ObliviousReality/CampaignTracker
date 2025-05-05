@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entities/Creature.hpp"
+#include "entities/Player.hpp"
 
 #include "data/Class.hpp"
 #include "data/Race.hpp"
@@ -25,7 +26,8 @@ public:
     const std::string getClassString(ClassType ct) const { return classes.at(ct)->getName(); }
     const std::string getRaceString(RaceType ct) const { return races.at(ct)->getName(); }
 
-    Creature * createCreature(const std::string & name, const ClassType classType, const RaceType raceType);
+    Creature * createCreature(const std::string & name);
+    Player * createPlayer(const std::string & name, const ClassType classType, const RaceType raceType);
 
 private:
     ClassMap classes;

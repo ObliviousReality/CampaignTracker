@@ -38,14 +38,18 @@ void CTCore::initalise()
     races.emplace(RaceType::Gith, std::make_shared<Race>("Githyanki"));
 }
 
-void CTCore::PrintHelloWorld()
+void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }
+
+Player * CTCore::createPlayer(const std::string & name, const ClassType classType, const RaceType raceType)
 {
-    std::cout << "Hello World!\n";
+    Player * p = new Player(name, classType, raceType);
+    creatures.emplace(p);
+    return p;
 }
 
-Creature * CTCore::createCreature(const std::string & name, const ClassType classType, const RaceType raceType)
+Creature * CTCore::createCreature(const std::string & name)
 {
-    Creature * c = new Creature(name, classType, raceType);
+    Creature * c = new Creature(name);
     creatures.emplace(c);
     return c;
 }
