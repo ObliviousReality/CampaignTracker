@@ -125,6 +125,25 @@ public:
     void removeVulnerability(const DamageType dt) { vulnerabilities.erase(dt); }
     bool hasVulnerability(const DamageType dt) { return vulnerabilities.find(dt) != vulnerabilities.end(); }
 
+    const Abilities * const getAbilities() const { return abilities.get(); }
+    const Abilities * const getSavingThrows() const { return savingThrows.get(); }
+    const Skills * const getSkills() const { return skills.get(); }
+    const PassiveSkills * const getPassives() const { return passives.get(); }
+
+    const std::set<SkillType> & getSkillAdvantages() const { return skillAdvantages; }
+    const std::set<AbilityType> & getAbilityAdvantages() const { return abilityAdvantages; }
+
+    const std::set<SkillType> & getSkillDisadvantages() const { return skillDisadvantages; }
+    const std::set<AbilityType> & getAbilityDisadvantages() const { return abilityDisadvantages; }
+
+    const std::set<ConditionType> & getConditions() const { return conditions; }
+
+    const std::set<ConditionType> & getConditionImmunities() const { return conditionImmunities; }
+    const std::set<DamageType> & getDamageTypeImmunities() const { return damageTypeImmunities; }
+
+    const std::set<DamageType> & getResistances() const { return resistances; }
+    const std::set<DamageType> & getVulnerabilities() const { return vulnerabilities; }
+
 private:
     std::string name;
 
