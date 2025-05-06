@@ -10,7 +10,44 @@ void printDetails(Player * p, CTCore * core)
 {
     const auto race = core->getRaceString(p->getRaceType());
     const auto clas = core->getClassString(p->getClassType());
-    printf("Name:\t%s\nRace:\t%s\nClass:\t%s\n", p->getName().c_str(), race.c_str(), clas.c_str());
+
+    printf("%s (NAME)\n", p->getName().c_str());
+    printf("%s/%s/(LEVEL)/(ALIGNMENT)\n", race.c_str(), clas.c_str());
+    printf("STR DEX CON INT WIS CHA\n");
+    auto * abilities = p->getAbilities();
+    printf(
+        " %i   %i   %i   %i   %i   %i\n",
+        abilities->STR,
+        abilities->DEX,
+        abilities->CON,
+        abilities->INT,
+        abilities->WIS,
+        abilities->CHA);
+
+    printf("STR DEX CON INT WIS CHA\n");
+    auto * savingThrows = p->getSavingThrows();
+    printf(
+        " %i   %i   %i   %i   %i   %i\n",
+        savingThrows->STR,
+        savingThrows->DEX,
+        savingThrows->CON,
+        savingThrows->INT,
+        savingThrows->WIS,
+        savingThrows->CHA);
+
+    printf("%i (%i) / %i\n", p->getHitPoints(), p->getTempHitPoints(), p->getHitPointsMax());
+
+    printf("Init / Insp / AC\n");
+    printf("%i      %s    %i\n", p->getInitiative(), p->hasInspiration() ? "yes" : "no ", p->getAC());
+
+    printf("PER / INV / INS  SPEED\n");
+    auto * passives = p->getPassives();
+    printf(
+        " %i   %i   %i        %ift\n",
+        passives->perception,
+        passives->investigation,
+        passives->insight,
+        p->getSpeed());
 }
 
 int main()
