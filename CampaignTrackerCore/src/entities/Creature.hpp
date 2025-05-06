@@ -14,7 +14,7 @@
 class Creature
 {
 public:
-    Creature(const std::string name) : name(name) {}
+    Creature(const std::string name);
 
     const std::string getName() const { return name; }
 
