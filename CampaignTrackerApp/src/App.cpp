@@ -12,7 +12,7 @@ void printDetails(Player * p, CTCore * core)
     const auto clas = core->getClassString(p->getClassType());
 
     printf("%s (%s)\n", p->getName().c_str(), p->getHumanName().c_str());
-    printf("%s/%s/(LEVEL)/(ALIGNMENT)\n", race.c_str(), clas.c_str());
+    printf("%s/%s/%i/(ALIGNMENT)\n", race.c_str(), clas.c_str(), p->getLevel());
     printf("STR DEX CON INT WIS CHA\n");
     auto * abilities = p->getAbilities();
     printf(
@@ -83,7 +83,7 @@ int main()
         std::cout << c.second->getName() << std::endl;
     }
 
-    auto p = core->createPlayer("Gary", ClassType::Fighter, RaceType::Human, "Gary");
+    auto p = core->createPlayer("Gary", ClassType::Fighter, RaceType::Human, "Gary", 1);
 
     printDetails(p, core.get());
 

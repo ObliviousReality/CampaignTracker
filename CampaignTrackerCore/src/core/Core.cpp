@@ -80,9 +80,14 @@ void CTCore::initalise()
 
 void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }
 
-Player * CTCore::createPlayer(const std::string & name, const ClassType classType, const RaceType raceType, const std::string & human)
+Player * CTCore::createPlayer(
+    const std::string & name,
+    const ClassType classType,
+    const RaceType raceType,
+    const std::string & human,
+    const int level)
 {
-    Player * p = new Player(name, classType, raceType, human);
+    Player * p = new Player(name, classType, raceType, human, level);
     creatures.emplace(p);
     return p;
 }

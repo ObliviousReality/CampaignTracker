@@ -39,7 +39,12 @@ public:
     const std::string & getSenseString(const SenseType st) const { return senses.at(st)->getName(); }
 
     Creature * createCreature(const std::string & name);
-    Player * createPlayer(const std::string & name, const ClassType classType, const RaceType raceType, const std::string & human);
+    Player * createPlayer(
+        const std::string & name,
+        const ClassType classType,
+        const RaceType raceType,
+        const std::string & human,
+        const int level);
 
 private:
     ClassMap classes;
