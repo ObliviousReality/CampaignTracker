@@ -70,6 +70,12 @@ void CTCore::initalise()
     damageTypes.emplace(DamageType::Radiant, std::make_shared<DamageTypeObj>("Radiant"));
     damageTypes.emplace(DamageType::Slashing, std::make_shared<DamageTypeObj>("Slashing"));
     damageTypes.emplace(DamageType::Thunder, std::make_shared<DamageTypeObj>("Thunder"));
+
+    // init senses
+    senses.emplace(SenseType::Blindsight, std::make_shared<Sense>("Blindsight"));
+    senses.emplace(SenseType::Darkvision, std::make_shared<Sense>("Darkvision"));
+    senses.emplace(SenseType::Tremorsense, std::make_shared<Sense>("Tremorsense"));
+    senses.emplace(SenseType::Truesight, std::make_shared<Sense>("Truesight"));
 }
 
 void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }

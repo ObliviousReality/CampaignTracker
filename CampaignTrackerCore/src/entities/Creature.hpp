@@ -5,6 +5,7 @@
 #include "data/CreatureData.hpp"
 #include "data/DamageType.hpp"
 #include "data/Race.hpp"
+#include "data/Senses.hpp"
 
 #include <memory>
 #include <set>
@@ -125,6 +126,10 @@ public:
     void removeVulnerability(const DamageType dt) { vulnerabilities.erase(dt); }
     bool hasVulnerability(const DamageType dt) { return vulnerabilities.find(dt) != vulnerabilities.end(); }
 
+    void addSense(const SenseType st) { senses.emplace(st); }
+    void removeSense(const SenseType st) { senses.erase(st); }
+    bool hasSense(const SenseType st) { return senses.find(st) != senses.end(); }
+
     const Abilities * const getAbilities() const { return abilities.get(); }
     const Abilities * const getSavingThrows() const { return savingThrows.get(); }
     const Skills * const getSkills() const { return skills.get(); }
@@ -143,6 +148,8 @@ public:
 
     const std::set<DamageType> & getResistances() const { return resistances; }
     const std::set<DamageType> & getVulnerabilities() const { return vulnerabilities; }
+
+    const std::set<SenseType> & getSenses() const { return senses; }
 
 private:
     std::string name;
@@ -173,4 +180,6 @@ private:
     std::set<DamageType> damageTypeImmunities;
     std::set<DamageType> resistances;
     std::set<DamageType> vulnerabilities;
+
+    std::set<SenseType> senses;
 };

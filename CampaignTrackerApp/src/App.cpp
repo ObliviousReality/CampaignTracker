@@ -40,6 +40,11 @@ int main()
     {
         std::cout << c.second->getName() << std::endl;
     }
+    std::cout << "Senses:" << std::endl;
+    for (const auto & c : core->getSenses())
+    {
+        std::cout << c.second->getName() << std::endl;
+    }
 
     auto p = core->createPlayer("Gary", ClassType::Fighter, RaceType::Human);
 
