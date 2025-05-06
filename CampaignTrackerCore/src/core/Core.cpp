@@ -72,10 +72,23 @@ void CTCore::initalise()
     damageTypes.emplace(DamageType::Thunder, std::make_shared<DamageTypeObj>("Thunder"));
 
     // init senses
+
     senses.emplace(SenseType::Blindsight, std::make_shared<Sense>("Blindsight"));
     senses.emplace(SenseType::Darkvision, std::make_shared<Sense>("Darkvision"));
     senses.emplace(SenseType::Tremorsense, std::make_shared<Sense>("Tremorsense"));
     senses.emplace(SenseType::Truesight, std::make_shared<Sense>("Truesight"));
+
+    // init alignments
+
+    moralities.emplace(MoralityType::None, std::make_shared<Morality>("None"));
+    moralities.emplace(MoralityType::Good, std::make_shared<Morality>("Good"));
+    moralities.emplace(MoralityType::Neutral, std::make_shared<Morality>("Neutral"));
+    moralities.emplace(MoralityType::Evil, std::make_shared<Morality>("Evil"));
+
+    orders.emplace(OrderType::None, std::make_shared<Order>("None"));
+    orders.emplace(OrderType::Lawful, std::make_shared<Order>("Lawful"));
+    orders.emplace(OrderType::Neutral, std::make_shared<Order>("Neutral"));
+    orders.emplace(OrderType::Chaotic, std::make_shared<Order>("Chaotic"));
 }
 
 void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }
@@ -85,16 +98,31 @@ Player * CTCore::createPlayer(
     const ClassType classType,
     const RaceType raceType,
     const std::string & human,
-    const int level)
+    const int level,
+    const std::pair<MoralityType, OrderType> alignment)
 {
-    Player * p = new Player(name, classType, raceType, human, level);
+    Player * p = new Player(name, classType, raceType, human, level, alignment);
     creatures.emplace(p);
     return p;
 }
 
+const std::string CTCore::getAlignmentString(std::pair<MoralityType, OrderType> alignment) const
+{
+    return getAlignmentString(alignment.first, alignment.second);
+}
+
+const std::string CTCore::getAlignmentString(const MoralityType mt, const OrderType ot) const
+{
+    if (mt == MoralityType::Neutral && ot == OrderType::Neutral)
+    {
+        return "True Neutral";
+    }
+    return orders.find(ot)->second->getName() + " " + moralities.find(mt)->second->getName();
+}
+
 Creature * CTCore::createCreature(const std::string & name)
 {
-    Creature * c = new Creature(name);
+    Creature * c = new Creature(name, { MoralityType::None, OrderType::None });
     creatures.emplace(c);
     return c;
 }

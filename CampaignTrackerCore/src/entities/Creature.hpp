@@ -1,5 +1,6 @@
 #pragma once
 
+#include "data/Alignment.hpp"
 #include "data/Class.hpp"
 #include "data/Condition.hpp"
 #include "data/CreatureData.hpp"
@@ -14,7 +15,7 @@
 class Creature
 {
 public:
-    Creature(const std::string name);
+    Creature(const std::string name, const std::pair<MoralityType, OrderType> alignment);
 
     const std::string getName() const { return name; }
 
@@ -151,6 +152,14 @@ public:
 
     const std::set<SenseType> & getSenses() const { return senses; }
 
+    const std::pair<MoralityType, OrderType> getAlignment() const { return { morality, order }; }
+
+    void setAlignment(const MoralityType newMorality, const OrderType newOrder)
+    {
+        morality = newMorality;
+        order = newOrder;
+    }
+
 private:
     std::string name;
 
@@ -182,4 +191,7 @@ private:
     std::set<DamageType> vulnerabilities;
 
     std::set<SenseType> senses;
+
+    MoralityType morality;
+    OrderType order;
 };

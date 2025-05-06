@@ -11,8 +11,10 @@ void printDetails(Player * p, CTCore * core)
     const auto race = core->getRaceString(p->getRaceType());
     const auto clas = core->getClassString(p->getClassType());
 
+    const auto alignment = core->getAlignmentString(p->getAlignment());
+
     printf("%s (%s)\n", p->getName().c_str(), p->getHumanName().c_str());
-    printf("%s/%s/%i/(ALIGNMENT)\n", race.c_str(), clas.c_str(), p->getLevel());
+    printf("%s/%s/%i/%s\n", race.c_str(), clas.c_str(), p->getLevel(), alignment.c_str());
     printf("STR DEX CON INT WIS CHA\n");
     auto * abilities = p->getAbilities();
     printf(
@@ -83,7 +85,13 @@ int main()
         std::cout << c.second->getName() << std::endl;
     }
 
-    auto p = core->createPlayer("Gary", ClassType::Fighter, RaceType::Human, "Gary", 1);
+    auto p = core->createPlayer(
+        "Gary",
+        ClassType::Fighter,
+        RaceType::Human,
+        "Gary",
+        1,
+        { MoralityType::Good, OrderType::Chaotic });
 
     printDetails(p, core.get());
 

@@ -5,8 +5,14 @@
 class Player : public Creature
 {
 public:
-    Player(const std::string name, const ClassType ct, const RaceType rt, const std::string humanName, const int level)
-        : Creature(name), classType(ct), raceType(rt), humanPlayerName(humanName), level(level)
+    Player(
+        const std::string name,
+        const ClassType ct,
+        const RaceType rt,
+        const std::string humanName,
+        const int level,
+        const std::pair<MoralityType, OrderType> alignment)
+        : Creature(name, alignment), classType(ct), raceType(rt), humanPlayerName(humanName), level(level)
     {}
     const ClassType getClassType() const { return classType; }
     const RaceType getRaceType() const { return raceType; }
