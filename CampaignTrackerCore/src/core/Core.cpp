@@ -54,6 +54,22 @@ void CTCore::initalise()
     conditions.emplace(ConditionType::Stunned, std::make_shared<Condition>("Stunned"));
     conditions.emplace(ConditionType::Unconscious, std::make_shared<Condition>("Unconscious"));
     conditions.emplace(ConditionType::Exhaustion, std::make_shared<Condition>("Exhaustion"));
+
+    // init damage types
+
+    damageTypes.emplace(DamageType::Acid, std::make_shared<DamageTypeObj>("Acid"));
+    damageTypes.emplace(DamageType::Bludgeoning, std::make_shared<DamageTypeObj>("Bludgeoning"));
+    damageTypes.emplace(DamageType::Cold, std::make_shared<DamageTypeObj>("Cold"));
+    damageTypes.emplace(DamageType::Fire, std::make_shared<DamageTypeObj>("Fire"));
+    damageTypes.emplace(DamageType::Force, std::make_shared<DamageTypeObj>("Force"));
+    damageTypes.emplace(DamageType::Lightning, std::make_shared<DamageTypeObj>("Lightning"));
+    damageTypes.emplace(DamageType::Necrotic, std::make_shared<DamageTypeObj>("Necrotic"));
+    damageTypes.emplace(DamageType::Piercing, std::make_shared<DamageTypeObj>("Piercing"));
+    damageTypes.emplace(DamageType::Poison, std::make_shared<DamageTypeObj>("Poison"));
+    damageTypes.emplace(DamageType::Psychic, std::make_shared<DamageTypeObj>("Psychic"));
+    damageTypes.emplace(DamageType::Radiant, std::make_shared<DamageTypeObj>("Radiant"));
+    damageTypes.emplace(DamageType::Slashing, std::make_shared<DamageTypeObj>("Slashing"));
+    damageTypes.emplace(DamageType::Thunder, std::make_shared<DamageTypeObj>("Thunder"));
 }
 
 void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }

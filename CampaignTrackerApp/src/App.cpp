@@ -20,15 +20,23 @@ int main()
 
     core->initalise();
 
+    std::cout << "Classes:" << std::endl;
     for (const auto & c : core->getClasses())
     {
         std::cout << c.second->getName() << std::endl;
     }
+    std::cout << "Races:" << std::endl;
     for (const auto & c : core->getRaces())
     {
         std::cout << c.second->getName() << std::endl;
     }
+    std::cout << "Conditions:" << std::endl;
     for (const auto & c : core->getConditions())
+    {
+        std::cout << c.second->getName() << std::endl;
+    }
+    std::cout << "Damage Types:" << std::endl;
+    for (const auto & c : core->getDamageTypes())
     {
         std::cout << c.second->getName() << std::endl;
     }

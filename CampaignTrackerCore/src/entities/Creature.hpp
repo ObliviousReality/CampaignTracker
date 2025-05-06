@@ -1,7 +1,9 @@
 #pragma once
+
 #include "data/Class.hpp"
 #include "data/Condition.hpp"
 #include "data/CreatureData.hpp"
+#include "data/DamageType.hpp"
 #include "data/Race.hpp"
 
 #include <memory>
@@ -111,6 +113,18 @@ public:
     void removeImmunity(const ConditionType ct) { conditionImmunities.erase(ct); }
     bool hasImmunity(const ConditionType ct) { return conditionImmunities.find(ct) != conditionImmunities.end(); }
 
+    void addImmunity(const DamageType dt) { damageTypeImmunities.emplace(dt); }
+    void removeImmunity(const DamageType dt) { damageTypeImmunities.erase(dt); }
+    bool hasImmunity(const DamageType dt) { return damageTypeImmunities.find(dt) != damageTypeImmunities.end(); }
+
+    void addResistance(const DamageType dt) { resistances.emplace(dt); }
+    void removeResistance(const DamageType dt) { resistances.erase(dt); }
+    bool hasResistance(const DamageType dt) { return resistances.find(dt) != resistances.end(); }
+
+    void addVulnerability(const DamageType dt) { vulnerabilities.emplace(dt); }
+    void removeVulnerability(const DamageType dt) { vulnerabilities.erase(dt); }
+    bool hasVulnerability(const DamageType dt) { return vulnerabilities.find(dt) != vulnerabilities.end(); }
+
 private:
     std::string name;
 
@@ -136,4 +150,8 @@ private:
 
     std::set<ConditionType> conditions;
     std::set<ConditionType> conditionImmunities;
+
+    std::set<DamageType> damageTypeImmunities;
+    std::set<DamageType> resistances;
+    std::set<DamageType> vulnerabilities;
 };
