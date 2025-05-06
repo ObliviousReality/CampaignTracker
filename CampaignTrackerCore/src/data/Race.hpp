@@ -24,9 +24,9 @@ enum class RaceType
 class Race
 {
 public:
-    Race(std::string name) : name(name) {}
+    Race(const std::string name) : name(name) {}
 
-    std::string getName() { return name; }
+    const std::string & getName() { return name; }
 
 private:
     std::string name;

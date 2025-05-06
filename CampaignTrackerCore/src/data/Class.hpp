@@ -22,9 +22,9 @@ enum class ClassType : unsigned int
 class Class
 {
 public:
-    Class(std::string name) : name(name) {}
+    Class(const std::string name) : name(name) {}
 
-    std::string getName() { return name; }
+    const std::string & getName() { return name; }
 
 private:
     std::string name;

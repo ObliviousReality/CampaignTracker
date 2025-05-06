@@ -108,27 +108,27 @@ public:
 
     void addCondition(const ConditionType ct) { conditions.emplace(ct); }
     void removeCondition(const ConditionType ct) { conditions.erase(ct); }
-    bool hasCondition(const ConditionType ct) { return conditions.find(ct) != conditions.end(); }
+    const bool hasCondition(const ConditionType ct) { return conditions.find(ct) != conditions.end(); }
 
     void addImmunity(const ConditionType ct) { conditionImmunities.emplace(ct); }
     void removeImmunity(const ConditionType ct) { conditionImmunities.erase(ct); }
-    bool hasImmunity(const ConditionType ct) { return conditionImmunities.find(ct) != conditionImmunities.end(); }
+    const bool hasImmunity(const ConditionType ct) { return conditionImmunities.find(ct) != conditionImmunities.end(); }
 
     void addImmunity(const DamageType dt) { damageTypeImmunities.emplace(dt); }
     void removeImmunity(const DamageType dt) { damageTypeImmunities.erase(dt); }
-    bool hasImmunity(const DamageType dt) { return damageTypeImmunities.find(dt) != damageTypeImmunities.end(); }
+    const bool hasImmunity(const DamageType dt) { return damageTypeImmunities.find(dt) != damageTypeImmunities.end(); }
 
     void addResistance(const DamageType dt) { resistances.emplace(dt); }
     void removeResistance(const DamageType dt) { resistances.erase(dt); }
-    bool hasResistance(const DamageType dt) { return resistances.find(dt) != resistances.end(); }
+    const bool hasResistance(const DamageType dt) { return resistances.find(dt) != resistances.end(); }
 
     void addVulnerability(const DamageType dt) { vulnerabilities.emplace(dt); }
     void removeVulnerability(const DamageType dt) { vulnerabilities.erase(dt); }
-    bool hasVulnerability(const DamageType dt) { return vulnerabilities.find(dt) != vulnerabilities.end(); }
+    const bool hasVulnerability(const DamageType dt) { return vulnerabilities.find(dt) != vulnerabilities.end(); }
 
     void addSense(const SenseType st) { senses.emplace(st); }
     void removeSense(const SenseType st) { senses.erase(st); }
-    bool hasSense(const SenseType st) { return senses.find(st) != senses.end(); }
+    const bool hasSense(const SenseType st) { return senses.find(st) != senses.end(); }
 
     const Abilities * const getAbilities() const { return abilities.get(); }
     const Abilities * const getSavingThrows() const { return savingThrows.get(); }

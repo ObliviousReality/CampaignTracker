@@ -25,9 +25,9 @@ enum class ConditionType
 class Condition
 {
 public:
-    Condition(std::string name) : name(name) {}
+    Condition(const std::string name) : name(name) {}
 
-    const std::string getName() const { return name; }
+    const std::string & getName() const { return name; }
 
 private:
     std::string name;

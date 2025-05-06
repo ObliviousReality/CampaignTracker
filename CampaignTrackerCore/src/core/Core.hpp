@@ -26,17 +26,17 @@ public:
     void initalise();
     static void PrintHelloWorld();
 
-    ClassMap getClasses() const { return classes; }
-    RaceMap getRaces() const { return races; }
-    ConditionMap getConditions() const { return conditions; }
-    DamageTypeMap getDamageTypes() const { return damageTypes; }
-    SenseMap getSenses() const { return senses; }
+    const ClassMap & getClasses() const { return classes; }
+    const RaceMap & getRaces() const { return races; }
+    const ConditionMap & getConditions() const { return conditions; }
+    const DamageTypeMap & getDamageTypes() const { return damageTypes; }
+    const SenseMap & getSenses() const { return senses; }
 
-    const std::string getClassString(ClassType ct) const { return classes.at(ct)->getName(); }
-    const std::string getRaceString(RaceType ct) const { return races.at(ct)->getName(); }
-    const std::string getConditionString(ConditionType ct) const { return conditions.at(ct)->getName(); }
-    const std::string getDamageTypeString(DamageType dt) const { return damageTypes.at(dt)->getName(); }
-    const std::string getSenseString(SenseType st) const { return senses.at(st)->getName(); }
+    const std::string & getClassString(const ClassType ct) const { return classes.at(ct)->getName(); }
+    const std::string & getRaceString(const RaceType ct) const { return races.at(ct)->getName(); }
+    const std::string & getConditionString(const ConditionType ct) const { return conditions.at(ct)->getName(); }
+    const std::string & getDamageTypeString(const DamageType dt) const { return damageTypes.at(dt)->getName(); }
+    const std::string & getSenseString(const SenseType st) const { return senses.at(st)->getName(); }
 
     Creature * createCreature(const std::string & name);
     Player * createPlayer(const std::string & name, const ClassType classType, const RaceType raceType);

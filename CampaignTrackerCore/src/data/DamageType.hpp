@@ -24,9 +24,9 @@ enum class DamageType
 class DamageTypeObj
 {
 public:
-    DamageTypeObj(std::string name) : name(name) {}
+    DamageTypeObj(const std::string name) : name(name) {}
 
-    const std::string getName() const { return name; }
+    const std::string & getName() const { return name; }
 
 private:
     std::string name;
