@@ -50,4 +50,19 @@ void Creature::generateSkills()
     setSkillLevel(SkillType::Intimidation, cha);
     setSkillLevel(SkillType::Performance, cha);
     setSkillLevel(SkillType::Persuasion, cha);
+
+    // passives
+
+    auto getPassiveSkill = [&](const SkillType st)
+    {
+        auto mod = (skills->getSkill(st));
+        auto ad = (hasAdvantage(st) ? 5 : 0);
+        auto dd(hasDisadvantage(st) ? 5 : 0);
+
+        return 10 + mod + ad - dd;
+    };
+
+    passives->perception = getPassiveSkill(SkillType::Perception);
+    passives->insight = getPassiveSkill(SkillType::Insight);
+    passives->investigation = getPassiveSkill(SkillType::Investigation);
 }

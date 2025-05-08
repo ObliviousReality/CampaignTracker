@@ -132,9 +132,6 @@ int main()
     p->setInitiative(3);
     p->setSpeed(25);
     p->setProficiency(3);
-    p->setPassiveAbility(PassiveSkillType::Perception, 15);
-    p->setPassiveAbility(PassiveSkillType::Investigation, 18);
-    p->setPassiveAbility(PassiveSkillType::Insight, 12);
     p->addResistance(DamageType::Poison);
     p->setHitPoints(83);
     p->setMaxHitPoints(83);
