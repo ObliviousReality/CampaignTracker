@@ -7,7 +7,7 @@
 #include "data/Condition.hpp"
 #include "data/DamageType.hpp"
 #include "data/Race.hpp"
-#include "data/Senses.hpp"
+#include "data/Sense.hpp"
 
 #include <memory>
 #include <set>
