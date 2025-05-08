@@ -8,6 +8,7 @@
 #include "data/Race.hpp"
 #include "data/Sense.hpp"
 
+#include <map>
 #include <memory>
 #include <set>
 #include <string>
@@ -160,6 +161,16 @@ public:
         order = newOrder;
     }
 
+    void setTaggedSkill(const SkillType st, const int tagLevel = 1) { taggedSkills[st] = tagLevel; }
+    const int getTaggedSkillLevel(const SkillType st) const { return taggedSkills.count(st) ? taggedSkills.at(st) : 0; }
+
+    const int getSkillModifier(const SkillType st) const
+    {
+        return skills->getModifier(st) + (getProficiency() * getTaggedSkillLevel(st));
+    }
+
+    void generateSkills();
+
 private:
     std::string name;
 
@@ -194,4 +205,6 @@ private:
 
     MoralityType morality;
     OrderType order;
+
+    std::map<SkillType, int> taggedSkills;
 };

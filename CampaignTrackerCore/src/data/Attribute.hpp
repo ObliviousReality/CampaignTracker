@@ -154,6 +154,9 @@ struct Skills
     const int getSkill(const SkillType st) const;
     void setSkill(const SkillType st, const int val);
 
+    const int getModifier(const SkillType st) const;
+
+
     int acrobatics = 0;
     int animal_handling = 0;
     int arcana = 0;

@@ -2,6 +2,11 @@
 
 #include <cmath>
 
+namespace
+{
+    const int getModifier(const int skillLevel) { return static_cast<int>(std::floor((skillLevel - 10) / 2)); }
+};
+
 const int Abilities::getAbility(const AbilityType type) const
 {
     switch (type)
@@ -29,11 +34,7 @@ void Abilities::setAbility(const AbilityType type, const int val)
     }
 }
 
-const int Abilities::getModifier(const AbilityType at) const
-{
-    const auto value = getAbility(at);
-    return static_cast<int>(std::floor((value - 10) / 2));
-}
+const int Abilities::getModifier(const AbilityType at) const { return ::getModifier(getAbility(at)); }
 
 const int Skills::getSkill(const SkillType st) const
 {
@@ -85,6 +86,8 @@ void Skills::setSkill(const SkillType st, const int val)
         case SkillType::Survival: survival = val; break;
     }
 }
+
+const int Skills::getModifier(const SkillType st) const { return ::getModifier(getSkill(st)); }
 
 const int PassiveSkills::getPassiveSkill(const PassiveSkillType pst) const
 {

@@ -81,6 +81,33 @@ void printDetails(Player * p)
         printf("%s, ", Core::getSenseString(sense).c_str());
     }
     printf("\n");
+
+    printf("Skills:\n");
+    auto printSkill = [&p](const SkillType st)
+    {
+        const auto skill = p->getSkill(st);
+        printf("%s: %c%i\n", Core::getSkillString(st).c_str(), skill >= 0 ? '+' : '-', skill);
+    };
+    printSkill(SkillType::Acrobatics);
+    printSkill(SkillType::AnimalHandling);
+    printSkill(SkillType::Arcana);
+    printSkill(SkillType::Athletics);
+    printSkill(SkillType::Deception);
+    printSkill(SkillType::History);
+    printSkill(SkillType::Deception);
+    printSkill(SkillType::History);
+    printSkill(SkillType::Insight);
+    printSkill(SkillType::Intimidation);
+    printSkill(SkillType::Investigation);
+    printSkill(SkillType::Medicine);
+    printSkill(SkillType::Nature);
+    printSkill(SkillType::Perception);
+    printSkill(SkillType::Performance);
+    printSkill(SkillType::Persuasion);
+    printSkill(SkillType::Religion);
+    printSkill(SkillType::SleightOfHand);
+    printSkill(SkillType::Stealth);
+    printSkill(SkillType::Survival);
 }
 
 int main()
@@ -116,6 +143,13 @@ int main()
     p->setAbility(AbilityType::Wisdom, 14);
     p->setAbility(AbilityType::Charisma, 15);
 
+    p->setTaggedSkill(SkillType::AnimalHandling);
+    p->setTaggedSkill(SkillType::Deception);
+    p->setTaggedSkill(SkillType::Investigation, 2);
+    p->setTaggedSkill(SkillType::Perception);
+    p->setTaggedSkill(SkillType::Survival);
+
+    p->generateSkills();
     printDetails(p);
 
     std::cin.get();
