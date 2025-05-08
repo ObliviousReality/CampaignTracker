@@ -19,6 +19,18 @@ public:
 
     const std::string & getName() { return name; }
 
+    static const std::string getSenseString(const SenseType st)
+    {
+        switch (st)
+        {
+            case SenseType::Blindsight: return "Blindsight";
+            case SenseType::Darkvision: return "Darkvision";
+            case SenseType::Tremorsense: return "Tremorsense";
+            case SenseType::Truesight: return "Truesight";
+            default: return "";
+        }
+    }
+
 private:
     std::string name;
 };

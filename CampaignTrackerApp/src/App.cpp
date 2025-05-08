@@ -6,12 +6,12 @@
 #include <map>
 #include <memory>
 
-void printDetails(Player * p, CTCore * core)
+void printDetails(Player * p)
 {
-    const auto race = core->getRaceString(p->getRaceType());
-    const auto clas = core->getClassString(p->getClassType());
+    const auto race = Race::getClassName(p->getRaceType());
+    const auto clas = Class::getClassName(p->getClassType());
 
-    const auto alignment = core->getAlignmentString(p->getAlignment());
+    const auto alignment = Alignment::getAlignmentString(p->getAlignment());
 
     printf("%s (%s)\n", p->getName().c_str(), p->getHumanName().c_str());
     printf("%s/%s/%i/%s\n", race.c_str(), clas.c_str(), p->getLevel(), alignment.c_str());
@@ -39,8 +39,8 @@ void printDetails(Player * p, CTCore * core)
 
     printf("%i (%i) / %i\n", p->getHitPoints(), p->getTempHitPoints(), p->getHitPointsMax());
 
-    printf("Init / Insp / AC\n");
-    printf("+%i      %s    %i\n", p->getInitiative(), p->hasInspiration() ? "yes" : "no ", p->getAC());
+    printf("Init / Insp / Prof / AC\n");
+    printf("+%i      %s    +%i    %i\n", p->getInitiative(), p->hasInspiration() ? "yes" : "no ", p->getProficiency(), p->getAC());
 
     printf("PER / INV / INS  SPEED\n");
     auto * passives = p->getPassives();
@@ -56,29 +56,29 @@ void printDetails(Player * p, CTCore * core)
     printf("Conditions:\n");
     for (const auto con : p->getConditions())
     {
-        printf("%s, ", core->getConditionString(con).c_str());
+        printf("%s, ", Condition::getConditionString(con).c_str());
     }
     printf("\n");
     printf("Immunities:\n");
     for (const auto con : p->getConditionImmunities())
     {
-        printf("%s, ", core->getConditionString(con).c_str());
+        printf("%s, ", Condition::getConditionString(con).c_str());
     }
     for (const auto dt : p->getDamageTypeImmunities())
     {
-        printf("%s, ", core->getDamageTypeString(dt).c_str());
+        printf("%s, ", DamageTypeObj::getDamageTypeString(dt).c_str());
     }
     printf("\n");
     printf("Resistances:\n");
     for (const auto res : p->getResistances())
     {
-        printf("%s, ", core->getDamageTypeString(res).c_str());
+        printf("%s, ", DamageTypeObj::getDamageTypeString(res).c_str());
     }
     printf("\n");
     printf("Senses:\n");
     for (const auto sense : p->getSenses())
     {
-        printf("%s, ", core->getSenseString(sense).c_str());
+        printf("%s, ", Sense::getSenseString(sense).c_str());
     }
     printf("\n");
 }
@@ -89,32 +89,6 @@ int main()
     CTCore::PrintHelloWorld();
 
     core->initalise();
-
-    //std::cout << "Classes:" << std::endl;
-    //for (const auto & c : core->getClasses())
-    //{
-    //    std::cout << c.second->getName() << std::endl;
-    //}
-    //std::cout << "Races:" << std::endl;
-    //for (const auto & c : core->getRaces())
-    //{
-    //    std::cout << c.second->getName() << std::endl;
-    //}
-    //std::cout << "Conditions:" << std::endl;
-    //for (const auto & c : core->getConditions())
-    //{
-    //    std::cout << c.second->getName() << std::endl;
-    //}
-    //std::cout << "Damage Types:" << std::endl;
-    //for (const auto & c : core->getDamageTypes())
-    //{
-    //    std::cout << c.second->getName() << std::endl;
-    //}
-    //std::cout << "Senses:" << std::endl;
-    //for (const auto & c : core->getSenses())
-    //{
-    //    std::cout << c.second->getName() << std::endl;
-    //}
 
     auto p = core->createPlayer(
         "Berthog",
@@ -128,6 +102,7 @@ int main()
     p->setAC(17);
     p->setInitiative(3);
     p->setSpeed(25);
+    p->setProficiency(3);
     p->setPassiveAbility(PassiveSkillType::Perception, 15);
     p->setPassiveAbility(PassiveSkillType::Investigation, 18);
     p->setPassiveAbility(PassiveSkillType::Insight, 12);
@@ -143,7 +118,7 @@ int main()
     p->setAbility(AbilityType::Wisdom, 14);
     p->setAbility(AbilityType::Charisma, 15);
 
-    printDetails(p, core.get());
+    printDetails(p);
 
     std::cin.get();
     return 0;
