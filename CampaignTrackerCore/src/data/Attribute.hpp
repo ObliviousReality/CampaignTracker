@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 enum class AbilityType
 {
     Strength,
@@ -57,6 +59,34 @@ struct Abilities
 
     const int getModifier(const AbilityType at) const;
 
+    const std::string getAbilityString(const AbilityType at)
+    {
+        switch (at)
+        {
+            case AbilityType::Strength: return "Strength";
+            case AbilityType::Dexterity: return "Dexterity";
+            case AbilityType::Constitution: return "Constitution";
+            case AbilityType::Intelligence: return "Intelligence";
+            case AbilityType::Wisdom: return "Wisdom";
+            case AbilityType::Charisma: return "Charisma";
+            default: return "";
+        }
+    }
+
+    const std::string getAbilityShortString(const AbilityType at)
+    {
+        switch (at)
+        {
+            case AbilityType::Strength: return "STR";
+            case AbilityType::Dexterity: return "DEX";
+            case AbilityType::Constitution: return "CON";
+            case AbilityType::Intelligence: return "INT";
+            case AbilityType::Wisdom: return "WIS";
+            case AbilityType::Charisma: return "CHA";
+            default: return "";
+        }
+    }
+
     int STR = 0;
     int DEX = 0;
     int CON = 0;
@@ -94,6 +124,32 @@ struct Skills
 
     const int getSkill(const SkillType st) const;
     void setSkill(const SkillType st, const int val);
+
+    const std::string getSkillString(const SkillType st)
+    {
+        switch (st)
+        {
+            case SkillType::Acrobatics: return "Acrobatics";
+            case SkillType::AnimalHandling: return "Animal Handling";
+            case SkillType::Arcana: return "Arcana";
+            case SkillType::Athletics: return "Athletics";
+            case SkillType::Deception: return "Deception";
+            case SkillType::History: return "History";
+            case SkillType::Insight: return "Insight";
+            case SkillType::Intimidation: return "Intimidation";
+            case SkillType::Investigation: return "Investigation";
+            case SkillType::Medicine: return "Medicine";
+            case SkillType::Nature: return "Nature";
+            case SkillType::Perception: return "Perception";
+            case SkillType::Performance: return "Performance";
+            case SkillType::Persuasion: return "Persuasion";
+            case SkillType::Religion: return "Religion";
+            case SkillType::SleightOfHand: return "Sleight of Hand";
+            case SkillType::Stealth: return "Stealth";
+            case SkillType::Survival: return "Survival";
+            default: return "";
+        }
+    }
 
     int acrobatics = 0;
     int animal_handling = 0;

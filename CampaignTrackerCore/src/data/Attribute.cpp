@@ -1,4 +1,4 @@
-#include "CreatureData.hpp"
+#include "Attribute.hpp"
 
 #include <cmath>
 

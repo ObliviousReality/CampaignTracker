@@ -1,9 +1,9 @@
 #pragma once
 
 #include "data/Alignment.hpp"
+#include "data/Attribute.hpp"
 #include "data/Class.hpp"
 #include "data/Condition.hpp"
-#include "data/CreatureData.hpp"
 #include "data/DamageType.hpp"
 #include "data/Race.hpp"
 #include "data/Senses.hpp"
