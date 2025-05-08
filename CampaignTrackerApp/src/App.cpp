@@ -8,10 +8,10 @@
 
 void printDetails(Player * p)
 {
-    const auto race = Race::getClassName(p->getRaceType());
-    const auto clas = Class::getClassName(p->getClassType());
+    const auto race = Core::getRaceString(p->getRaceType());
+    const auto clas = Core::getClassString(p->getClassType());
 
-    const auto alignment = Alignment::getAlignmentString(p->getAlignment());
+    const auto alignment = Core::getAlignmentString(p->getAlignment());
 
     printf("%s (%s)\n", p->getName().c_str(), p->getHumanName().c_str());
     printf("%s/%s/%i/%s\n", race.c_str(), clas.c_str(), p->getLevel(), alignment.c_str());
@@ -66,19 +66,19 @@ void printDetails(Player * p)
     }
     for (const auto dt : p->getDamageTypeImmunities())
     {
-        printf("%s, ", DamageTypeObj::getDamageTypeString(dt).c_str());
+        printf("%s, ", Core::getDamageTypeString(dt).c_str());
     }
     printf("\n");
     printf("Resistances:\n");
     for (const auto res : p->getResistances())
     {
-        printf("%s, ", DamageTypeObj::getDamageTypeString(res).c_str());
+        printf("%s, ", Core::getDamageTypeString(res).c_str());
     }
     printf("\n");
     printf("Senses:\n");
     for (const auto sense : p->getSenses())
     {
-        printf("%s, ", Sense::getSenseString(sense).c_str());
+        printf("%s, ", Core::getSenseString(sense).c_str());
     }
     printf("\n");
 }
@@ -87,8 +87,6 @@ int main()
 {
     std::unique_ptr<CTCore> core = std::make_unique<CTCore>();
     CTCore::PrintHelloWorld();
-
-    core->initalise();
 
     auto p = core->createPlayer(
         "Berthog",

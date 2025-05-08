@@ -21,13 +21,8 @@ enum class DamageType
     NUM_DAMAGE_TYPES,
 };
 
-class DamageTypeObj
+namespace Core
 {
-public:
-    DamageTypeObj(const std::string name) : name(name) {}
-
-    const std::string & getName() const { return name; }
-
     static const std::string getDamageTypeString(const DamageType dt)
     {
         switch (dt)
@@ -48,7 +43,4 @@ public:
             default: return "";
         }
     }
-
-private:
-    std::string name;
 };

@@ -12,13 +12,8 @@ enum class SenseType
     NUM_SENSES,
 };
 
-class Sense
+namespace Core
 {
-public:
-    Sense(const std::string name) : name(name) {}
-
-    const std::string & getName() { return name; }
-
     static const std::string getSenseString(const SenseType st)
     {
         switch (st)
@@ -30,7 +25,4 @@ public:
             default: return "";
         }
     }
-
-private:
-    std::string name;
 };

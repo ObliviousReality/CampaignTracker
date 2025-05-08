@@ -19,14 +19,9 @@ enum class ClassType : unsigned int
     NUM_CLASSES,
 };
 
-class Class
+namespace Core
 {
-public:
-    Class(const std::string name) : name(name) {}
-
-    const std::string & getName() { return name; }
-
-    static const std::string getClassName(const ClassType ct)
+    static const std::string getClassString(const ClassType ct)
     {
         switch (ct)
         {
@@ -46,7 +41,4 @@ public:
             default: return "";
         }
     }
-
-private:
-    std::string name;
 };

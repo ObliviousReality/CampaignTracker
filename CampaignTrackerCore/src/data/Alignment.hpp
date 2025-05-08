@@ -22,13 +22,8 @@ enum class OrderType
     NUM_ORDERS,
 };
 
-class Alignment
+namespace Core
 {
-public:
-    Alignment(const std::string name) : name(name) {}
-
-    const std::string & getName() const { return name; }
-
     static const std::string getOrderString(const OrderType ot)
     {
         switch (ot)
@@ -55,25 +50,6 @@ public:
 
     static const std::string getAlignmentString(const std::pair<MoralityType, const OrderType> & alignment)
     {
-        return Alignment::getOrderString(alignment.second) + " " + Alignment::getMoralityString(alignment.first);
+        return Core::getOrderString(alignment.second) + " " + Core::getMoralityString(alignment.first);
     }
-
-private:
-    std::string name;
-};
-
-class Morality : public Alignment
-{
-public:
-    Morality(const std::string name) : Alignment(name) {}
-
-
-};
-
-class Order : public Alignment
-{
-public:
-    Order(const std::string name) : Alignment(name) {}
-
-
 };

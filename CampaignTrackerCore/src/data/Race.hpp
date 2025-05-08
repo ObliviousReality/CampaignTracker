@@ -21,14 +21,9 @@ enum class RaceType
     NUM_RACES,
 };
 
-class Race
+namespace Core
 {
-public:
-    Race(const std::string name) : name(name) {}
-
-    const std::string & getName() { return name; }
-
-    static const std::string getClassName(const RaceType rt)
+    static const std::string getRaceString(const RaceType rt)
     {
         switch (rt)
         {
@@ -50,7 +45,4 @@ public:
             default: return "";
         }
     }
-
-private:
-    std::string name;
 };

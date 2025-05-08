@@ -22,13 +22,8 @@ enum class ConditionType
     NUM_CONDITIONS,
 };
 
-class Condition
+namespace Condition
 {
-public:
-    Condition(const std::string name) : name(name) {}
-
-    const std::string & getName() const { return name; }
-
     static const std::string getConditionString(const ConditionType ct)
     {
         switch (ct)
@@ -51,7 +46,4 @@ public:
             default: return "";
         }
     }
-
-private:
-    std::string name;
 };

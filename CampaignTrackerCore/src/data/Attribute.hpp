@@ -47,19 +47,9 @@ enum class PassiveSkillType
     NUM_PASSIVE_SKILLS,
 };
 
-struct Abilities
+namespace Core
 {
-    Abilities() {}
-    Abilities(int str, int dex, int con, int _int, int wis, int cha)
-        : STR(str), DEX(dex), CON(con), INT(_int), WIS(wis), CHA(cha)
-    {}
-
-    const int getAbility(const AbilityType type) const;
-    void setAbility(const AbilityType type, const int val);
-
-    const int getModifier(const AbilityType at) const;
-
-    const std::string getAbilityString(const AbilityType at)
+    static const std::string getAbilityString(const AbilityType at)
     {
         switch (at)
         {
@@ -73,7 +63,7 @@ struct Abilities
         }
     }
 
-    const std::string getAbilityShortString(const AbilityType at)
+    static const std::string getAbilityShortString(const AbilityType at)
     {
         switch (at)
         {
@@ -86,6 +76,45 @@ struct Abilities
             default: return "";
         }
     }
+
+    static const std::string getSkillString(const SkillType st)
+    {
+        switch (st)
+        {
+            case SkillType::Acrobatics: return "Acrobatics";
+            case SkillType::AnimalHandling: return "Animal Handling";
+            case SkillType::Arcana: return "Arcana";
+            case SkillType::Athletics: return "Athletics";
+            case SkillType::Deception: return "Deception";
+            case SkillType::History: return "History";
+            case SkillType::Insight: return "Insight";
+            case SkillType::Intimidation: return "Intimidation";
+            case SkillType::Investigation: return "Investigation";
+            case SkillType::Medicine: return "Medicine";
+            case SkillType::Nature: return "Nature";
+            case SkillType::Perception: return "Perception";
+            case SkillType::Performance: return "Performance";
+            case SkillType::Persuasion: return "Persuasion";
+            case SkillType::Religion: return "Religion";
+            case SkillType::SleightOfHand: return "Sleight of Hand";
+            case SkillType::Stealth: return "Stealth";
+            case SkillType::Survival: return "Survival";
+            default: return "";
+        }
+    }
+};
+
+struct Abilities
+{
+    Abilities() {}
+    Abilities(int str, int dex, int con, int _int, int wis, int cha)
+        : STR(str), DEX(dex), CON(con), INT(_int), WIS(wis), CHA(cha)
+    {}
+
+    const int getAbility(const AbilityType type) const;
+    void setAbility(const AbilityType type, const int val);
+
+    const int getModifier(const AbilityType at) const;
 
     int STR = 0;
     int DEX = 0;
@@ -124,32 +153,6 @@ struct Skills
 
     const int getSkill(const SkillType st) const;
     void setSkill(const SkillType st, const int val);
-
-    const std::string getSkillString(const SkillType st)
-    {
-        switch (st)
-        {
-            case SkillType::Acrobatics: return "Acrobatics";
-            case SkillType::AnimalHandling: return "Animal Handling";
-            case SkillType::Arcana: return "Arcana";
-            case SkillType::Athletics: return "Athletics";
-            case SkillType::Deception: return "Deception";
-            case SkillType::History: return "History";
-            case SkillType::Insight: return "Insight";
-            case SkillType::Intimidation: return "Intimidation";
-            case SkillType::Investigation: return "Investigation";
-            case SkillType::Medicine: return "Medicine";
-            case SkillType::Nature: return "Nature";
-            case SkillType::Perception: return "Perception";
-            case SkillType::Performance: return "Performance";
-            case SkillType::Persuasion: return "Persuasion";
-            case SkillType::Religion: return "Religion";
-            case SkillType::SleightOfHand: return "Sleight of Hand";
-            case SkillType::Stealth: return "Stealth";
-            case SkillType::Survival: return "Survival";
-            default: return "";
-        }
-    }
 
     int acrobatics = 0;
     int animal_handling = 0;
