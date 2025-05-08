@@ -129,7 +129,6 @@ int main()
 
     p->addSense(SenseType::Darkvision);
     p->setAC(17);
-    p->setInitiative(3);
     p->setSpeed(25);
     p->setProficiency(3);
     p->addResistance(DamageType::Poison);

@@ -65,4 +65,6 @@ void Creature::generateSkills()
     passives->perception = getPassiveSkill(SkillType::Perception);
     passives->insight = getPassiveSkill(SkillType::Insight);
     passives->investigation = getPassiveSkill(SkillType::Investigation);
+
+    setInitiative(abilities->getModifier(AbilityType::Dexterity));
 }
