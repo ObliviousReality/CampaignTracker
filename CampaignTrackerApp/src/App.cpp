@@ -90,7 +90,20 @@ void printDetails(Player * p)
     auto printSkill = [&p](const SkillType st)
     {
         const auto skill = p->getSkill(st);
-        printf("%s: %c%i\n", Core::getSkillString(st).c_str(), skill >= 0 ? '+' : '-', skill);
+        std::string end;
+        if (p->hasAdvantage(st) == p->hasDisadvantage(st))
+        {
+            end = "";
+        }
+        else if (p->hasAdvantage(st))
+        {
+            end = "+Adv";
+        }
+        else
+        {
+            end = "-Dvd";
+        }
+        printf("%s: %c%i %s\n", Core::getSkillString(st).c_str(), skill >= 0 ? '+' : '-', skill, end.c_str());
     };
     printSkill(SkillType::Acrobatics);
     printSkill(SkillType::AnimalHandling);
@@ -151,6 +164,8 @@ int main()
 
     p->setTaggedSavingThrow(AbilityType::Wisdom);
     p->setTaggedSavingThrow(AbilityType::Charisma);
+
+    p->setDisadvantage(SkillType::Stealth, true);
 
     p->generateSkills();
     printDetails(p);
