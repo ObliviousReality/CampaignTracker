@@ -27,20 +27,24 @@ void printDetails(Player * p)
         abilities->getModifier(AbilityType::Charisma));
 
     printf("STR DEX CON INT WIS CHA\n");
-    auto * savingThrows = p->getSavingThrows();
     printf(
         "+%i  +%i  +%i  +%i  +%i  +%i\n",
-        savingThrows->getModifier(AbilityType::Strength),
-        savingThrows->getModifier(AbilityType::Dexterity),
-        savingThrows->getModifier(AbilityType::Constitution),
-        savingThrows->getModifier(AbilityType::Intelligence),
-        savingThrows->getModifier(AbilityType::Wisdom),
-        savingThrows->getModifier(AbilityType::Charisma));
+        p->getSavingThrowModifier(AbilityType::Strength),
+        p->getSavingThrowModifier(AbilityType::Dexterity),
+        p->getSavingThrowModifier(AbilityType::Constitution),
+        p->getSavingThrowModifier(AbilityType::Intelligence),
+        p->getSavingThrowModifier(AbilityType::Wisdom),
+        p->getSavingThrowModifier(AbilityType::Charisma));
 
     printf("%i (%i) / %i\n", p->getHitPoints(), p->getTempHitPoints(), p->getHitPointsMax());
 
     printf("Init / Insp / Prof / AC\n");
-    printf("+%i      %s    +%i    %i\n", p->getInitiative(), p->hasInspiration() ? "yes" : "no ", p->getProficiency(), p->getAC());
+    printf(
+        "+%i      %s    +%i    %i\n",
+        p->getInitiative(),
+        p->hasInspiration() ? "yes" : "no ",
+        p->getProficiency(),
+        p->getAC());
 
     printf("PER / INV / INS  SPEED\n");
     auto * passives = p->getPassives();
@@ -148,6 +152,9 @@ int main()
     p->setTaggedSkill(SkillType::Investigation, 2);
     p->setTaggedSkill(SkillType::Perception);
     p->setTaggedSkill(SkillType::Survival);
+
+    p->setTaggedSavingThrow(AbilityType::Wisdom);
+    p->setTaggedSavingThrow(AbilityType::Charisma);
 
     p->generateSkills();
     printDetails(p);

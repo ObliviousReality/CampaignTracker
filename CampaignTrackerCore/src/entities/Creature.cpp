@@ -4,7 +4,6 @@ Creature::Creature(const std::string name, const std::pair<MoralityType, OrderTy
 {
     abilities = std::make_unique<Abilities>();
     skills = std::make_unique<Skills>();
-    savingThrows = std::make_unique<Abilities>();
     passives = std::make_unique<PassiveSkills>();
 
     morality = alignment.first;

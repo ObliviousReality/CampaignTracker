@@ -38,13 +38,10 @@ public:
     void setProficiency(const int newProf) { proficiency = newProf; }
 
     const int getAbility(const AbilityType at) const { return abilities->getAbility(at); }
-    const int getSavingThrow(const AbilityType st) const { return abilities->getAbility(st); }
     const int getSkill(const SkillType st) const { return skills->getSkill(st); }
     const int getPassiveAbility(const PassiveSkillType pst) { return passives->getPassiveSkill(pst); }
 
-    void setAbility(const AbilityType at, const int val) const { return abilities->setAbility(at, val); }
-    void setSavingThrow(const AbilityType st, const int val) const { return abilities->setAbility(st, val); }
-    void setSkill(const SkillType st, const int val) const { return skills->setSkill(st, val); }
+    void setAbility(const AbilityType at, const int val) const { return abilities->setAbility(at, val); }    void setSkill(const SkillType st, const int val) const { return skills->setSkill(st, val); }
     void setPassiveAbility(const PassiveSkillType pst, const int val) { return passives->setPassiveSkill(pst, val); }
 
     const bool hasAdvantage(const AbilityType at) { return abilityAdvantages.find(at) != abilityAdvantages.end(); }
@@ -133,7 +130,6 @@ public:
     const bool hasSense(const SenseType st) { return senses.find(st) != senses.end(); }
 
     const Abilities * const getAbilities() const { return abilities.get(); }
-    const Abilities * const getSavingThrows() const { return savingThrows.get(); }
     const Skills * const getSkills() const { return skills.get(); }
     const PassiveSkills * const getPassives() const { return passives.get(); }
 
@@ -171,6 +167,17 @@ public:
 
     void generateSkills();
 
+    void setTaggedSavingThrow(const AbilityType at, const int tagLevel = 1) { taggedSavingThrows[at] = tagLevel; }
+    const int getTaggedSavingThrowLevel(const AbilityType at) const
+    {
+        return taggedSavingThrows.count(at) ? taggedSavingThrows.at(at) : 0;
+    }
+
+    const int getSavingThrowModifier(const AbilityType at)
+    {
+        return abilities->getModifier(at) + (getProficiency() * getTaggedSavingThrowLevel(at));
+    }
+
 private:
     std::string name;
 
@@ -183,7 +190,6 @@ private:
     int tempHitPoints = 0;
 
     std::unique_ptr<Abilities> abilities;
-    std::unique_ptr<Abilities> savingThrows;
     std::unique_ptr<Skills> skills;
     std::unique_ptr<PassiveSkills> passives;
 
@@ -207,4 +213,5 @@ private:
     OrderType order;
 
     std::map<SkillType, int> taggedSkills;
+    std::map<AbilityType, int> taggedSavingThrows;
 };
