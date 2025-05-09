@@ -172,7 +172,7 @@ public:
         return skills->getModifier(st) + (getProficiency() * getTaggedSkillLevel(st));
     }
 
-    void generateSkills();
+    virtual void generateSkills();
 
     void setTaggedSavingThrows(const std::vector<AbilityType> & savingThrows, const int tagLevel = 1);
     void setTaggedSavingThrow(const AbilityType at, const int tagLevel = 1) { taggedSavingThrows[at] = tagLevel; }

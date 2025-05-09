@@ -67,6 +67,9 @@ public:
         return spellSlotManager->getRemainingSpellSlots();
     }
 
+    void generateSkills() override;
+
+
 private:
     ClassType classType;
     RaceType raceType;
