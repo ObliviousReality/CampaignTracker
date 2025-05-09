@@ -137,45 +137,84 @@ int main()
     std::unique_ptr<CTCore> core = std::make_unique<CTCore>();
     CTCore::PrintHelloWorld();
 
-    auto p = core->createPlayer(
-        "Berthog",
-        ClassType::Warlock,
-        RaceType::Dwarf,
-        "Tom",
-        8,
-        { MoralityType::Good, OrderType::Lawful });
+    {
+        auto p = core->createPlayer(
+            "Berthog",
+            ClassType::Warlock,
+            RaceType::Dwarf,
+            "Tom",
+            8,
+            { MoralityType::Good, OrderType::Lawful });
 
-    p->addSense(SenseType::Darkvision);
-    p->setAC(17);
-    p->setSpeed(25);
-    p->setProficiency(3);
-    p->addResistance(DamageType::Poison);
-    p->setHitPoints(83);
-    p->setMaxHitPoints(83);
-    p->setTempHitPoint(5);
+        p->addSense(SenseType::Darkvision);
+        p->setAC(17);
+        p->setSpeed(25);
+        p->setProficiency(3);
+        p->addResistance(DamageType::Poison);
+        p->setHitPoints(83);
+        p->setMaxHitPoints(83);
+        p->setTempHitPoint(5);
 
-    p->setAbility(AbilityType::Strength, 20);
-    p->setAbility(AbilityType::Dexterity, 17);
-    p->setAbility(AbilityType::Constitution, 18);
-    p->setAbility(AbilityType::Intelligence, 15);
-    p->setAbility(AbilityType::Wisdom, 14);
-    p->setAbility(AbilityType::Charisma, 15);
+        p->setAbility(AbilityType::Strength, 20);
+        p->setAbility(AbilityType::Dexterity, 17);
+        p->setAbility(AbilityType::Constitution, 18);
+        p->setAbility(AbilityType::Intelligence, 15);
+        p->setAbility(AbilityType::Wisdom, 14);
+        p->setAbility(AbilityType::Charisma, 15);
 
-    p->setTaggedSkill(SkillType::AnimalHandling);
-    p->setTaggedSkill(SkillType::Deception);
-    p->setTaggedSkill(SkillType::Investigation, 2);
-    p->setTaggedSkill(SkillType::Perception);
-    p->setTaggedSkill(SkillType::Survival);
+        p->setTaggedSkill(SkillType::AnimalHandling);
+        p->setTaggedSkill(SkillType::Deception);
+        p->setTaggedSkill(SkillType::Investigation, 2);
+        p->setTaggedSkill(SkillType::Perception);
+        p->setTaggedSkill(SkillType::Survival);
 
-    p->setTaggedSavingThrow(AbilityType::Wisdom);
-    p->setTaggedSavingThrow(AbilityType::Charisma);
+        p->setTaggedSavingThrow(AbilityType::Wisdom);
+        p->setTaggedSavingThrow(AbilityType::Charisma);
 
-    p->setDisadvantage(SkillType::Stealth, true);
+        p->setDisadvantage(SkillType::Stealth, true);
 
-    p->setSpellSlots({ 0, 0, 0, 2, 0, 0, 0, 0 });
+        p->setSpellSlots({ 0, 0, 0, 2, 0, 0, 0, 0 });
 
-    p->generateSkills();
-    printDetails(p);
+        p->generateSkills();
+        printDetails(p);
+    }
+    printf("\n\n\n\n");
+    {
+        auto p = core->createPlayer(
+            "Elysia Autumnfire",
+            ClassType::Wizard,
+            RaceType::Elf,
+            "Tom",
+            8,
+            { MoralityType::Good, OrderType::Lawful });
+        p->addSense(SenseType::Darkvision);
+        p->setAC(12);
+        p->setSpeed(30);
+        p->setProficiency(3);
+        p->setHitPoints(34);
+        p->setMaxHitPoints(34);
+
+        p->setAbility(AbilityType::Strength, 10);
+        p->setAbility(AbilityType::Dexterity, 14);
+        p->setAbility(AbilityType::Constitution, 11);
+        p->setAbility(AbilityType::Intelligence, 18);
+        p->setAbility(AbilityType::Wisdom, 14);
+        p->setAbility(AbilityType::Charisma, 13);
+
+        p->setTaggedSkill(SkillType::Arcana);
+        p->setTaggedSkill(SkillType::Athletics);
+        p->setTaggedSkill(SkillType::Medicine);
+        p->setTaggedSkill(SkillType::Perception);
+        p->setTaggedSkill(SkillType::Performance);
+        p->setTaggedSkill(SkillType::Survival);
+
+        p->setTaggedSavingThrow(AbilityType::Intelligence);
+        p->setTaggedSavingThrow(AbilityType::Wisdom);
+
+        p->setSpellSlots({ 4, 3, 3, 2, 0, 0, 0, 0 });
+        p->generateSkills();
+        printDetails(p);
+    }
 
     std::cin.get();
     return 0;
