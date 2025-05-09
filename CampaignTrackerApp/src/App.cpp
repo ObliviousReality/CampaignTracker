@@ -1,7 +1,8 @@
 #include "Core/Core.hpp"
 
-#include "entities/Creature.hpp"
+#include "entities/Player.hpp"
 
+#include <array>
 #include <iostream>
 #include <map>
 #include <memory>
@@ -56,7 +57,11 @@ void printDetails(Player * p)
         p->getSpeed());
 
     printf(" 1 2 3 4 5 6 7 8\n");
-    printf(" 0 0 0 0 0 0 0 0\n"); // Spell slots
+    for (const auto slot : p->getRemainingSpellSlots())
+    {
+        printf(" %i", slot);
+    }
+    printf("\n");
     printf("Conditions:\n");
     for (const auto con : p->getConditions())
     {
@@ -166,6 +171,8 @@ int main()
     p->setTaggedSavingThrow(AbilityType::Charisma);
 
     p->setDisadvantage(SkillType::Stealth, true);
+
+    p->setSpellSlots({ 0, 0, 0, 2, 0, 0, 0, 0 });
 
     p->generateSkills();
     printDetails(p);
