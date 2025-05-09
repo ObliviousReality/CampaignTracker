@@ -1,5 +1,7 @@
 #include "Creature.hpp"
 
+#include <array>
+
 Creature::Creature(const std::string name, const std::pair<MoralityType, OrderType> alignment) : name(name)
 {
     abilities = std::make_unique<Abilities>();
@@ -8,6 +10,31 @@ Creature::Creature(const std::string name, const std::pair<MoralityType, OrderTy
 
     morality = alignment.first;
     order = alignment.second;
+}
+
+void Creature::setTaggedSkills(const std::vector<SkillType> & skills, const int tagLevel)
+{
+    for (const auto skill : skills)
+    {
+        setTaggedSkill(skill, tagLevel);
+    }
+}
+
+void Creature::setAbilities(const std::array<int, static_cast<size_t>(AbilityType::NUM_ABILITIES)> & abilities) const
+{
+    int count = 0;
+    for (const auto ab : abilities)
+    {
+        setAbility(static_cast<AbilityType>(count++), ab);
+    }
+}
+
+void Creature::setTaggedSavingThrows(const std::vector<AbilityType> & savingThrows, const int tagLevel)
+{
+    for (const auto savingThrow : savingThrows)
+    {
+        setTaggedSavingThrow(savingThrow, tagLevel);
+    }
 }
 
 void Creature::generateSkills()

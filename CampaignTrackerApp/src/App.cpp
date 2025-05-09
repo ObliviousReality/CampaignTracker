@@ -155,21 +155,14 @@ int main()
         p->setMaxHitPoints(83);
         p->setTempHitPoint(5);
 
-        p->setAbility(AbilityType::Strength, 20);
-        p->setAbility(AbilityType::Dexterity, 17);
-        p->setAbility(AbilityType::Constitution, 18);
-        p->setAbility(AbilityType::Intelligence, 15);
-        p->setAbility(AbilityType::Wisdom, 14);
-        p->setAbility(AbilityType::Charisma, 15);
+        p->setAbilities({ 20, 17, 18, 15, 14, 15 });
 
-        p->setTaggedSkill(SkillType::AnimalHandling);
-        p->setTaggedSkill(SkillType::Deception);
+        p->setTaggedSkills(
+            { SkillType::AnimalHandling, SkillType::Deception, SkillType::Perception, SkillType::Survival });
+
         p->setTaggedSkill(SkillType::Investigation, 2);
-        p->setTaggedSkill(SkillType::Perception);
-        p->setTaggedSkill(SkillType::Survival);
 
-        p->setTaggedSavingThrow(AbilityType::Wisdom);
-        p->setTaggedSavingThrow(AbilityType::Charisma);
+        p->setTaggedSavingThrows({ AbilityType::Wisdom, AbilityType::Charisma });
 
         p->setDisadvantage(SkillType::Stealth, true);
 
@@ -194,22 +187,16 @@ int main()
         p->setHitPoints(34);
         p->setMaxHitPoints(34);
 
-        p->setAbility(AbilityType::Strength, 10);
-        p->setAbility(AbilityType::Dexterity, 14);
-        p->setAbility(AbilityType::Constitution, 11);
-        p->setAbility(AbilityType::Intelligence, 18);
-        p->setAbility(AbilityType::Wisdom, 14);
-        p->setAbility(AbilityType::Charisma, 13);
+        p->setAbilities({ 10, 14, 11, 18, 14, 13 });
 
-        p->setTaggedSkill(SkillType::Arcana);
-        p->setTaggedSkill(SkillType::Athletics);
-        p->setTaggedSkill(SkillType::Medicine);
-        p->setTaggedSkill(SkillType::Perception);
-        p->setTaggedSkill(SkillType::Performance);
-        p->setTaggedSkill(SkillType::Survival);
+        p->setTaggedSkills({ SkillType::Arcana,
+                             SkillType::Athletics,
+                             SkillType::Medicine,
+                             SkillType::Perception,
+                             SkillType::Performance,
+                             SkillType::Survival });
 
-        p->setTaggedSavingThrow(AbilityType::Intelligence);
-        p->setTaggedSavingThrow(AbilityType::Wisdom);
+        p->setTaggedSavingThrows({ AbilityType::Intelligence, AbilityType::Wisdom });
 
         p->setSpellSlots({ 4, 3, 3, 2, 0, 0, 0, 0 });
         p->generateSkills();

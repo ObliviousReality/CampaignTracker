@@ -12,6 +12,7 @@
 #include <memory>
 #include <set>
 #include <string>
+#include <vector>
 
 class Creature
 {
@@ -41,7 +42,11 @@ public:
     const int getSkill(const SkillType st) const { return skills->getSkill(st); }
     const int getPassiveAbility(const PassiveSkillType pst) { return passives->getPassiveSkill(pst); }
 
-    void setAbility(const AbilityType at, const int val) const { return abilities->setAbility(at, val); }    void setSkill(const SkillType st, const int val) const { return skills->setSkill(st, val); }
+    void setAbility(const AbilityType at, const int val) const { return abilities->setAbility(at, val); }
+
+    void setAbilities(const std::array<int, static_cast<size_t>(AbilityType::NUM_ABILITIES)> & abilities) const;
+
+    void setSkill(const SkillType st, const int val) const { return skills->setSkill(st, val); }
     void setPassiveAbility(const PassiveSkillType pst, const int val) { return passives->setPassiveSkill(pst, val); }
 
     const bool hasAdvantage(const AbilityType at) { return abilityAdvantages.find(at) != abilityAdvantages.end(); }
@@ -158,6 +163,8 @@ public:
     }
 
     void setTaggedSkill(const SkillType st, const int tagLevel = 1) { taggedSkills[st] = tagLevel; }
+    void setTaggedSkills(const std::vector<SkillType> & skills, const int tagLevel = 1);
+
     const int getTaggedSkillLevel(const SkillType st) const { return taggedSkills.count(st) ? taggedSkills.at(st) : 0; }
 
     const int getSkillModifier(const SkillType st) const
@@ -167,6 +174,7 @@ public:
 
     void generateSkills();
 
+    void setTaggedSavingThrows(const std::vector<AbilityType> & savingThrows, const int tagLevel = 1);
     void setTaggedSavingThrow(const AbilityType at, const int tagLevel = 1) { taggedSavingThrows[at] = tagLevel; }
     const int getTaggedSavingThrowLevel(const AbilityType at) const
     {
