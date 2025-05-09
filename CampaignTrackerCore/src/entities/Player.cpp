@@ -17,5 +17,7 @@ void Player::generateSkills()
     const int proficiencyBonus = static_cast<int>(ceil(level / 4)) + 1;
     setProficiency(proficiencyBonus);
 
+    setSpeed(Core::getRaceSpeed(getRaceType()));
+
     Creature::generateSkills();
 }

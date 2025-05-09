@@ -35,6 +35,8 @@ public:
     void setTempHitPoint(const int newTempHP) { tempHitPoints = newTempHP; }
     void setAC(const int newAC) { armourClass = newAC; }
     void setSpeed(const int newSpeed) { speed = newSpeed; }
+    void setSpeedModifier(const int speedMod) { speed += speedMod; }
+
     void setInitiative(const int newInitiative) { initiative = newInitiative; }
     void setProficiency(const int newProf) { proficiency = newProf; }
 

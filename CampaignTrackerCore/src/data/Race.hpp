@@ -45,4 +45,17 @@ namespace Core
             default: return "";
         }
     }
+
+    static const int getRaceSpeed(const RaceType rt)
+    {
+        // https://docs.google.com/spreadsheets/d/1vvMGY0KZjkJVjDNoa3P-v51dbE1dCD6Bnauko9qTYqo/edit?gid=0#gid=0
+        switch (rt)
+        {
+            case RaceType::Aarakocra:
+            case RaceType::Dwarf:
+            case RaceType::Gnome:
+            case RaceType::Halfling: return 25;
+            default: return 30;
+        }
+    }
 };
