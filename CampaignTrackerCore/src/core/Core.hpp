@@ -12,11 +12,10 @@
 #include <memory>
 #include <set>
 
-
 class CTCore
 {
 public:
-    CTCore() {}
+    CTCore();
     static void PrintHelloWorld();
 
     Creature * createCreature(const std::string & name);
