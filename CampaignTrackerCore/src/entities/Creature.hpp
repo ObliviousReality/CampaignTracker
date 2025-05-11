@@ -41,6 +41,7 @@ public:
     void setProficiency(const int newProf) { proficiency = newProf; }
 
     const int getAbility(const AbilityType at) const { return abilities->getAbility(at); }
+    const int getAbilityModifier(const AbilityType at) const { return abilities->getModifier(at); }
     const int getSkill(const SkillType st) const { return skills->getSkill(st); }
     const int getPassiveAbility(const PassiveSkillType pst) { return passives->getPassiveSkill(pst); }
 

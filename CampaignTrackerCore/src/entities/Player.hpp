@@ -69,6 +69,9 @@ public:
 
     void generateSkills() override;
 
+private:
+
+    void generateHP();
 
 private:
     ClassType classType;
