@@ -1,0 +1,4 @@
+[submodule "CampaignTrackerApp/ThirdParty/imgui"]
+	path = CampaignTrackerApp/ThirdParty/imgui
+	url = https://github.com/ObliviousReality/asoimgui.git
+	branch = docking
