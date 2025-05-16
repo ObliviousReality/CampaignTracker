@@ -6,7 +6,7 @@ workspace "Campaign Tracker"
 
    -- Workspace-wide build options for MSVC
    filter "system:windows"
-      buildoptions { "/EHsc", "/Zc:preprocessor", "/Zc:__cplusplus", "/WX" }
+      buildoptions { "/EHsc", "/Zc:preprocessor", "/Zc:__cplusplus"}
 
 OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
 
@@ -15,3 +15,7 @@ group "Core"
 group ""
 
 include "CampaignTrackerApp/Build-App.lua"
+
+group "third-party"
+   include "CampaignTrackerApp/ThirdParty/imgui/premake5.lua"
+group ""

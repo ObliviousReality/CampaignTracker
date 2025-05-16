@@ -10,14 +10,17 @@ project "CampaignTrackerApp"
    includedirs
    {
       "src",
-
+      "%WindowsSdkDir%Include/um",
+      "%WindowsSdkDir%Include/shared",
+      "ThirdParty/imgui",
 	  -- Include Core
 	  "../CampaignTrackerCore/src"
    }
 
    links
    {
-      "CampaignTrackerCore"
+      "CampaignTrackerCore",
+      "ImGui"
    }
 
    vpaths
