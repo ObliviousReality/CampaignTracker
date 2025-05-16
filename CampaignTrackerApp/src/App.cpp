@@ -132,7 +132,7 @@ void printDetails(Player * p)
     printSkill(SkillType::Survival);
 }
 
-int main()
+int oldmain()
 {
     std::unique_ptr<CTCore> core = std::make_unique<CTCore>();
     CTCore::PrintHelloWorld();
