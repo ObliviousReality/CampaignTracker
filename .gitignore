@@ -46,3 +46,5 @@ bin/
 *.log
 Makefile
 
+# Project-Specific
+imgui.ini
