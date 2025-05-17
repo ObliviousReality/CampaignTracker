@@ -50,6 +50,14 @@ namespace Core
 
     static const std::string getAlignmentString(const std::pair<MoralityType, const OrderType> & alignment)
     {
+        if ((alignment.first == MoralityType::Neutral) && (alignment.second == OrderType::Neutral))
+        {
+            return "True Neutral";
+        }
+        if ((alignment.first == MoralityType::None) && (alignment.second == OrderType::None))
+        {
+            return "Unaligned";
+        }
         return Core::getOrderString(alignment.second) + " " + Core::getMoralityString(alignment.first);
     }
 };
