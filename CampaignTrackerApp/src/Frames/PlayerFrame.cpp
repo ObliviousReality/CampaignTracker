@@ -11,33 +11,131 @@ void PlayerFrame::render()
     const auto clas = Core::getClassString(player->getClassType());
 
     const auto alignment = Core::getAlignmentString(player->getAlignment());
+    const auto titleText = player->getName() + " (" + (player->getHumanName()) + ")";
+    ImGui::SeparatorText(titleText.c_str());
+    ImGui::Text("Level: %i", player->getLevel());
+    ImGui::Text("Race: %s", race.c_str());
+    ImGui::Text("Class: %s", clas.c_str());
+    ImGui::Text("Alignment: %s", alignment.c_str());
 
-    ImGui::Text("%s (%s)\n", player->getName().c_str(), player->getHumanName().c_str());
-    ImGui::Text("%s/%s/%i/%s\n", race.c_str(), clas.c_str(), player->getLevel(), alignment.c_str());
-    ImGui::Text("STR DEX CON INT WIS CHA\n");
-    auto * abilities = player->getAbilities();
-    ImGui::Text(
-        "+%i  +%i  +%i  +%i  +%i  +%i\n",
-        abilities->getModifier(AbilityType::Strength),
-        abilities->getModifier(AbilityType::Dexterity),
-        abilities->getModifier(AbilityType::Constitution),
-        abilities->getModifier(AbilityType::Intelligence),
-        abilities->getModifier(AbilityType::Wisdom),
-        abilities->getModifier(AbilityType::Charisma));
+    ImGui::SeparatorText("Abilities");
+    auto * ab = player->getAbilities();
+    auto addAbility = [](const AbilityType at, const Abilities * ab)
+    {
+        const auto val = ab->getModifier(at);
+        const auto text = Core::getAbilityShortString(at) + "\n " + (val >= 0 ? '+' : '-') + std::to_string(val);
+        ImGui::Button(text.c_str());
+        if (at != AbilityType::Charisma)
+        {
+            ImGui::SameLine();
+        }
+    };
 
-    ImGui::Text("STR DEX CON INT WIS CHA\n");
-    ImGui::Text(
-        "+%i  +%i  +%i  +%i  +%i  +%i\n",
-        player->getSavingThrowModifier(AbilityType::Strength),
-        player->getSavingThrowModifier(AbilityType::Dexterity),
-        player->getSavingThrowModifier(AbilityType::Constitution),
-        player->getSavingThrowModifier(AbilityType::Intelligence),
-        player->getSavingThrowModifier(AbilityType::Wisdom),
-        player->getSavingThrowModifier(AbilityType::Charisma));
+    addAbility(AbilityType::Strength, ab);
+    addAbility(AbilityType::Dexterity, ab);
+    addAbility(AbilityType::Constitution, ab);
+    addAbility(AbilityType::Intelligence, ab);
+    addAbility(AbilityType::Wisdom, ab);
+    addAbility(AbilityType::Charisma, ab);
 
-    ImGui::Text("\n");
-    ImGui::Text("%i (%i) / %i\n", player->getHitPoints(), player->getTempHitPoints(), player->getHitPointsMax());
-    ImGui::Text("\n");
+    ImGui::SeparatorText("Saving Throws");
+
+    auto addSavingThrow = [&](const AbilityType at)
+    {
+        const auto val = player->getSavingThrowModifier(at);
+        const auto text = Core::getAbilityShortString(at) + "\n" + (val >= 0 ? '+' : '-') + std::to_string(val);
+        ImGui::Button(text.c_str());
+        if (at != AbilityType::Charisma)
+        {
+            ImGui::SameLine();
+        }
+    };
+
+    addSavingThrow(AbilityType::Strength);
+    addSavingThrow(AbilityType::Dexterity);
+    addSavingThrow(AbilityType::Constitution);
+    addSavingThrow(AbilityType::Intelligence);
+    addSavingThrow(AbilityType::Wisdom);
+    addSavingThrow(AbilityType::Charisma);
+
+    ImGui::SeparatorText("Hit Points");
+    auto hp = player->getHitPoints();
+    auto maxHp = player->getHitPointsMax();
+
+    ImGui::PushItemFlag(ImGuiItemFlags_ButtonRepeat, true);
+
+    if (ImGui::ArrowButton("##lefthp", ImGuiDir::ImGuiDir_Left) && (hp > 0))
+    {
+        int shiftAmount = 1;
+        if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftShift))
+        {
+            shiftAmount = 10;
+        }
+        else if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftCtrl))
+        {
+            shiftAmount = 5;
+        }
+        hp -= shiftAmount;
+        hp = std::max(hp, 0);
+    }
+    ImGui::SameLine();
+    ImGui::Text("%i", hp);
+    ImGui::SameLine();
+    if (ImGui::ArrowButton("##rightp", ImGuiDir::ImGuiDir_Right) && (hp < maxHp))
+    {
+        int shiftAmount = 1;
+        if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftShift))
+        {
+            shiftAmount = 10;
+        }
+        else if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftCtrl))
+        {
+            shiftAmount = 5;
+        }
+        hp += shiftAmount;
+        hp = std::min(hp, maxHp);
+    }
+
+    player->setHitPoints(hp);
+    int tempHp = player->getTempHitPoints();
+
+    ImGui::SameLine();
+    if (ImGui::ArrowButton("##leftthp", ImGuiDir::ImGuiDir_Left) && (tempHp > 0))
+    {
+        int shiftAmount = 1;
+        if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftShift))
+        {
+            shiftAmount = 10;
+        }
+        else if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftCtrl))
+        {
+            shiftAmount = 5;
+        }
+        tempHp -= shiftAmount;
+        tempHp = std::max(tempHp, 0);
+    }
+    ImGui::SameLine();
+    ImGui::Text("+%i", tempHp);
+    ImGui::SameLine();
+    if (ImGui::ArrowButton("##rightthp", ImGuiDir::ImGuiDir_Right))
+    {
+        int shiftAmount = 1;
+        if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftShift))
+        {
+            shiftAmount = 10;
+        }
+        else if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_LeftCtrl))
+        {
+            shiftAmount = 5;
+        }
+        tempHp += shiftAmount;
+    }
+
+    player->setTempHitPoint(tempHp);
+
+    ImGui::PopItemFlag();
+    ImGui::SameLine();
+    ImGui::Text("/ %i", maxHp);
 
     ImGui::Text("Init / Insp / Prof / AC\n");
     ImGui::Text(
