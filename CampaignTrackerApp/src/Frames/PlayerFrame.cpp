@@ -6,7 +6,7 @@ void PlayerFrame::update() {}
 
 void PlayerFrame::render()
 {
-    ImGui::Begin(player->getName().c_str());
+    ImGui::BeginChild(player->getName().c_str(), ImVec2(256, ImGui::GetContentRegionAvail().y));
     const auto race = Core::getRaceString(player->getRaceType());
     const auto clas = Core::getClassString(player->getClassType());
 
@@ -140,7 +140,7 @@ void PlayerFrame::render()
     printSkill(SkillType::SleightOfHand);
     printSkill(SkillType::Stealth);
     printSkill(SkillType::Survival);
-    ImGui::End();
+    ImGui::EndChild();
 }
 
 const std::string PlayerFrame::getName() { return player->getName(); }

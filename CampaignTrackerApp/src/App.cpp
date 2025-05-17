@@ -1,6 +1,6 @@
 #include "Core/Core.hpp"
 
-#include "Frames/PlayerFrame.hpp"
+#include "Frames/MainFrame.hpp"
 
 #include "Render/Win32/WinWindow.hpp"
 
@@ -203,8 +203,11 @@ int main()
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();
     window->initImGui();
-    auto player1Frame = std::make_unique<PlayerFrame>(p);
-    auto player2Frame = std::make_unique<PlayerFrame>(p2);
+
+    auto mainWindow = std::make_unique<MainFrame>();
+
+    mainWindow->createPlayerFrame(p);
+    mainWindow->createPlayerFrame(p2);
 
     bool running = true;
     int sliderVal = 0;
@@ -217,11 +220,13 @@ int main()
             break;
         }
         window->startFrame();
-        player1Frame->render();
-        player2Frame->render();
+        mainWindow->render();
+#if defined(DEBUG)
+        ImGui::ShowDemoWindow();
+#endif
         window->endFrame();
     }
 
-    std::cin.get();
+    //std::cin.get();
     return 0;
 }
