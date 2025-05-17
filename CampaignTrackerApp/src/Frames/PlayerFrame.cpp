@@ -2,6 +2,8 @@
 
 #include "imgui.h"
 
+#include <sstream>
+
 void PlayerFrame::update() {}
 
 void PlayerFrame::render()
@@ -137,69 +139,133 @@ void PlayerFrame::render()
     ImGui::SameLine();
     ImGui::Text("/ %i", maxHp);
 
-    ImGui::Text("Init / Insp / Prof / AC\n");
-    ImGui::Text(
-        "+%i      %s    +%i    %i\n",
-        player->getInitiative(),
-        player->hasInspiration() ? "yes" : "no ",
-        player->getProficiency(),
-        player->getAC());
+    ImGui::SeparatorText("Stats");
 
-    ImGui::Text("PER / INV / INS  SPEED\n");
-    auto * passives = player->getPassives();
-    ImGui::Text(
-        " %i   %i   %i        %ift\n",
-        passives->perception,
-        passives->investigation,
-        passives->insight,
-        player->getSpeed());
-
-    ImGui::Text("\n");
-    ImGui::Text(" 1 2 3 4 5 6 7 8\n");
-    const auto & slots = player->getRemainingSpellSlots();
+    ImGui::Button(("Init\n +" + std::to_string(player->getInitiative())).c_str());
+    ImGui::SameLine();
+    std::string inspText = "Insp\n " + std::string(player->hasInspiration() ? "Yes" : "No");
+    if (ImGui::Button(inspText.c_str()))
     {
-        ImGui::Text(
-            " %i %i %i %i %i %i %i %i",
-            slots[0],
-            slots[1],
-            slots[2],
-            slots[3],
-            slots[4],
-            slots[5],
-            slots[6],
-            slots[7]);
+        player->setInspiration(!player->hasInspiration());
     }
-    ImGui::Text("\n");
-    ImGui::Text("Conditions:\n");
+    ImGui::SameLine();
+    ImGui::Button(("Prof\n +" + std::to_string(player->getProficiency())).c_str());
+    ImGui::SameLine();
+    ImGui::Button((" AC \n " + std::to_string(player->getAC())).c_str());
+    ImGui::SameLine();
+    ImGui::Button(("Speed\n " + std::to_string(player->getSpeed()) + "ft").c_str());
+
+    ImGui::SeparatorText("Passives");
+    auto * passives = player->getPassives();
+    ImGui::Text(("Perception: " + std::to_string(passives->perception)).c_str());
+    ImGui::Text(("Investigation: " + std::to_string(passives->investigation)).c_str());
+    ImGui::Text(("Insight: " + std::to_string(passives->insight)).c_str());
+
+    ImGui::SeparatorText("Spell Slots");
+
+    auto slots = player->getRemainingSpellSlots();
+    for (int i = 0; i < 8; ++i)
+    {
+        ImGui::BeginGroup();
+        if (ImGui::ArrowButton(("##upslots" + std::to_string(i)).c_str(), ImGuiDir::ImGuiDir_Up))
+        {
+            slots[i]++;
+            slots[i] = std::min(slots[i], player->getTotalSpells(i));
+        }
+        ImGui::Text((" " + std::to_string(slots[i])).c_str());
+        if (ImGui::ArrowButton(("##downslots" + std::to_string(i)).c_str(), ImGuiDir::ImGuiDir_Down) && slots[i])
+        {
+            slots[i]--;
+        }
+        ImGui::EndGroup();
+
+        if (i != 7)
+        {
+            ImGui::SameLine();
+        }
+    }
+
+    player->setRemainingSpellSlots(slots);
+
+    std::stringstream conditionStream;
+    int count = 0;
     for (const auto con : player->getConditions())
     {
-        ImGui::Text("%s, ", Condition::getConditionString(con).c_str());
+        if (count++)
+        {
+            conditionStream << ',';
+        }
+        conditionStream << Condition::getConditionString(con).c_str();
     }
-    ImGui::Text("\n");
-    ImGui::Text("Immunities:\n");
+
+    if (count)
+    {
+        ImGui::SeparatorText("Conditions");
+        ImGui::Text(conditionStream.str().c_str());
+    }
+
+    count = 0;
+    std::stringstream immunityStream;
     for (const auto con : player->getConditionImmunities())
     {
-        ImGui::Text("%s, ", Condition::getConditionString(con).c_str());
+        if (count++)
+        {
+            immunityStream << ',';
+        }
+        immunityStream << Condition::getConditionString(con).c_str();
     }
     for (const auto dt : player->getDamageTypeImmunities())
     {
-        ImGui::Text("%s, ", Core::getDamageTypeString(dt).c_str());
+        if (count++)
+        {
+            immunityStream << ',';
+        }
+        immunityStream << Core::getDamageTypeString(dt).c_str();
     }
-    ImGui::Text("\n");
-    ImGui::Text("Resistances:\n");
-    for (const auto res : player->getResistances())
+
+    if (count)
     {
-        ImGui::Text("%s, ", Core::getDamageTypeString(res).c_str());
+        ImGui::SeparatorText("Immunities");
+        ImGui::Text(immunityStream.str().c_str());
     }
-    ImGui::Text("\n");
-    ImGui::Text("Senses:\n");
+
+    count = 0;
+
+    std::stringstream resistanceStream;
+    for (const auto dt : player->getResistances())
+    {
+        if (count++)
+        {
+            resistanceStream << ',';
+        }
+        resistanceStream << Core::getDamageTypeString(dt).c_str();
+    }
+
+    if (count)
+    {
+        ImGui::SeparatorText("Resistances");
+        ImGui::Text(resistanceStream.str().c_str());
+    }
+
+    count = 0;
+
+    std::stringstream senseStream;
     for (const auto sense : player->getSenses())
     {
-        ImGui::Text("%s, ", Core::getSenseString(sense).c_str());
+        if (count++)
+        {
+            senseStream << ',';
+        }
+        senseStream << Core::getSenseString(sense).c_str();
     }
-    ImGui::Text("\n");
 
-    ImGui::Text("Skills:\n");
+    if (count)
+    {
+        ImGui::SeparatorText("Senses");
+        ImGui::Text(senseStream.str().c_str());
+    }
+
+    ImGui::SeparatorText("Skills");
     auto printSkill = [&](const SkillType st)
     {
         const auto skill = player->getSkill(st);
