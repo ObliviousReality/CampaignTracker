@@ -4,6 +4,8 @@
 
 #include "data/HitPoint.hpp"
 
+#include <cmath>
+
 Player::Player(
     const std::string name,
     const ClassType ct,
@@ -18,7 +20,7 @@ Player::Player(
 
 void Player::generateSkills()
 {
-    const int proficiencyBonus = static_cast<int>(ceil(level / 4)) + 1;
+    const int proficiencyBonus = static_cast<int>(std::ceil(static_cast<float>(level) / 4.0f)) + 1;
     setProficiency(proficiencyBonus);
 
     setSpeed(Core::getRaceSpeed(getRaceType()));
