@@ -195,7 +195,7 @@ void PlayerFrame::render()
         {
             conditionStream << ',';
         }
-        conditionStream << Condition::getConditionString(con).c_str();
+        conditionStream << Core::getConditionString(con).c_str();
     }
 
     if (count)
@@ -212,7 +212,7 @@ void PlayerFrame::render()
         {
             immunityStream << ',';
         }
-        immunityStream << Condition::getConditionString(con).c_str();
+        immunityStream << Core::getConditionString(con).c_str();
     }
     for (const auto dt : player->getDamageTypeImmunities())
     {

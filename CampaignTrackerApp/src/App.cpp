@@ -69,13 +69,13 @@ void printDetails(Player * p)
     printf("Conditions:\n");
     for (const auto con : p->getConditions())
     {
-        printf("%s, ", Condition::getConditionString(con).c_str());
+        printf("%s, ", Core::getConditionString(con).c_str());
     }
     printf("\n");
     printf("Immunities:\n");
     for (const auto con : p->getConditionImmunities())
     {
-        printf("%s, ", Condition::getConditionString(con).c_str());
+        printf("%s, ", Core::getConditionString(con).c_str());
     }
     for (const auto dt : p->getDamageTypeImmunities())
     {

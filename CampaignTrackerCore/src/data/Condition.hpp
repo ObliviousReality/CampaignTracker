@@ -22,7 +22,7 @@ enum class ConditionType
     NUM_CONDITIONS,
 };
 
-namespace Condition
+namespace Core
 {
     static const std::string getConditionString(const ConditionType ct)
     {
