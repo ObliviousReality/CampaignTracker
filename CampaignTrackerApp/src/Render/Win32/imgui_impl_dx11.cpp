@@ -42,7 +42,7 @@
 
 #include "imgui.h"
 #ifndef IMGUI_DISABLE
-#    include "Render/imgui_impl_dx11.hpp"
+#    include "Render/Win32/imgui_impl_dx11.hpp"
 
 // DirectX
 #    include <d3d11.h>
