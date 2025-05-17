@@ -196,6 +196,44 @@ int main()
     p2->generateSkills();
     printDetails(p);
 
+    auto p3 = core->createPlayer(
+        "Gulthandor Jones",
+        ClassType::Ranger,
+        RaceType::HalfElf,
+        "Tom",
+        4,
+        { MoralityType::Neutral, OrderType::Neutral });
+    p3->addSense(SenseType::Darkvision);
+    p3->setAC(13);
+
+    p3->setAbilities({ 13, 14, 8, 12, 15, 16 });
+    p3->setTaggedSkills({ SkillType::AnimalHandling,
+                          SkillType::Athletics,
+                          SkillType::Deception,
+                          SkillType::History,
+                          SkillType::Investigation,
+                          SkillType::Stealth,
+                          SkillType::Survival });
+
+    p3->setTaggedSavingThrows({ AbilityType::Strength, AbilityType::Dexterity });
+    p3->setSpellSlots({ 3, 0, 0, 0, 0, 0, 0, 0 });
+    p3->generateSkills();
+
+    auto p4 = core->createPlayer(
+        "Natalie Stormwind",
+        ClassType::Rogue,
+        RaceType::Human,
+        "Tom",
+        2,
+        { MoralityType::Good, OrderType::Chaotic });
+    p4->setAC(13);
+    p4->setAbilities({ 13, 15, 14, 17, 15, 15 });
+    p4->setTaggedSkills(
+        { SkillType::Athletics, SkillType::Deception, SkillType::Investigation, SkillType::Persuasion });
+    p4->setTaggedSkills({ SkillType::Perception, SkillType::Stealth }, 2);
+    p4->setTaggedSavingThrows({ AbilityType::Dexterity, AbilityType::Intelligence });
+    p4->generateSkills();
+
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();
     window->initImGui();
@@ -204,6 +242,8 @@ int main()
 
     mainWindow->createPlayerFrame(p);
     mainWindow->createPlayerFrame(p2);
+    mainWindow->createPlayerFrame(p3);
+    mainWindow->createPlayerFrame(p4);
 
     bool running = true;
     int sliderVal = 0;
