@@ -152,8 +152,6 @@ int main()
     p->addSense(SenseType::Darkvision);
     p->setAC(17);
     p->addResistance(DamageType::Poison);
-    p->setHitPoints(83);
-    //p->setMaxHitPoints(83);
     p->setTempHitPoint(5);
 
     p->setAbilities({ 20, 17, 18, 15, 14, 15 });
@@ -182,8 +180,6 @@ int main()
         { MoralityType::Good, OrderType::Lawful });
     p2->addSense(SenseType::Darkvision);
     p2->setAC(12);
-    p2->setHitPoints(34);
-    p2->setMaxHitPoints(34);
 
     p2->setAbilities({ 10, 14, 11, 18, 14, 13 });
 

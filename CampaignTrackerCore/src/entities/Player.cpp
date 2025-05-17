@@ -46,4 +46,5 @@ void Player::generateHP()
 
     const auto newMaxHp = baseHP + ((getLevel() - 1) * subsequentHP);
     setMaxHitPoints(newMaxHp);
+    setHitPoints(newMaxHp);
 }
