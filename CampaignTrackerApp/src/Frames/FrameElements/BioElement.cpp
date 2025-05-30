@@ -182,6 +182,8 @@ void BioElement::draw()
 
     player->setRemainingSpellSlots(slots);
 
+    bool addedExtraValues = false;
+
     std::stringstream conditionStream;
     int count = 0;
     for (const auto con : player->getConditions())
@@ -195,6 +197,7 @@ void BioElement::draw()
 
     if (count)
     {
+        addedExtraValues = true;
         ImGui::SeparatorText("Conditions");
         ImGui::Text(conditionStream.str().c_str());
     }
@@ -220,6 +223,7 @@ void BioElement::draw()
 
     if (count)
     {
+        addedExtraValues = true;
         ImGui::SeparatorText("Immunities");
         ImGui::Text(immunityStream.str().c_str());
     }
@@ -256,7 +260,13 @@ void BioElement::draw()
 
     if (count)
     {
+        addedExtraValues = true;
         ImGui::SeparatorText("Senses");
         ImGui::Text(senseStream.str().c_str());
+    }
+
+    if (!addedExtraValues)
+    {
+        ImGui::SeparatorText("");
     }
 }
