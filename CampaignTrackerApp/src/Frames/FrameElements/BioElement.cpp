@@ -20,7 +20,7 @@ void BioElement::draw()
     auto addAbility = [](const AbilityType at, const Abilities * ab)
     {
         const auto val = ab->getModifier(at);
-        const auto text = Core::getAbilityShortString(at) + "\n " + (val >= 0 ? '+' : '-') + std::to_string(val);
+        const auto text = Core::getAbilityShortString(at) + "\n " + (val >= 0 ? '+' : '-') + std::to_string(abs(val));
         ImGui::Button(text.c_str());
         if (at != AbilityType::Charisma)
         {
@@ -40,7 +40,7 @@ void BioElement::draw()
     auto addSavingThrow = [&](const AbilityType at)
     {
         const auto val = player->getSavingThrowModifier(at);
-        const auto text = Core::getAbilityShortString(at) + "\n" + (val >= 0 ? '+' : '-') + std::to_string(val);
+        const auto text = Core::getAbilityShortString(at) + "\n" + (val >= 0 ? '+' : '-') + std::to_string(abs(val));
         ImGui::Button(text.c_str());
         if (at != AbilityType::Charisma)
         {
