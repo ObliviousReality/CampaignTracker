@@ -1,9 +1,6 @@
 #include "WinWindow.hpp"
 
-// Data
-//static ID3D11Device * g_pd3dDevice = nullptr;
-//static ID3D11DeviceContext * g_pd3dDeviceContext = nullptr;
-//static IDXGISwapChain * g_pSwapChain = nullptr;
+#include "Application/ApplicationManager.hpp"
 
 static int x = 1;
 static bool g_SwapChainOccluded = false;
@@ -118,7 +115,7 @@ void WinWindow::initImGui()
     ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dDeviceContext);
 }
 
-bool WinWindow::pollUpdates()
+void WinWindow::pollUpdates()
 {
     MSG msg;
     while (::PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
@@ -126,10 +123,8 @@ bool WinWindow::pollUpdates()
         ::TranslateMessage(&msg);
         ::DispatchMessage(&msg);
         if (msg.message == WM_QUIT)
-            return true;
-        //quit
+            ApplicationManager::Get()->setAppRunning(false);
     }
-    return false;
 }
 
 void WinWindow::startFrame()

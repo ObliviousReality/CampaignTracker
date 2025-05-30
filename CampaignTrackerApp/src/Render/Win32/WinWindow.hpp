@@ -4,6 +4,7 @@
 
 #include "Render/Win32/imgui_impl_dx11.hpp"
 #include "Render/Win32/imgui_impl_win32.hpp"
+
 #include "imgui.h"
 
 // DirectX
@@ -25,7 +26,7 @@ public:
 
     void initImGui() override;
 
-    bool pollUpdates() override;
+    void pollUpdates() override;
     void startFrame() override;
     void endFrame() override;
 

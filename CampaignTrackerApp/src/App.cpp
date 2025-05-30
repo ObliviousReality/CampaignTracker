@@ -1,3 +1,5 @@
+#include "Application/ApplicationManager.hpp"
+
 #include "Core/Core.hpp"
 
 #include "Frames/MainFrame.hpp"
@@ -138,7 +140,7 @@ void printDetails(Player * p)
 
 int main()
 {
-    std::unique_ptr<CTCore> core = std::make_unique<CTCore>();
+    auto core = std::make_unique<CTCore>();
     CTCore::PrintHelloWorld();
 
     auto p = core->createPlayer(
@@ -245,22 +247,16 @@ int main()
     mainWindow->createPlayerFrame(p3);
     mainWindow->createPlayerFrame(p4);
 
-    bool running = true;
     int sliderVal = 0;
-    while (running)
+    while (ApplicationManager::Get()->isAppRunning())
     {
-        const auto x = window->pollUpdates();
-        if (x)
-        {
-            running = false;
-            break;
-        }
         window->startFrame();
         mainWindow->render();
 #if defined(DEBUG)
         ImGui::ShowDemoWindow();
 #endif
         window->endFrame();
+        window->pollUpdates();
     }
 
     //std::cin.get();
