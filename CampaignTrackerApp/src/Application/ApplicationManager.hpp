@@ -3,6 +3,9 @@
 class ApplicationManager
 {
 public:
+    ApplicationManager(ApplicationManager const &) = delete;
+    void operator=(ApplicationManager const &) = delete;
+
     static ApplicationManager * Get()
     {
         static ApplicationManager * instance = new ApplicationManager();
