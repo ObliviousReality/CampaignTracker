@@ -15,8 +15,6 @@ PlayerFrame::PlayerFrame(Player * p) : player(p)
     notesElement = std::make_unique<NotesElement>();
 }
 
-void PlayerFrame::update() {}
-
 void PlayerFrame::render()
 {
     ImGui::BeginChild(player->getName().c_str(), ImVec2(224, ImGui::GetContentRegionAvail().y));

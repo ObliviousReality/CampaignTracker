@@ -15,20 +15,12 @@ class PlayerFrame : public Frame
 public:
     PlayerFrame(Player * p);
 
-    void update() override;
+    void update() override {}
     void render() override;
 
     const std::string getName() override;
 
 private:
-    enum class Element
-    {
-        Skills,
-        Bio,
-        Notes,
-    };
-
-    Element currentElement = Element::Bio;
     Player * player = nullptr;
 
     std::unique_ptr<BioElement> bioElement;
