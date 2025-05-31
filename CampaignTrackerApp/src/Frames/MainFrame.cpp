@@ -18,11 +18,31 @@ void MainFrame::render()
     ImGui::SetNextWindowSize(useWorkArea ? viewport->WorkSize : viewport->Size);
     ImGui::Begin("Main Window", &open, flags);
     titleBar->render();
-    for (const auto pFrame : playerFrames)
+    const float totalWidth = (224.0f + 10.0f) * playerFrames.size();
+    const auto tableFlags = ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY | ImGuiTableFlags_SizingStretchSame
+                          | ImGuiTableFlags_Reorderable;
+    auto & style = ImGui::GetStyle();
+    auto oldCellPadding = style.CellPadding;
+    style.CellPadding = { 0, 0 };
+    auto outerSize = ImGui::GetWindowSize();
+    outerSize[0] -= 2 * style.WindowPadding[0];
+    outerSize[1] -= titleBar->getSize()[1];
+    if (ImGui::BeginTable("###Players", static_cast<int>(playerFrames.size()), tableFlags, outerSize, totalWidth))
     {
-        pFrame->render();
-        ImGui::SameLine();
+        //for (int i = 0; i < playerFrames.size(); ++i)
+        //{
+        //    ImGui::TableSetupColumn(std::to_string(i + 1).c_str());
+        //}
+        //ImGui::TableHeadersRow();
+        for (const auto pFrame : playerFrames)
+        {
+            ImGui::TableNextColumn();
+            pFrame->render();
+            ImGui::SameLine();
+        }
+        ImGui::EndTable();
     }
+    style.CellPadding = oldCellPadding;
     ImGui::End();
 }
 

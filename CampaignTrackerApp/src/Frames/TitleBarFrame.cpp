@@ -2,14 +2,13 @@
 
 #include "Application/ApplicationManager.hpp"
 
-#include "imgui.h"
-
 void TitleBarFrame::update() {}
 
 void TitleBarFrame::render()
 {
     if (ImGui::BeginMenuBar())
     {
+        titleBarSize = ImGui::GetWindowSize();
         if (ImGui::BeginMenu("File"))
         {
             if (ImGui::MenuItem("Close", "Alt+F4"))

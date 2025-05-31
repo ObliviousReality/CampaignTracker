@@ -2,6 +2,8 @@
 
 #include "Frame.hpp"
 
+#include "imgui.h"
+
 class TitleBarFrame : public Frame
 {
 public:
@@ -9,6 +11,9 @@ public:
     void render() override;
     const std::string getName() override;
 
+    const ImVec2 getSize() const { return titleBarSize; }
+
 private:
     bool closePressed = false;
+    ImVec2 titleBarSize;
 };
