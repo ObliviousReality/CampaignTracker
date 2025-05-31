@@ -5,7 +5,7 @@
 #include "Frames/TitleBarFrame.hpp"
 
 #include <memory>
-#include <set>
+#include <vector>
 
 class PlayerFrame;
 class Player;
@@ -25,5 +25,5 @@ private:
     bool useWorkArea = false;
     bool closePressed = false;
     std::unique_ptr<TitleBarFrame> titleBar;
-    std::set<PlayerFrame *> playerFrames;
+    std::vector<PlayerFrame *> playerFrames;
 };
