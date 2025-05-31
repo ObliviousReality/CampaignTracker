@@ -43,6 +43,13 @@ LRESULT __stdcall WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     SWP_NOZORDER | SWP_NOACTIVATE);
             }
             break;
+        case WM_GETMINMAXINFO:
+        {
+            LPMINMAXINFO lpMMI = (LPMINMAXINFO)lParam;
+            lpMMI->ptMinTrackSize.x = 500;
+            lpMMI->ptMinTrackSize.y = 750;
+            break;
+        }
     }
     return ::DefWindowProcW(hWnd, msg, wParam, lParam);
 }
