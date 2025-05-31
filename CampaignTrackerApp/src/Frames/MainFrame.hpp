@@ -2,6 +2,7 @@
 
 #include "Frame.hpp"
 
+#include "Frames/TabBarFrame.hpp"
 #include "Frames/TitleBarFrame.hpp"
 
 #include <memory>
@@ -25,5 +26,6 @@ private:
     bool useWorkArea = false;
     bool closePressed = false;
     std::unique_ptr<TitleBarFrame> titleBar;
+    std::unique_ptr<TabBarFrame> tabBar;
     std::vector<PlayerFrame *> playerFrames;
 };
