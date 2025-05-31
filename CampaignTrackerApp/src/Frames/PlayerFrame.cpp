@@ -24,8 +24,9 @@ void PlayerFrame::render()
     auto & style = ImGui::GetStyle();
     auto oldPadding = style.FramePadding;
     style.FramePadding = ImVec2(19, 5);
+    style.TabBarOverlineSize = 2;
 
-    if (ImGui::BeginTabBar("tabs", ImGuiTabBarFlags_NoTooltip))
+    if (ImGui::BeginTabBar("tabs", ImGuiTabBarFlags_NoTooltip | ImGuiTabBarFlags_DrawSelectedOverline))
     {
         if (ImGui::BeginTabItem("Bio"))
         {
