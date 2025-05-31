@@ -17,7 +17,7 @@ PlayerFrame::PlayerFrame(Player * p) : player(p)
 
 void PlayerFrame::render()
 {
-    ImGui::BeginChild(player->getName().c_str(), ImVec2(224, ImGui::GetContentRegionAvail().y));
+    ImGui::BeginChild(player->getName().c_str(), ImVec2(234, ImGui::GetContentRegionAvail().y));
 
     const auto titleText = player->getName() + " (" + (player->getHumanName()) + ")";
     ImGui::SeparatorText(titleText.c_str());

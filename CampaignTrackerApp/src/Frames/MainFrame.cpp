@@ -18,12 +18,10 @@ void MainFrame::render()
     ImGui::SetNextWindowSize(useWorkArea ? viewport->WorkSize : viewport->Size);
     ImGui::Begin("Main Window", &open, flags);
     titleBar->render();
-    const float totalWidth = (224.0f + 10.0f) * playerFrames.size();
+    const float totalWidth = (233.0f) * playerFrames.size();
     const auto tableFlags = ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY | ImGuiTableFlags_SizingStretchSame
-                          | ImGuiTableFlags_Reorderable;
+                          | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_Reorderable /*| ImGuiTableFlags_Resizable*/;
     auto & style = ImGui::GetStyle();
-    auto oldCellPadding = style.CellPadding;
-    style.CellPadding = { 0, 0 };
     auto outerSize = ImGui::GetWindowSize();
     outerSize[0] -= 2 * style.WindowPadding[0];
     outerSize[1] -= titleBar->getSize()[1];
@@ -42,7 +40,6 @@ void MainFrame::render()
         }
         ImGui::EndTable();
     }
-    style.CellPadding = oldCellPadding;
     ImGui::End();
 }
 
