@@ -10,7 +10,7 @@
 class Player : public Creature
 {
 public:
-    Player();
+    Player(const CreatureId newId);
 
     const ClassType getClassType() const { return classType; }
     const RaceType getRaceType() const { return raceType; }

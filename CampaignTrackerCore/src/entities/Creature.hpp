@@ -14,6 +14,8 @@
 #include <string>
 #include <vector>
 
+using CreatureId = unsigned int;
+
 enum class CreatureType
 {
     Player,
@@ -25,7 +27,9 @@ enum class CreatureType
 class Creature
 {
 public:
-    Creature(const CreatureType t);
+    Creature(const CreatureId newId, const CreatureType t);
+
+    const CreatureId getId() const { return id; }
 
     const CreatureType getType() const { return type; }
 
@@ -201,6 +205,7 @@ public:
     }
 
 private:
+    CreatureId id;
     CreatureType type;
     std::string name;
 

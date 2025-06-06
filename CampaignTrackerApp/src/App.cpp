@@ -113,6 +113,9 @@ int main()
     p4->setTaggedSavingThrows({ AbilityType::Dexterity, AbilityType::Intelligence });
     p4->generateSkills();
 
+    auto * pp = core->getCreatureFromId(0, CreatureType::Player);
+    pp;
+
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();
     window->initImGui();

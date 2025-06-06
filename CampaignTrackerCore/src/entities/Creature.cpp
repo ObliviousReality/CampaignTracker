@@ -2,7 +2,7 @@
 
 #include <array>
 
-Creature::Creature(const CreatureType t) : type(t)
+Creature::Creature(const CreatureId newId, const CreatureType t) : id(newId), type(t)
 {
     abilities = std::make_unique<Abilities>();
     skills = std::make_unique<Skills>();

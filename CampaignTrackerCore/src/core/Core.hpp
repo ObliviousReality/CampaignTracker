@@ -20,8 +20,14 @@ public:
 
     Player * createPlayer();
 
+    Creature * getCreatureFromId(const CreatureId id, const CreatureType type) const;
+
+    const CreatureId getNewCreatureId() { return nextFreeId++; }
+
 private:
     std::vector<std::unique_ptr<Player>> players;
     // std::vector<std::unique_ptr<NPC>> npcs;
     // std::vector<std::unique_ptr<Monster>> monsters;
+
+    CreatureId nextFreeId = 0;
 };

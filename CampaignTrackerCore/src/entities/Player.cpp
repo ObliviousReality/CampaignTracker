@@ -6,7 +6,10 @@
 
 #include <cmath>
 
-Player::Player() : Creature(CreatureType::Player) { spellSlotManager = std::make_unique<SpellSlotManager>(); }
+Player::Player(const CreatureId newId) : Creature(newId, CreatureType::Player)
+{
+    spellSlotManager = std::make_unique<SpellSlotManager>();
+}
 
 void Player::generateSkills()
 {
