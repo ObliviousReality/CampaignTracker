@@ -10,7 +10,7 @@
 #include "data/Sense.hpp"
 
 #include <memory>
-#include <set>
+#include <vector>
 
 class CTCore
 {
@@ -21,5 +21,7 @@ public:
     Player * createPlayer();
 
 private:
-    std::set<Creature *> creatures;
+    std::vector<std::unique_ptr<Player>> players;
+    // std::vector<std::unique_ptr<NPC>> npcs;
+    // std::vector<std::unique_ptr<Monster>> monsters;
 };

@@ -10,7 +10,6 @@ void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }
 
 Player * CTCore::createPlayer()
 {
-    Player * p = new Player();
-    creatures.emplace(p);
-    return p;
+    players.emplace_back(std::make_unique<Player>());
+    return players.back().get();
 }
