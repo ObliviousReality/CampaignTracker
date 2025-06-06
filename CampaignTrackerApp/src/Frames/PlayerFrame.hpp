@@ -2,7 +2,7 @@
 
 #include "Frames/Frame.hpp"
 
-#include "entities/Player.hpp"
+#include "core/Core.hpp"
 
 #include <memory>
 
@@ -13,7 +13,7 @@ class SkillsElement;
 class PlayerFrame : public Frame
 {
 public:
-    PlayerFrame(Player * p);
+    PlayerFrame(CreatureId id);
 
     void update() override {}
     void render() override;
@@ -21,7 +21,7 @@ public:
     const std::string getName() override;
 
 private:
-    Player * player = nullptr;
+    CreatureId playerId;
 
     std::unique_ptr<BioElement> bioElement;
     std::unique_ptr<SkillsElement> skillsElement;

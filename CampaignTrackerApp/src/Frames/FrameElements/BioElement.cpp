@@ -6,6 +6,7 @@
 
 void BioElement::draw()
 {
+    auto * player = CTCore::Get()->getCreatureFromId<Player>(playerId, CreatureType::Player);
     const auto race = Core::getRaceString(player->getRaceType());
     const auto clas = Core::getClassString(player->getClassType());
 

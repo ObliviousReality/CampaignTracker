@@ -4,6 +4,7 @@
 
 void SkillsElement::draw()
 {
+    auto * player = CTCore::Get()->getCreatureFromId<Player>(id, CreatureType::Player);
     ImGui::SeparatorText("Skills");
     auto printSkill = [&](const SkillType st)
     {

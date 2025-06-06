@@ -123,10 +123,10 @@ int main()
 
     auto mainWindow = std::make_unique<MainFrame>();
 
-    mainWindow->createPlayerFrame(berthog);
-    mainWindow->createPlayerFrame(elysia);
-    mainWindow->createPlayerFrame(gulthandor);
-    mainWindow->createPlayerFrame(natalie);
+    mainWindow->createPlayerFrame(berthogId);
+    mainWindow->createPlayerFrame(elysiaId);
+    mainWindow->createPlayerFrame(gulthandorId);
+    mainWindow->createPlayerFrame(natalieId);
 
     int sliderVal = 0;
     while (ApplicationManager::Get()->isAppRunning())

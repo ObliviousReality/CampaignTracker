@@ -8,15 +8,16 @@
 
 #include <sstream>
 
-PlayerFrame::PlayerFrame(Player * p) : player(p)
+PlayerFrame::PlayerFrame(CreatureId id) : playerId(id)
 {
-    bioElement = std::make_unique<BioElement>(p);
-    skillsElement = std::make_unique<SkillsElement>(p); // TODO: This doesn't need to take p
+    bioElement = std::make_unique<BioElement>(id);
+    skillsElement = std::make_unique<SkillsElement>(id); // TODO: This doesn't need to take id?
     notesElement = std::make_unique<NotesElement>();
 }
 
 void PlayerFrame::render()
 {
+    auto * player = CTCore::Get()->getCreatureFromId<Player>(playerId, CreatureType::Player);
     ImGui::BeginChild(player->getName().c_str(), ImVec2(234, ImGui::GetContentRegionAvail().y));
 
     const auto titleText = player->getName() + " (" + (player->getHumanName()) + ")";
@@ -54,4 +55,4 @@ void PlayerFrame::render()
     ImGui::EndChild();
 }
 
-const std::string PlayerFrame::getName() { return player->getName(); }
+const std::string PlayerFrame::getName() { return {}; }

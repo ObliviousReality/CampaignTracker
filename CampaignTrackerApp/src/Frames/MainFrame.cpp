@@ -54,4 +54,4 @@ void MainFrame::render()
 
 const std::string MainFrame::getName() { return std::string(); }
 
-void MainFrame::createPlayerFrame(Player * p) { playerFrames.emplace_back(new PlayerFrame(p)); }
+void MainFrame::createPlayerFrame(CreatureId playerId) { playerFrames.emplace_back(new PlayerFrame(playerId)); }

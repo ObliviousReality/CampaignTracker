@@ -2,6 +2,8 @@
 
 #include "Frame.hpp"
 
+#include "core/Core.hpp"
+
 #include "Frames/TabBarFrame.hpp"
 #include "Frames/TitleBarFrame.hpp"
 
@@ -9,7 +11,6 @@
 #include <vector>
 
 class PlayerFrame;
-class Player;
 
 class MainFrame : public Frame
 {
@@ -19,7 +20,7 @@ public:
     virtual void render() override;
     virtual const std::string getName() override;
 
-    void createPlayerFrame(Player * p);
+    void createPlayerFrame(CreatureId playerId);
 
 private:
     bool open = false;
