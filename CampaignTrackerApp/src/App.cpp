@@ -44,8 +44,6 @@ int main()
 
     berthog->generateSkills();
 
-    printf("\n\n\n\n");
-
     const auto elysiaId = core->createPlayer();
     auto * elysia = core->getCreatureFromId<Player>(elysiaId, CreatureType::Player);
 
