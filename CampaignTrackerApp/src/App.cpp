@@ -12,7 +12,7 @@
 
 int main()
 {
-    auto core = std::make_unique<CTCore>();
+    auto * core = CTCore::Get();
     CTCore::PrintHelloWorld();
 
     const auto berthogId = core->createPlayer();

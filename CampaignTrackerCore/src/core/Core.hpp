@@ -32,7 +32,15 @@ namespace Details
 class CTCore
 {
 public:
-    CTCore();
+    CTCore(CTCore const &) = delete;
+    void operator=(CTCore const &) = delete;
+
+    static CTCore * Get()
+    {
+        static CTCore * instance = new CTCore();
+        return instance;
+    }
+
     static void PrintHelloWorld();
 
     CreatureId createPlayer();
@@ -57,6 +65,10 @@ public:
     const CreatureId getNewCreatureId() { return nextFreeId++; }
 
 private:
+    CTCore();
+
+    static CTCore * core;
+
     std::vector<std::unique_ptr<Player>> players;
     // std::vector<std::unique_ptr<NPC>> npcs;
     // std::vector<std::unique_ptr<Monster>> monsters;
