@@ -2,14 +2,11 @@
 
 #include <array>
 
-Creature::Creature(const std::string name, const std::pair<MoralityType, OrderType> alignment) : name(name)
+Creature::Creature(const CreatureType t) : type(t)
 {
     abilities = std::make_unique<Abilities>();
     skills = std::make_unique<Skills>();
     passives = std::make_unique<PassiveSkills>();
-
-    morality = alignment.first;
-    order = alignment.second;
 }
 
 void Creature::setTaggedSkills(const std::vector<SkillType> & skills, const int tagLevel)

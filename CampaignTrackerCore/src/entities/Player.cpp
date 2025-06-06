@@ -6,17 +6,7 @@
 
 #include <cmath>
 
-Player::Player(
-    const std::string name,
-    const ClassType ct,
-    const RaceType rt,
-    const std::string humanName,
-    const int level,
-    const std::pair<MoralityType, OrderType> alignment)
-    : Creature(name, alignment), classType(ct), raceType(rt), humanPlayerName(humanName), level(level)
-{
-    spellSlotManager = std::make_unique<SpellSlotManager>();
-}
+Player::Player() : Creature(CreatureType::Player) { spellSlotManager = std::make_unique<SpellSlotManager>(); }
 
 void Player::generateSkills()
 {

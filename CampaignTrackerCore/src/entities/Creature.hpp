@@ -14,12 +14,23 @@
 #include <string>
 #include <vector>
 
+enum class CreatureType
+{
+    Player,
+    NPC,
+    Monster,
+    Other,
+};
+
 class Creature
 {
 public:
-    Creature(const std::string name, const std::pair<MoralityType, OrderType> alignment);
+    Creature(const CreatureType t);
+
+    const CreatureType getType() const { return type; }
 
     const std::string getName() const { return name; }
+    void setName(const std::string newName) { name = newName; }
 
     const int getHitPoints() const { return hitPoints; }
     const int getHitPointsMax() const { return hitPointsMax; }
@@ -190,6 +201,7 @@ public:
     }
 
 private:
+    CreatureType type;
     std::string name;
 
     int hitPoints = 0;

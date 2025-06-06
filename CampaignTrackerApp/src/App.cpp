@@ -15,13 +15,14 @@ int main()
     auto core = std::make_unique<CTCore>();
     CTCore::PrintHelloWorld();
 
-    auto p = core->createPlayer(
-        "Berthog",
-        ClassType::Warlock,
-        RaceType::Dwarf,
-        "Tom",
-        8,
-        { MoralityType::Good, OrderType::Lawful });
+    auto p = core->createPlayer();
+
+    p->setName("Berthog");
+    p->setClassType(ClassType::Warlock);
+    p->setRaceType(RaceType::Dwarf);
+    p->setHumanName("Tom");
+    p->setLevel(8);
+    p->setAlignment(MoralityType::Good, OrderType::Lawful);
 
     p->addSense(SenseType::Darkvision);
     p->setAC(17);
@@ -44,13 +45,15 @@ int main()
 
     printf("\n\n\n\n");
 
-    auto p2 = core->createPlayer(
-        "Elysia Autumnfire",
-        ClassType::Wizard,
-        RaceType::Elf,
-        "Tom",
-        8,
-        { MoralityType::Good, OrderType::Lawful });
+    auto p2 = core->createPlayer();
+
+    p2->setName("Elysia Autumnfire");
+    p2->setClassType(ClassType::Wizard);
+    p2->setRaceType(RaceType::Elf);
+    p2->setHumanName("Tom");
+    p2->setLevel(8);
+    p2->setAlignment(MoralityType::Good, OrderType::Lawful);
+
     p2->addSense(SenseType::Darkvision);
     p2->setAC(12);
 
@@ -68,13 +71,15 @@ int main()
     p2->setSpellSlots({ 4, 3, 3, 2, 0, 0, 0, 0 });
     p2->generateSkills();
 
-    auto p3 = core->createPlayer(
-        "Gulthandor Jones",
-        ClassType::Ranger,
-        RaceType::HalfElf,
-        "Tom",
-        4,
-        { MoralityType::Neutral, OrderType::Neutral });
+    auto p3 = core->createPlayer();
+
+    p3->setName("Gulthandor Jones");
+    p3->setClassType(ClassType::Ranger);
+    p3->setRaceType(RaceType::HalfElf);
+    p3->setHumanName("Tom");
+    p3->setLevel(4);
+    p3->setAlignment(MoralityType::Neutral, OrderType::Neutral);
+
     p3->addSense(SenseType::Darkvision);
     p3->setAC(13);
 
@@ -91,13 +96,15 @@ int main()
     p3->setSpellSlots({ 3, 0, 0, 0, 0, 0, 0, 0 });
     p3->generateSkills();
 
-    auto p4 = core->createPlayer(
-        "Natalie Stormwind",
-        ClassType::Rogue,
-        RaceType::Human,
-        "Tom",
-        2,
-        { MoralityType::Good, OrderType::Chaotic });
+    auto p4 = core->createPlayer();
+
+    p4->setName("Natalie Stormwind");
+    p4->setClassType(ClassType::Rogue);
+    p4->setRaceType(RaceType::Human);
+    p4->setHumanName("Tom");
+    p4->setLevel(2);
+    p4->setAlignment(MoralityType::Good, OrderType::Chaotic);
+
     p4->setAC(13);
     p4->setAbilities({ 13, 15, 14, 17, 15, 15 });
     p4->setTaggedSkills(
