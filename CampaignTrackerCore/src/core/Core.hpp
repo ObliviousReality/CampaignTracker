@@ -12,15 +12,47 @@
 #include <memory>
 #include <vector>
 
+namespace Details
+{
+    template<typename T>
+    T * findObject(const std::vector<std::unique_ptr<T>> & vector, CreatureId id)
+    {
+        auto item = std::find_if(
+            vector.begin(),
+            vector.end(),
+            [&id](const std::unique_ptr<T> & p) { return p->getId() == id; });
+        if (item != vector.end())
+        {
+            return item->get();
+        }
+        return nullptr;
+    }
+}
+
 class CTCore
 {
 public:
     CTCore();
     static void PrintHelloWorld();
 
-    Player * createPlayer();
+    CreatureId createPlayer();
 
-    Creature * getCreatureFromId(const CreatureId id, const CreatureType type) const;
+    template<typename T>
+    T * getCreatureFromId(const CreatureId id, const CreatureType type) const
+    {
+        switch (type)
+        {
+            case CreatureType::Player:
+            {
+                return Details::findObject(players, id);
+            }
+            case CreatureType::NPC:
+            case CreatureType::Monster:
+            case CreatureType::Other:
+            default: return nullptr;
+        }
+        return nullptr;
+    }
 
     const CreatureId getNewCreatureId() { return nextFreeId++; }
 

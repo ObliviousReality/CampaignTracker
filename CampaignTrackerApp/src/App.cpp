@@ -15,106 +15,107 @@ int main()
     auto core = std::make_unique<CTCore>();
     CTCore::PrintHelloWorld();
 
-    auto p = core->createPlayer();
+    const auto berthogId = core->createPlayer();
+    auto * berthog = core->getCreatureFromId<Player>(berthogId, CreatureType::Player);
 
-    p->setName("Berthog");
-    p->setClassType(ClassType::Warlock);
-    p->setRaceType(RaceType::Dwarf);
-    p->setHumanName("Tom");
-    p->setLevel(8);
-    p->setAlignment(MoralityType::Good, OrderType::Lawful);
+    berthog->setName("Berthog");
+    berthog->setClassType(ClassType::Warlock);
+    berthog->setRaceType(RaceType::Dwarf);
+    berthog->setHumanName("Tom");
+    berthog->setLevel(8);
+    berthog->setAlignment(MoralityType::Good, OrderType::Lawful);
 
-    p->addSense(SenseType::Darkvision);
-    p->setAC(17);
-    p->addResistance(DamageType::Poison);
-    p->setTempHitPoint(5);
+    berthog->addSense(SenseType::Darkvision);
+    berthog->setAC(17);
+    berthog->addResistance(DamageType::Poison);
+    berthog->setTempHitPoint(5);
 
-    p->setAbilities({ 20, 17, 18, 15, 14, 15 });
+    berthog->setAbilities({ 20, 17, 18, 15, 14, 15 });
 
-    p->setTaggedSkills({ SkillType::AnimalHandling, SkillType::Deception, SkillType::Perception, SkillType::Survival });
+    berthog->setTaggedSkills({ SkillType::AnimalHandling, SkillType::Deception, SkillType::Perception, SkillType::Survival });
 
-    p->setTaggedSkill(SkillType::Investigation, 2);
+    berthog->setTaggedSkill(SkillType::Investigation, 2);
 
-    p->setTaggedSavingThrows({ AbilityType::Wisdom, AbilityType::Charisma });
+    berthog->setTaggedSavingThrows({ AbilityType::Wisdom, AbilityType::Charisma });
 
-    p->setDisadvantage(SkillType::Stealth, true);
+    berthog->setDisadvantage(SkillType::Stealth, true);
 
-    p->setSpellSlots({ 0, 0, 0, 2, 0, 0, 0, 0 });
+    berthog->setSpellSlots({ 0, 0, 0, 2, 0, 0, 0, 0 });
 
-    p->generateSkills();
+    berthog->generateSkills();
 
     printf("\n\n\n\n");
 
-    auto p2 = core->createPlayer();
+    const auto elysiaId = core->createPlayer();
+    auto * elysia = core->getCreatureFromId<Player>(elysiaId, CreatureType::Player);
 
-    p2->setName("Elysia Autumnfire");
-    p2->setClassType(ClassType::Wizard);
-    p2->setRaceType(RaceType::Elf);
-    p2->setHumanName("Tom");
-    p2->setLevel(8);
-    p2->setAlignment(MoralityType::Good, OrderType::Lawful);
+    elysia->setName("Elysia Autumnfire");
+    elysia->setClassType(ClassType::Wizard);
+    elysia->setRaceType(RaceType::Elf);
+    elysia->setHumanName("Tom");
+    elysia->setLevel(8);
+    elysia->setAlignment(MoralityType::Good, OrderType::Lawful);
 
-    p2->addSense(SenseType::Darkvision);
-    p2->setAC(12);
+    elysia->addSense(SenseType::Darkvision);
+    elysia->setAC(12);
 
-    p2->setAbilities({ 10, 14, 11, 18, 14, 13 });
+    elysia->setAbilities({ 10, 14, 11, 18, 14, 13 });
 
-    p2->setTaggedSkills({ SkillType::Arcana,
-                          SkillType::Athletics,
-                          SkillType::Medicine,
-                          SkillType::Perception,
-                          SkillType::Performance,
-                          SkillType::Survival });
+    elysia->setTaggedSkills({ SkillType::Arcana,
+                              SkillType::Athletics,
+                              SkillType::Medicine,
+                              SkillType::Perception,
+                              SkillType::Performance,
+                              SkillType::Survival });
 
-    p2->setTaggedSavingThrows({ AbilityType::Intelligence, AbilityType::Wisdom });
+    elysia->setTaggedSavingThrows({ AbilityType::Intelligence, AbilityType::Wisdom });
 
-    p2->setSpellSlots({ 4, 3, 3, 2, 0, 0, 0, 0 });
-    p2->generateSkills();
+    elysia->setSpellSlots({ 4, 3, 3, 2, 0, 0, 0, 0 });
+    elysia->generateSkills();
 
-    auto p3 = core->createPlayer();
+    const auto gulthandorId = core->createPlayer();
+    auto * gulthandor = core->getCreatureFromId<Player>(gulthandorId, CreatureType::Player);
 
-    p3->setName("Gulthandor Jones");
-    p3->setClassType(ClassType::Ranger);
-    p3->setRaceType(RaceType::HalfElf);
-    p3->setHumanName("Tom");
-    p3->setLevel(4);
-    p3->setAlignment(MoralityType::Neutral, OrderType::Neutral);
+    gulthandor->setName("Gulthandor Jones");
+    gulthandor->setClassType(ClassType::Ranger);
+    gulthandor->setRaceType(RaceType::HalfElf);
+    gulthandor->setHumanName("Tom");
+    gulthandor->setLevel(4);
+    gulthandor->setAlignment(MoralityType::Neutral, OrderType::Neutral);
 
-    p3->addSense(SenseType::Darkvision);
-    p3->setAC(13);
+    gulthandor->addSense(SenseType::Darkvision);
+    gulthandor->setAC(13);
 
-    p3->setAbilities({ 13, 14, 8, 12, 15, 16 });
-    p3->setTaggedSkills({ SkillType::AnimalHandling,
-                          SkillType::Athletics,
-                          SkillType::Deception,
-                          SkillType::History,
-                          SkillType::Investigation,
-                          SkillType::Stealth,
-                          SkillType::Survival });
+    gulthandor->setAbilities({ 13, 14, 8, 12, 15, 16 });
+    gulthandor->setTaggedSkills({ SkillType::AnimalHandling,
+                                  SkillType::Athletics,
+                                  SkillType::Deception,
+                                  SkillType::History,
+                                  SkillType::Investigation,
+                                  SkillType::Stealth,
+                                  SkillType::Survival });
 
-    p3->setTaggedSavingThrows({ AbilityType::Strength, AbilityType::Dexterity });
-    p3->setSpellSlots({ 3, 0, 0, 0, 0, 0, 0, 0 });
-    p3->generateSkills();
+    gulthandor->setTaggedSavingThrows({ AbilityType::Strength, AbilityType::Dexterity });
+    gulthandor->setSpellSlots({ 3, 0, 0, 0, 0, 0, 0, 0 });
+    gulthandor->generateSkills();
 
-    auto p4 = core->createPlayer();
+    const auto natalieId = core->createPlayer();
+    auto * natalie = core->getCreatureFromId<Player>(natalieId, CreatureType::Player);
 
-    p4->setName("Natalie Stormwind");
-    p4->setClassType(ClassType::Rogue);
-    p4->setRaceType(RaceType::Human);
-    p4->setHumanName("Tom");
-    p4->setLevel(2);
-    p4->setAlignment(MoralityType::Good, OrderType::Chaotic);
+    natalie->setName("Natalie Stormwind");
+    natalie->setClassType(ClassType::Rogue);
+    natalie->setRaceType(RaceType::Human);
+    natalie->setHumanName("Tom");
+    natalie->setLevel(2);
+    natalie->setAlignment(MoralityType::Good, OrderType::Chaotic);
 
-    p4->setAC(13);
-    p4->setAbilities({ 13, 15, 14, 17, 15, 15 });
-    p4->setTaggedSkills(
+    natalie->setAC(13);
+    natalie->setAbilities({ 13, 15, 14, 17, 15, 15 });
+    natalie->setTaggedSkills(
         { SkillType::Athletics, SkillType::Deception, SkillType::Investigation, SkillType::Persuasion });
-    p4->setTaggedSkills({ SkillType::Perception, SkillType::Stealth }, 2);
-    p4->setTaggedSavingThrows({ AbilityType::Dexterity, AbilityType::Intelligence });
-    p4->generateSkills();
-
-    auto * pp = core->getCreatureFromId(0, CreatureType::Player);
-    pp;
+    natalie->setTaggedSkills({ SkillType::Perception, SkillType::Stealth }, 2);
+    natalie->setTaggedSavingThrows({ AbilityType::Dexterity, AbilityType::Intelligence });
+    natalie->generateSkills();
 
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();
@@ -122,10 +123,10 @@ int main()
 
     auto mainWindow = std::make_unique<MainFrame>();
 
-    mainWindow->createPlayerFrame(p);
-    mainWindow->createPlayerFrame(p2);
-    mainWindow->createPlayerFrame(p3);
-    mainWindow->createPlayerFrame(p4);
+    mainWindow->createPlayerFrame(berthog);
+    mainWindow->createPlayerFrame(elysia);
+    mainWindow->createPlayerFrame(gulthandor);
+    mainWindow->createPlayerFrame(natalie);
 
     int sliderVal = 0;
     while (ApplicationManager::Get()->isAppRunning())
