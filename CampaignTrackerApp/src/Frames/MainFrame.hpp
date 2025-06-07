@@ -11,6 +11,7 @@
 #include <vector>
 
 class PlayerFrame;
+class MonsterFrame;
 
 class MainFrame : public Frame
 {
@@ -22,6 +23,8 @@ public:
 
     void createPlayerFrame(CreatureId playerId);
 
+    void createMonsterFrame(CreatureId monsterId);
+
 private:
     bool open = false;
     bool useWorkArea = false;
@@ -29,4 +32,5 @@ private:
     std::unique_ptr<TitleBarFrame> titleBar;
     std::unique_ptr<TabBarFrame> tabBar;
     std::vector<PlayerFrame *> playerFrames;
+    std::vector<MonsterFrame *> monsterFrames;
 };

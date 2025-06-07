@@ -1,6 +1,7 @@
 #include "MainFrame.hpp"
 
 #include "Frames/PlayerFrame.hpp"
+#include "Frames/MonsterFrame.hpp"
 
 #include "imgui.h"
 
@@ -24,8 +25,8 @@ void MainFrame::render()
     {
         titleBar->render();
         tabBar->render();
-
-        const float totalWidth = (233.0f) * playerFrames.size();
+        const auto numFrames = playerFrames.size() + monsterFrames.size();
+        const float totalWidth = (233.0f) * numFrames;
         const auto tableFlags = ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY | ImGuiTableFlags_SizingStretchSame
                               | ImGuiTableFlags_BordersInnerV
                               | ImGuiTableFlags_Reorderable /*| ImGuiTableFlags_Resizable*/;
@@ -33,7 +34,7 @@ void MainFrame::render()
         auto outerSize = ImGui::GetWindowSize();
         outerSize[0] -= 2 * style.WindowPadding[0];
         outerSize[1] -= titleBar->getSize()[1];
-        if (ImGui::BeginTable("###Players", static_cast<int>(playerFrames.size()), tableFlags, outerSize, totalWidth))
+        if (ImGui::BeginTable("###Players", static_cast<int>(numFrames), tableFlags, outerSize, totalWidth))
         {
             //for (int i = 0; i < playerFrames.size(); ++i)
             //{
@@ -41,6 +42,12 @@ void MainFrame::render()
             //}
             //ImGui::TableHeadersRow();
             for (const auto pFrame : playerFrames)
+            {
+                ImGui::TableNextColumn();
+                pFrame->render();
+                ImGui::SameLine();
+            }
+            for (const auto pFrame : monsterFrames)
             {
                 ImGui::TableNextColumn();
                 pFrame->render();
@@ -55,3 +62,5 @@ void MainFrame::render()
 const std::string MainFrame::getName() { return std::string(); }
 
 void MainFrame::createPlayerFrame(CreatureId playerId) { playerFrames.emplace_back(new PlayerFrame(playerId)); }
+
+void MainFrame::createMonsterFrame(CreatureId monsterId) { monsterFrames.emplace_back(new MonsterFrame(monsterId)); }

@@ -156,6 +156,7 @@ int main()
     mainWindow->createPlayerFrame(elysiaId);
     mainWindow->createPlayerFrame(gulthandorId);
     mainWindow->createPlayerFrame(natalieId);
+    mainWindow->createMonsterFrame(airElementalId);
 
     int sliderVal = 0;
     while (ApplicationManager::Get()->isAppRunning())
