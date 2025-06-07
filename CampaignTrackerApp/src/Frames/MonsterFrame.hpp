@@ -8,7 +8,6 @@
 
 class ActionsElement;
 class MonsterBioElement;
-class NotesElement;
 class SkillsElement;
 
 class MonsterFrame : public Frame
@@ -25,5 +24,4 @@ private:
     std::unique_ptr<MonsterBioElement> bioElement;
     std::unique_ptr<SkillsElement> skillsElement;
     std::unique_ptr<ActionsElement> actionsElement;
-    //std::unique_ptr<NotesElement> notesElement;
 };
