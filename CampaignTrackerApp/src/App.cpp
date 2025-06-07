@@ -152,7 +152,7 @@ int main()
     auto * actionB = new Action();
     actionB->setName("Thunderous Slam");
     actionB->setDescription("Melee Attack Roll: +8, reach 10ft. Hit 14 (2d8 + 5) Thunder damage.");
-    actionB->setLimitType(ActionLimitType::RechargeRest);
+    actionB->setLimitType(ActionLimitType::RechargeShortRest);
     airElemental->addAction(actionB);
 
     auto * actionC = new Action();

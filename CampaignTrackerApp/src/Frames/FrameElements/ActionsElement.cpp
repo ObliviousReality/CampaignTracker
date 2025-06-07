@@ -18,23 +18,25 @@ void ActionsElement::draw()
             }
             ImGui::Text(action->getName().c_str());
             bool showUseReset = true;
+            const auto limitText = Core::getActionLimitTypeString(action->getLimitType());
             switch (action->getLimitType())
             {
                 case ActionLimitType::PerDay:
                 {
                     const auto m = action->getPerDayMax();
                     const auto c = action->getPerDayCurrent();
-                    ImGui::Text("%i %s per day (%i left)", m, m > 1 ? "uses" : "use", c);
+                    ImGui::Text(limitText.c_str(), m, m > 1 ? "uses" : "use", c);
                     break;
                 }
-                case ActionLimitType::RechargeRest:
+                case ActionLimitType::RechargeShortRest:
+                case ActionLimitType::RechargeLongRest:
                 {
-                    ImGui::Text("Recharges after a long rest");
+                    ImGui::Text(limitText.c_str());
                     break;
                 }
                 case ActionLimitType::RechargeRoll:
                 {
-                    ImGui::Text("Recharge %i-6", action->getRechargeRollMinimum());
+                    ImGui::Text(limitText.c_str(), action->getRechargeRollMinimum());
                     break;
                 }
                 default:

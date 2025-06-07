@@ -6,8 +6,25 @@ enum class ActionLimitType
 {
     PerDay,
     RechargeRoll,
-    RechargeRest,
+    RechargeLongRest,
+    RechargeShortRest,
     None,
+};
+
+namespace Core
+{
+    static std::string getActionLimitTypeString(const ActionLimitType atl)
+    {
+        switch (atl)
+        {
+            case ActionLimitType::PerDay: return "%i %s per day (%i left)";
+            case ActionLimitType::RechargeRoll: return "Recharge %i-6";
+            case ActionLimitType::RechargeLongRest: return "Recharges after a long rest";
+            case ActionLimitType::RechargeShortRest: return "Recharges after a short rest";
+            case ActionLimitType::None: return "";
+        }
+        return {};
+    }
 };
 
 class Action
@@ -38,7 +55,8 @@ public:
                 rechargeRollMinimum = val;
                 break;
             }
-            case ActionLimitType::RechargeRest: // nothing to do here, fallthrough
+            case ActionLimitType::RechargeLongRest: // nothing to do here, fallthrough
+            case ActionLimitType::RechargeShortRest: // nothing to do here, fallthrough
             case ActionLimitType::None:
             {
                 // Shouldn't occur
@@ -70,7 +88,8 @@ public:
                 break;
             }
             case ActionLimitType::RechargeRoll:
-            case ActionLimitType::RechargeRest:
+            case ActionLimitType::RechargeShortRest:
+            case ActionLimitType::RechargeLongRest:
             {
                 if (chargeAvailable)
                 {
