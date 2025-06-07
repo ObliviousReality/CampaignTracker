@@ -14,6 +14,9 @@ public:
     const ImVec2 getSize() const { return titleBarSize; }
 
 private:
-    bool closePressed = false;
+    bool diceWellOpen = false; // TODO: Move to ApplicationManager
+    bool logOpen = false;
+    bool showEnvironment = true;
+    bool editMode = false;
     ImVec2 titleBarSize;
 };
