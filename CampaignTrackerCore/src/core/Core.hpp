@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entities/Creature.hpp"
+#include "entities/Monster.hpp"
 #include "entities/Player.hpp"
 
 #include "data/Class.hpp"
@@ -45,6 +46,10 @@ public:
 
     CreatureId createPlayer();
 
+    CreatureId createMonster();
+
+    Monster * getMonsterFromId(const CreatureId id) { return Details::findObject(monsters, id); }
+
     template<typename T>
     T * getCreatureFromId(const CreatureId id, const CreatureType type) const
     {
@@ -71,7 +76,7 @@ private:
 
     std::vector<std::unique_ptr<Player>> players;
     // std::vector<std::unique_ptr<NPC>> npcs;
-    // std::vector<std::unique_ptr<Monster>> monsters;
+    std::vector<std::unique_ptr<Monster>> monsters;
 
     CreatureId nextFreeId = 0;
 };

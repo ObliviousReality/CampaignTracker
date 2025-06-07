@@ -32,7 +32,8 @@ int main()
 
     berthog->setAbilities({ 20, 17, 18, 15, 14, 15 });
 
-    berthog->setTaggedSkills({ SkillType::AnimalHandling, SkillType::Deception, SkillType::Perception, SkillType::Survival });
+    berthog->setTaggedSkills(
+        { SkillType::AnimalHandling, SkillType::Deception, SkillType::Perception, SkillType::Survival });
 
     berthog->setTaggedSkill(SkillType::Investigation, 2);
 
@@ -114,6 +115,36 @@ int main()
     natalie->setTaggedSkills({ SkillType::Perception, SkillType::Stealth }, 2);
     natalie->setTaggedSavingThrows({ AbilityType::Dexterity, AbilityType::Intelligence });
     natalie->generateSkills();
+
+    auto airElementalId = core->createMonster();
+    auto * airElemental = core->getMonsterFromId(airElementalId);
+
+    airElemental->setName("gary");
+    airElemental->setMonsterTypeName("Air Elemental");
+    airElemental->setChallengeRating(5);
+    airElemental->setMonsterType(MonsterType::Elemental);
+    airElemental->setAlignment(MoralityType::Neutral, OrderType::Neutral);
+    airElemental->setAC(15);
+    airElemental->setMaxHitPoints(90);
+    airElemental->setSpeed(10);
+    airElemental->setAbilities({ 14, 20, 14, 6, 10, 6 });
+    airElemental->addResistance(DamageType::Bludgeoning);
+    airElemental->addResistance(DamageType::Lightning);
+    airElemental->addResistance(DamageType::Piercing);
+    airElemental->addResistance(DamageType::Slashing);
+    airElemental->addImmunity(DamageType::Poison);
+    airElemental->addImmunity(DamageType::Thunder);
+    airElemental->addImmunity(ConditionType::Exhaustion);
+    airElemental->addImmunity(ConditionType::Grappled);
+    airElemental->addImmunity(ConditionType::Paralysed);
+    airElemental->addImmunity(ConditionType::Petrified);
+    airElemental->addImmunity(ConditionType::Poisoned);
+    airElemental->addImmunity(ConditionType::Prone);
+    airElemental->addImmunity(ConditionType::Restrained);
+    airElemental->addImmunity(ConditionType::Unconscious);
+
+    airElemental->addSense(SenseType::Darkvision);
+    airElemental->generateSkills();
 
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();

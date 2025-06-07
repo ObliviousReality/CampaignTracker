@@ -15,3 +15,10 @@ CreatureId CTCore::createPlayer()
     return id;
 }
 
+CreatureId CTCore::createMonster()
+{
+    const auto id = getNewCreatureId();
+
+    monsters.emplace_back(std::make_unique<Monster>(id));
+    return id;
+}
