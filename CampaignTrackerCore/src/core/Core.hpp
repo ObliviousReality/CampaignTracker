@@ -50,6 +50,8 @@ public:
 
     Monster * getMonsterFromId(const CreatureId id) { return Details::findObject(monsters, id); }
 
+    Creature * getCreature(const CreatureId id, const CreatureType type) const;
+
     template<typename T>
     T * getCreatureFromId(const CreatureId id, const CreatureType type) const
     {

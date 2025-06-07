@@ -22,3 +22,19 @@ CreatureId CTCore::createMonster()
     monsters.emplace_back(std::make_unique<Monster>(id));
     return id;
 }
+
+Creature * CTCore::getCreature(const CreatureId id, const CreatureType type) const { 
+
+    switch (type)
+    {
+        case CreatureType::Player:
+        {
+            return Details::findObject(players, id);
+        }
+        case CreatureType::Monster:
+        {
+            return Details::findObject(monsters, id);
+        }
+        default: break;
+    }
+}
