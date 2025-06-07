@@ -11,7 +11,7 @@
 PlayerFrame::PlayerFrame(CreatureId id) : playerId(id)
 {
     bioElement = std::make_unique<PlayerBioElement>(id);
-    skillsElement = std::make_unique<SkillsElement>(id); // TODO: This doesn't need to take id?
+    skillsElement = std::make_unique<SkillsElement>(id, CreatureType::Player); // TODO: This doesn't need to take id?
     notesElement = std::make_unique<NotesElement>();
 }
 

@@ -4,17 +4,29 @@
 
 void SkillsElement::draw()
 {
-    auto * player = CTCore::Get()->getCreatureFromId<Player>(id, CreatureType::Player);
+    Creature * creature;
+    switch (type)
+    {
+        case CreatureType::Player: 
+            creature = dynamic_cast<Creature *>(CTCore::Get()->getCreatureFromId<Player>(id, type));
+            break;
+        case CreatureType::Monster:
+            creature = dynamic_cast<Creature *>(CTCore::Get()->getMonsterFromId(id));
+            break;
+        case CreatureType::NPC: break;
+        case CreatureType::Other: break;
+        default: break;
+    }
     ImGui::SeparatorText("Skills");
     auto printSkill = [&](const SkillType st)
     {
-        const auto skill = player->getSkill(st);
+        const auto skill = creature->getSkill(st);
         std::string end;
-        if (player->hasAdvantage(st) == player->hasDisadvantage(st))
+        if (creature->hasAdvantage(st) == creature->hasDisadvantage(st))
         {
             end = "";
         }
-        else if (player->hasAdvantage(st))
+        else if (creature->hasAdvantage(st))
         {
             end = "+Adv";
         }
