@@ -21,7 +21,7 @@ public:
     void setDescription(std::string newDesc) { description = newDesc; }
     const std::string & getDescription() const { return description; }
 
-    void setLimitType(const ActionLimitType alt, const int val)
+    void setLimitType(const ActionLimitType alt, const int val = 0)
     {
         limitType = alt;
 
@@ -47,6 +47,12 @@ public:
         }
     }
 
+    const ActionLimitType getLimitType() const { return limitType; }
+
+    const int getRechargeRollMinimum() const { return rechargeRollMinimum; }
+    const int getPerDayMax() const { return perDayMax; }
+    const int getPerDayCurrent() const { return perDayCurrent; }
+
     void useAction()
     {
         switch (limitType)
@@ -56,6 +62,10 @@ public:
                 if (perDayCurrent)
                 {
                     perDayCurrent--;
+                    if (!perDayCurrent)
+                    {
+                        chargeAvailable = false;
+                    }
                 }
                 break;
             }
@@ -77,7 +87,7 @@ public:
         }
     }
 
-    bool canDoAction() { return (perDayCurrent > perDayMax) || chargeAvailable; }
+    bool canDoAction() { return chargeAvailable; }
 
     void reset()
     {
