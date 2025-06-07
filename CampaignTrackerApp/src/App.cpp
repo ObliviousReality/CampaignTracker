@@ -143,6 +143,28 @@ int main()
     airElemental->addImmunity(ConditionType::Restrained);
     airElemental->addImmunity(ConditionType::Unconscious);
 
+    Action * actionA = new Action();
+    actionA->setName("Multiattack");
+    actionA->setDescription("The elemental takes two Thunderous Slam attacks");
+    actionA->setLimitType(ActionLimitType::PerDay, 2);
+    airElemental->addAction(actionA);
+
+    auto * actionB = new Action();
+    actionB->setName("Thunderous Slam");
+    actionB->setDescription("Melee Attack Roll: +8, reach 10ft. Hit 14 (2d8 + 5) Thunder damage.");
+    actionB->setLimitType(ActionLimitType::RechargeRest);
+    airElemental->addAction(actionB);
+
+    auto * actionC = new Action();
+    actionC->setName("Whirlwind");
+    actionC->setDescription(
+        "Strength Saving Throw: DC 13, one Medium or smaller creature in the elemental’s space. Failure: 24 "
+        "(4d10 + 2) Thunder damage, and the target is pushed up to 20 feet straight away from the elemental "
+        "and has the Prone condition. Success: Half damage only.");
+    actionC->setLimitType(ActionLimitType::RechargeRoll, 4);
+    airElemental->addAction(actionC);
+
+
     airElemental->addSense(SenseType::Darkvision);
     airElemental->generateSkills();
 
