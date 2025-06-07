@@ -1,23 +1,24 @@
-#include "BioElement.hpp"
+#include "MonsterBioElement.hpp"
+
+#include "entities/Monster.hpp"
 
 #include "imgui.h"
 
 #include <sstream>
 
-void BioElement::draw()
+void MonsterBioElement::draw()
 {
-    auto * player = CTCore::Get()->getCreatureFromId<Player>(playerId, CreatureType::Player);
-    const auto race = Core::getRaceString(player->getRaceType());
-    const auto clas = Core::getClassString(player->getClassType());
+    auto * monster = CTCore::Get()->getMonsterFromId(monsterId);
 
-    const auto alignment = Core::getAlignmentString(player->getAlignment());
-    ImGui::Text("Level: %i", player->getLevel());
-    ImGui::Text("Race: %s", race.c_str());
-    ImGui::Text("Class: %s", clas.c_str());
+    const auto monsterTypeStr = Core::getMonsterTypeString(monster->getMonsterType());
+
+    const auto alignment = Core::getAlignmentString(monster->getAlignment());
+    ImGui::Text("Challenge Rating: %i", monster->getChallengeRating());
+    ImGui::Text("Type: %s", monsterTypeStr.c_str());
     ImGui::Text("Alignment: %s", alignment.c_str());
 
     ImGui::SeparatorText("Abilities");
-    auto * ab = player->getAbilities();
+    auto * ab = monster->getAbilities();
     auto addAbility = [](const AbilityType at, const Abilities * ab)
     {
         const auto val = ab->getModifier(at);
@@ -40,7 +41,7 @@ void BioElement::draw()
 
     auto addSavingThrow = [&](const AbilityType at)
     {
-        const auto val = player->getSavingThrowModifier(at);
+        const auto val = monster->getSavingThrowModifier(at);
         const auto text = Core::getAbilityShortString(at) + "\n" + (val >= 0 ? '+' : '-') + std::to_string(abs(val));
         ImGui::Button(text.c_str());
         if (at != AbilityType::Charisma)
@@ -57,8 +58,8 @@ void BioElement::draw()
     addSavingThrow(AbilityType::Charisma);
 
     ImGui::SeparatorText("Hit Points");
-    auto hp = player->getHitPoints();
-    auto maxHp = player->getHitPointsMax();
+    auto hp = monster->getHitPoints();
+    auto maxHp = monster->getHitPointsMax();
 
     ImGui::PushItemFlag(ImGuiItemFlags_ButtonRepeat, true);
 
@@ -94,8 +95,8 @@ void BioElement::draw()
         hp = std::min(hp, maxHp);
     }
 
-    player->setHitPoints(hp);
-    int tempHp = player->getTempHitPoints();
+    monster->setHitPoints(hp);
+    int tempHp = monster->getTempHitPoints();
 
     ImGui::SameLine();
     if (ImGui::ArrowButton("##leftthp", ImGuiDir::ImGuiDir_Left) && (tempHp > 0))
@@ -129,7 +130,7 @@ void BioElement::draw()
         tempHp += shiftAmount;
     }
 
-    player->setTempHitPoint(tempHp);
+    monster->setTempHitPoint(tempHp);
 
     ImGui::PopItemFlag();
     ImGui::SameLine();
@@ -137,57 +138,25 @@ void BioElement::draw()
 
     ImGui::SeparatorText("Stats");
 
-    ImGui::Button(("Init\n +" + std::to_string(player->getInitiative())).c_str());
+    ImGui::Button(("Init\n +" + std::to_string(monster->getInitiative())).c_str());
     ImGui::SameLine();
-    std::string inspText = "Insp\n " + std::string(player->hasInspiration() ? "Yes" : "No");
-    if (ImGui::Button(inspText.c_str()))
-    {
-        player->setInspiration(!player->hasInspiration());
-    }
+    ImGui::Button(("Prof\n +" + std::to_string(monster->getProficiency())).c_str());
     ImGui::SameLine();
-    ImGui::Button(("Prof\n +" + std::to_string(player->getProficiency())).c_str());
+    ImGui::Button((" AC \n " + std::to_string(monster->getAC())).c_str());
     ImGui::SameLine();
-    ImGui::Button((" AC \n " + std::to_string(player->getAC())).c_str());
-    ImGui::SameLine();
-    ImGui::Button(("Speed\n " + std::to_string(player->getSpeed()) + "ft").c_str());
+    ImGui::Button(("Speed\n " + std::to_string(monster->getSpeed()) + "ft").c_str());
 
     ImGui::SeparatorText("Passives");
-    auto * passives = player->getPassives();
+    auto * passives = monster->getPassives();
     ImGui::Text(("Perception: " + std::to_string(passives->perception)).c_str());
     ImGui::Text(("Investigation: " + std::to_string(passives->investigation)).c_str());
     ImGui::Text(("Insight: " + std::to_string(passives->insight)).c_str());
-
-    ImGui::SeparatorText("Spell Slots");
-
-    auto slots = player->getRemainingSpellSlots();
-    for (int i = 0; i < 8; ++i)
-    {
-        ImGui::BeginGroup();
-        if (ImGui::ArrowButton(("##upslots" + std::to_string(i)).c_str(), ImGuiDir::ImGuiDir_Up))
-        {
-            slots[i]++;
-            slots[i] = std::min(slots[i], player->getTotalSpells(i));
-        }
-        ImGui::Text((" " + std::to_string(slots[i])).c_str());
-        if (ImGui::ArrowButton(("##downslots" + std::to_string(i)).c_str(), ImGuiDir::ImGuiDir_Down) && slots[i])
-        {
-            slots[i]--;
-        }
-        ImGui::EndGroup();
-
-        if (i != 7)
-        {
-            ImGui::SameLine();
-        }
-    }
-
-    player->setRemainingSpellSlots(slots);
 
     bool addedExtraValues = false;
 
     std::stringstream conditionStream;
     int count = 0;
-    for (const auto con : player->getConditions())
+    for (const auto con : monster->getConditions())
     {
         if (count++)
         {
@@ -205,7 +174,7 @@ void BioElement::draw()
 
     count = 0;
     std::stringstream immunityStream;
-    for (const auto con : player->getConditionImmunities())
+    for (const auto con : monster->getConditionImmunities())
     {
         if (count++)
         {
@@ -213,7 +182,7 @@ void BioElement::draw()
         }
         immunityStream << Core::getConditionString(con).c_str();
     }
-    for (const auto dt : player->getDamageTypeImmunities())
+    for (const auto dt : monster->getDamageTypeImmunities())
     {
         if (count++)
         {
@@ -232,7 +201,7 @@ void BioElement::draw()
     count = 0;
 
     std::stringstream resistanceStream;
-    for (const auto dt : player->getResistances())
+    for (const auto dt : monster->getResistances())
     {
         if (count++)
         {
@@ -250,7 +219,7 @@ void BioElement::draw()
     count = 0;
 
     std::stringstream senseStream;
-    for (const auto sense : player->getSenses())
+    for (const auto sense : monster->getSenses())
     {
         if (count++)
         {

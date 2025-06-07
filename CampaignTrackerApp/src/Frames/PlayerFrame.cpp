@@ -1,6 +1,6 @@
 #include "PlayerFrame.hpp"
 
-#include "FrameElements/BioElement.hpp"
+#include "FrameElements/PlayerBioElement.hpp"
 #include "FrameElements/NotesElement.hpp"
 #include "FrameElements/SkillsElement.hpp"
 
@@ -10,7 +10,7 @@
 
 PlayerFrame::PlayerFrame(CreatureId id) : playerId(id)
 {
-    bioElement = std::make_unique<BioElement>(id);
+    bioElement = std::make_unique<PlayerBioElement>(id);
     skillsElement = std::make_unique<SkillsElement>(id); // TODO: This doesn't need to take id?
     notesElement = std::make_unique<NotesElement>();
 }

@@ -6,7 +6,7 @@
 
 #include <memory>
 
-class BioElement;
+class PlayerBioElement;
 class NotesElement;
 class SkillsElement;
 
@@ -23,7 +23,7 @@ public:
 private:
     CreatureId playerId;
 
-    std::unique_ptr<BioElement> bioElement;
+    std::unique_ptr<PlayerBioElement> bioElement;
     std::unique_ptr<SkillsElement> skillsElement;
     std::unique_ptr<NotesElement> notesElement;
 };

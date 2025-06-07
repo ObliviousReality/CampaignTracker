@@ -4,14 +4,14 @@
 
 #include "core/Core.hpp"
 
-class BioElement : public FrameElement
+class MonsterBioElement : public FrameElement
 {
 public:
-    BioElement(CreatureId id) : playerId(id) {}
+    MonsterBioElement(CreatureId id) : monsterId(id) {}
 
     void update() override {}
     void draw() override;
 
 private:
-    CreatureId playerId;
+    CreatureId monsterId;
 };
