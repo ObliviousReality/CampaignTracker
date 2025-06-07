@@ -34,7 +34,7 @@ void SkillsElement::draw()
         {
             end = "-Dvd";
         }
-        ImGui::Text("%s: %c%i %s\n", Core::getSkillString(st).c_str(), skill >= 0 ? '+' : '-', skill, end.c_str());
+        ImGui::Text("%s: %c%i %s\n", Core::getSkillString(st).c_str(), skill >= 0 ? '+' : '-', std::abs(skill), end.c_str());
     };
     printSkill(SkillType::Acrobatics);
     printSkill(SkillType::AnimalHandling);
