@@ -200,7 +200,7 @@ void PlayerBioElement::draw()
     {
         addedExtraValues = true;
         ImGui::SeparatorText("Conditions");
-        ImGui::Text(conditionStream.str().c_str());
+        ImGui::TextWrapped(conditionStream.str().c_str());
     }
 
     count = 0;
@@ -226,7 +226,7 @@ void PlayerBioElement::draw()
     {
         addedExtraValues = true;
         ImGui::SeparatorText("Immunities");
-        ImGui::Text(immunityStream.str().c_str());
+        ImGui::TextWrapped(immunityStream.str().c_str());
     }
 
     count = 0;
@@ -244,7 +244,7 @@ void PlayerBioElement::draw()
     if (count)
     {
         ImGui::SeparatorText("Resistances");
-        ImGui::Text(resistanceStream.str().c_str());
+        ImGui::TextWrapped(resistanceStream.str().c_str());
     }
 
     count = 0;
@@ -263,7 +263,7 @@ void PlayerBioElement::draw()
     {
         addedExtraValues = true;
         ImGui::SeparatorText("Senses");
-        ImGui::Text(senseStream.str().c_str());
+        ImGui::TextWrapped(senseStream.str().c_str());
     }
 
     if (!addedExtraValues)
