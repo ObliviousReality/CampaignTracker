@@ -1,17 +1,19 @@
 #pragma once
 
-#include "FrameElement.hpp"
+#include "BioElement.hpp"
 
 #include "core/Core.hpp"
 
-class PlayerBioElement : public FrameElement
+class PlayerBioElement : public BioElement
 {
 public:
-    PlayerBioElement(CreatureId id) : playerId(id) {}
+    PlayerBioElement(CreatureId id) : BioElement(id, CreatureType::Player) {}
 
     void update() override {}
-    void draw() override;
+    void olddraw();
 
 private:
-    CreatureId playerId;
+    void drawCoreInfo() override;
+    void drawStats() override;
+    void drawSpells() override;
 };

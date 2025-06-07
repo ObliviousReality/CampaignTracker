@@ -1,17 +1,17 @@
 #pragma once
 
-#include "FrameElement.hpp"
+#include "BioElement.hpp"
 
 #include "core/Core.hpp"
 
-class MonsterBioElement : public FrameElement
+class MonsterBioElement : public BioElement
 {
 public:
-    MonsterBioElement(CreatureId id) : monsterId(id) {}
+    MonsterBioElement(CreatureId id) : BioElement(id, CreatureType::Monster) {}
 
-    void update() override {}
-    void draw() override;
-
+    void update() {}
 private:
-    CreatureId monsterId;
+    virtual void drawCoreInfo() override;
+    virtual void drawStats() override;
+    virtual void drawSpells() override {}
 };
