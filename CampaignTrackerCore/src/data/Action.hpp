@@ -15,6 +15,9 @@ class Action
 public:
     Action() {}
 
+    void setName(std::string newName) { name = newName; }
+    const std::string & getName() const { return name; }
+
     void setDescription(std::string newDesc) { description = newDesc; }
     const std::string & getDescription() const { return description; }
 
@@ -83,6 +86,7 @@ public:
     }
 
 private:
+    std::string name;
     std::string description;
     ActionLimitType limitType = ActionLimitType::None;
 
