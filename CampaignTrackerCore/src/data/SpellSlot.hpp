@@ -6,13 +6,15 @@ static constexpr const size_t NumSpellSlots = 8;
 
 using uint = unsigned int;
 
+using SpellSlotArray = std::array<uint, NumSpellSlots>;
+
 class SpellSlotManager
 {
 public:
     SpellSlotManager()
     {
-        slots = std::array<uint, NumSpellSlots>();
-        remaining = std::array<uint, NumSpellSlots>();
+        slots = SpellSlotArray();
+        remaining = SpellSlotArray();
     }
 
     const int getTotalSpells(const uint slot) const { return slots[slot]; }
@@ -41,10 +43,10 @@ public:
 
     void reset() { remaining = slots; }
 
-    const std::array<uint, NumSpellSlots> & getSpellSlots() const { return slots; }
-    const std::array<uint, NumSpellSlots> & getRemainingSpellSlots() const { return remaining; }
+    const SpellSlotArray & getSpellSlots() const { return slots; }
+    const SpellSlotArray & getRemainingSpellSlots() const { return remaining; }
 
 private:
-    std::array<uint, NumSpellSlots> slots;
-    std::array<uint, NumSpellSlots> remaining;
+    SpellSlotArray slots;
+    SpellSlotArray remaining;
 };

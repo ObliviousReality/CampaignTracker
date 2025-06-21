@@ -14,6 +14,8 @@ enum class AbilityType
     NUM_ABILITIES,
 };
 
+using AbilityArray = std::array<int, static_cast<size_t>(AbilityType::NUM_ABILITIES)>;
+
 enum class SkillType
 {
     Acrobatics,

@@ -41,7 +41,7 @@ public:
         return spellSlotManager->getRemainingSpells(spellSlot);
     }
 
-    void setSpellSlots(const std::array<uint, NumSpellSlots> & slots)
+    void setSpellSlots(const SpellSlotArray & slots)
     {
         int s = 0;
         for (const auto slot : slots)
@@ -52,7 +52,7 @@ public:
         spellSlotManager->reset();
     }
 
-    void setRemainingSpellSlots(const std::array<uint, NumSpellSlots> & slots)
+    void setRemainingSpellSlots(const SpellSlotArray & slots)
     {
         int s = 0;
         for (const auto slot : slots)
@@ -62,8 +62,8 @@ public:
         }
     }
 
-    const std::array<uint, NumSpellSlots> & getSpellSlots() const { return spellSlotManager->getSpellSlots(); }
-    const std::array<uint, NumSpellSlots> & getRemainingSpellSlots() const
+    const SpellSlotArray & getSpellSlots() const { return spellSlotManager->getSpellSlots(); }
+    const SpellSlotArray & getRemainingSpellSlots() const
     {
         return spellSlotManager->getRemainingSpellSlots();
     }
