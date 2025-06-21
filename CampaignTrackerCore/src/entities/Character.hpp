@@ -7,10 +7,10 @@
 #include <memory>
 #include <string>
 
-class Player : public Creature
+class Character : public Creature
 {
 public:
-    Player(const CreatureId newId);
+    Character(CreatureId id);
 
     const ClassType getClassType() const { return classType; }
     const RaceType getRaceType() const { return raceType; }
@@ -20,9 +20,6 @@ public:
 
     const bool hasInspiration() { return inspiration; }
     void setInspiration(const bool newInsp) { inspiration = newInsp; }
-
-    const std::string & getHumanName() const { return humanPlayerName; }
-    void setHumanName(std::string hName) { humanPlayerName = hName; }
 
     const int getLevel() const { return level; }
     void setLevel(const int newLevel) { level = newLevel; }
@@ -67,17 +64,21 @@ public:
 
     void generateSkills() override;
 
-private:
+    const std::string & getHumanName() const { return humanPlayerName; }
+    void setHumanName(std::string hName) { humanPlayerName = hName; }
 
+private:
     void generateHP();
 
 private:
     ClassType classType;
     RaceType raceType;
-    std::string humanPlayerName;
     bool inspiration = false;
 
     std::unique_ptr<SpellSlotManager> spellSlotManager;
 
     int level = 1;
+    std::string humanPlayerName;
 };
+
+using Player = Character;

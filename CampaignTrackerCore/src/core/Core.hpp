@@ -1,8 +1,8 @@
 #pragma once
 
+#include "entities/Character.hpp"
 #include "entities/Creature.hpp"
 #include "entities/Monster.hpp"
-#include "entities/Player.hpp"
 
 #include "data/Class.hpp"
 #include "data/Condition.hpp"

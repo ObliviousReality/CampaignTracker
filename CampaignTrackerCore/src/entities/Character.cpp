@@ -1,4 +1,4 @@
-#include "Player.hpp"
+#include "Character.hpp"
 
 #include "core/Dice.hpp"
 
@@ -6,12 +6,12 @@
 
 #include <cmath>
 
-Player::Player(const CreatureId newId) : Creature(newId, CreatureType::Player)
+Character::Character(CreatureId id) : Creature(id, CreatureType::Player)
 {
     spellSlotManager = std::make_unique<SpellSlotManager>();
 }
 
-void Player::generateSkills()
+void Character::generateSkills()
 {
     const int proficiencyBonus = static_cast<int>(std::ceil(static_cast<float>(level) / 4.0f)) + 1;
     setProficiency(proficiencyBonus);
@@ -23,7 +23,7 @@ void Player::generateSkills()
     Creature::generateSkills();
 }
 
-void Player::generateHP()
+void Character::generateHP()
 {
     const auto dice = Core::getClassHPDice(getClassType());
 

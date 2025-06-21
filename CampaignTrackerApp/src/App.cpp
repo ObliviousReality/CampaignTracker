@@ -6,7 +6,7 @@
 
 #include "Render/Win32/WinWindow.hpp"
 
-#include "entities/Player.hpp"
+#include "entities/Character.hpp"
 
 #include <memory>
 
