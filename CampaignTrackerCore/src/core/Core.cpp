@@ -8,10 +8,10 @@ CTCore::CTCore() { srand(static_cast<uint>(time(0))); }
 
 void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }
 
-CreatureId CTCore::createPlayer()
+CreatureId CTCore::createCharacter()
 {
     const auto id = getNewCreatureId();
-    players.emplace_back(std::make_unique<Player>(id));
+    characters.emplace_back(std::make_unique<Player>(id));
     return id;
 }
 
@@ -27,9 +27,9 @@ Creature * CTCore::getCreature(const CreatureId id, const CreatureType type) con
 {
     switch (type)
     {
-        case CreatureType::Player:
+        case CreatureType::Character:
         {
-            return Details::findObject(players, id);
+            return Details::findObject(characters, id);
         }
         case CreatureType::Monster:
         {

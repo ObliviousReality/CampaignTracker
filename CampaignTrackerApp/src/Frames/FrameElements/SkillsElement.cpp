@@ -7,13 +7,8 @@ void SkillsElement::draw()
     Creature * creature;
     switch (type)
     {
-        case CreatureType::Player: 
-            creature = dynamic_cast<Creature *>(CTCore::Get()->getCreatureFromId<Player>(id, type));
-            break;
-        case CreatureType::Monster:
-            creature = dynamic_cast<Creature *>(CTCore::Get()->getMonsterFromId(id));
-            break;
-        case CreatureType::NPC: break;
+        case CreatureType::Character: creature = dynamic_cast<Creature *>(CTCore::Get()->getCharacterFromId(id)); break;
+        case CreatureType::Monster: creature = dynamic_cast<Creature *>(CTCore::Get()->getMonsterFromId(id)); break;
         case CreatureType::Other: break;
         default: break;
     }
@@ -34,7 +29,12 @@ void SkillsElement::draw()
         {
             end = "-Dvd";
         }
-        ImGui::Text("%s: %c%i %s\n", Core::getSkillString(st).c_str(), skill >= 0 ? '+' : '-', std::abs(skill), end.c_str());
+        ImGui::Text(
+            "%s: %c%i %s\n",
+            Core::getSkillString(st).c_str(),
+            skill >= 0 ? '+' : '-',
+            std::abs(skill),
+            end.c_str());
     };
     printSkill(SkillType::Acrobatics);
     printSkill(SkillType::AnimalHandling);

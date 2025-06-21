@@ -1,23 +1,23 @@
-#include "PlayerFrame.hpp"
+#include "CharacterFrame.hpp"
 
+#include "FrameElements/CharacterBioElement.hpp"
 #include "FrameElements/NotesElement.hpp"
-#include "FrameElements/PlayerBioElement.hpp"
 #include "FrameElements/SkillsElement.hpp"
 
 #include "imgui.h"
 
 #include <sstream>
 
-PlayerFrame::PlayerFrame(CreatureId id) : playerId(id)
+CharacterFrame::CharacterFrame(CreatureId id) : playerId(id)
 {
-    bioElement = std::make_unique<PlayerBioElement>(id);
-    skillsElement = std::make_unique<SkillsElement>(id, CreatureType::Player); // TODO: This doesn't need to take id?
+    bioElement = std::make_unique<CharacterBioElement>(id);
+    skillsElement = std::make_unique<SkillsElement>(id, CreatureType::Character); // TODO: This doesn't need to take id?
     notesElement = std::make_unique<NotesElement>();
 }
 
-void PlayerFrame::render()
+void CharacterFrame::render()
 {
-    auto * player = CTCore::Get()->getCreatureFromId<Player>(playerId, CreatureType::Player);
+    auto * player = CTCore::Get()->getCharacterFromId(playerId);
     ImGui::BeginChild(player->getName().c_str(), ImVec2(234, ImGui::GetContentRegionAvail().y));
     std::string titleText;
 
@@ -63,4 +63,4 @@ void PlayerFrame::render()
     ImGui::EndChild();
 }
 
-const std::string PlayerFrame::getName() { return {}; }
+const std::string CharacterFrame::getName() { return {}; }

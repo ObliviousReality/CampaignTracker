@@ -18,8 +18,7 @@ using CreatureId = unsigned int;
 
 enum class CreatureType
 {
-    Player,
-    NPC,
+    Character,
     Monster,
     Other,
 };

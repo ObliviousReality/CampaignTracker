@@ -1,17 +1,12 @@
-#include "PlayerBioElement.hpp"
+#include "CharacterBioElement.hpp"
 
 #include "imgui.h"
 
 #include <sstream>
 
-void PlayerBioElement::olddraw()
+void CharacterBioElement::drawCoreInfo()
 {
-
-}
-
-void PlayerBioElement::drawCoreInfo()
-{
-    auto * player = CTCore::Get()->getCreatureFromId<Player>(getCreatureId(), CreatureType::Player);
+    auto * player = CTCore::Get()->getCharacterFromId(getCreatureId());
     const auto race = Core::getRaceString(player->getRaceType());
     const auto clas = Core::getClassString(player->getClassType());
 
@@ -22,9 +17,9 @@ void PlayerBioElement::drawCoreInfo()
     ImGui::Text("Alignment: %s", alignment.c_str());
 }
 
-void PlayerBioElement::drawStats()
+void CharacterBioElement::drawStats()
 {
-    auto * player = CTCore::Get()->getCreatureFromId<Player>(getCreatureId(), CreatureType::Player);
+    auto * player = CTCore::Get()->getCharacterFromId(getCreatureId());
     ImGui::SeparatorText("Stats");
 
     ImGui::Button(("Init\n +" + std::to_string(player->getInitiative())).c_str());
@@ -42,9 +37,9 @@ void PlayerBioElement::drawStats()
     ImGui::Button(("Speed\n " + std::to_string(player->getSpeed()) + "ft").c_str());
 }
 
-void PlayerBioElement::drawSpells()
+void CharacterBioElement::drawSpells()
 {
-    auto * player = CTCore::Get()->getCreatureFromId<Player>(getCreatureId(), CreatureType::Player);
+    auto * player = CTCore::Get()->getCharacterFromId(getCreatureId());
     ImGui::SeparatorText("Spell Slots");
 
     auto slots = player->getRemainingSpellSlots();

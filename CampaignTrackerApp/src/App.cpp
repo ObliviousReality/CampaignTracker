@@ -15,8 +15,8 @@ int main()
     auto * core = CTCore::Get();
     CTCore::PrintHelloWorld();
 
-    const auto berthogId = core->createPlayer();
-    auto * berthog = core->getCreatureFromId<Player>(berthogId, CreatureType::Player);
+    const auto berthogId = core->createCharacter();
+    auto * berthog = core->getCharacterFromId(berthogId);
 
     berthog->setName("Berthog");
     berthog->setClassType(ClassType::Warlock);
@@ -45,8 +45,8 @@ int main()
 
     berthog->generateSkills();
 
-    const auto elysiaId = core->createPlayer();
-    auto * elysia = core->getCreatureFromId<Player>(elysiaId, CreatureType::Player);
+    const auto elysiaId = core->createCharacter();
+    auto * elysia = core->getCharacterFromId(elysiaId);
 
     elysia->setName("Elysia Autumnfire");
     elysia->setClassType(ClassType::Wizard);
@@ -72,8 +72,8 @@ int main()
     elysia->setSpellSlots({ 4, 3, 3, 2, 0, 0, 0, 0 });
     elysia->generateSkills();
 
-    const auto gulthandorId = core->createPlayer();
-    auto * gulthandor = core->getCreatureFromId<Player>(gulthandorId, CreatureType::Player);
+    const auto gulthandorId = core->createCharacter();
+    auto * gulthandor = core->getCharacterFromId(gulthandorId);
 
     gulthandor->setName("Gulthandor Jones");
     gulthandor->setClassType(ClassType::Ranger);
@@ -98,8 +98,8 @@ int main()
     gulthandor->setSpellSlots({ 3, 0, 0, 0, 0, 0, 0, 0 });
     gulthandor->generateSkills();
 
-    const auto natalieId = core->createPlayer();
-    auto * natalie = core->getCreatureFromId<Player>(natalieId, CreatureType::Player);
+    const auto natalieId = core->createCharacter();
+    auto * natalie = core->getCharacterFromId(natalieId);
 
     natalie->setName("Natalie Stormwind");
     natalie->setClassType(ClassType::Rogue);
@@ -188,11 +188,12 @@ int main()
 
     auto mainWindow = std::make_unique<MainFrame>();
 
-    mainWindow->createPlayerFrame(berthogId);
-    mainWindow->createPlayerFrame(elysiaId);
-    mainWindow->createPlayerFrame(gulthandorId);
-    mainWindow->createPlayerFrame(natalieId);
+    mainWindow->createCharacterFrame(berthogId);
+    mainWindow->createCharacterFrame(elysiaId);
+    mainWindow->createCharacterFrame(gulthandorId);
+    mainWindow->createCharacterFrame(natalieId);
     mainWindow->createMonsterFrame(airElementalId);
+    mainWindow->createCharacterFrame(bartId);
 
     int sliderVal = 0;
     while (ApplicationManager::Get()->isAppRunning())

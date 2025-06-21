@@ -4,13 +4,12 @@
 
 #include "core/Core.hpp"
 
-class PlayerBioElement : public BioElement
+class CharacterBioElement : public BioElement
 {
 public:
-    PlayerBioElement(CreatureId id) : BioElement(id, CreatureType::Player) {}
+    CharacterBioElement(CreatureId id) : BioElement(id, CreatureType::Character) {}
 
     void update() override {}
-    void olddraw();
 
 private:
     void drawCoreInfo() override;

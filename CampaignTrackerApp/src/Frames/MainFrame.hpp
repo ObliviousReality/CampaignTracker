@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-class PlayerFrame;
+class CharacterFrame;
 class MonsterFrame;
 
 class MainFrame : public Frame
@@ -21,7 +21,7 @@ public:
     virtual void render() override;
     virtual const std::string getName() override;
 
-    void createPlayerFrame(CreatureId playerId);
+    void createCharacterFrame(CreatureId playerId);
 
     void createMonsterFrame(CreatureId monsterId);
 
@@ -31,6 +31,6 @@ private:
     bool closePressed = false;
     std::unique_ptr<TitleBarFrame> titleBar;
     std::unique_ptr<TabBarFrame> tabBar;
-    std::vector<PlayerFrame *> playerFrames;
+    std::vector<CharacterFrame *> characterFrames;
     std::vector<MonsterFrame *> monsterFrames;
 };

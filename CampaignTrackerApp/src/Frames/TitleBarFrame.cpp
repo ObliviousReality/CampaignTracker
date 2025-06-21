@@ -40,7 +40,7 @@ void TitleBarFrame::render()
             {
                 for (int i = 0; i < 4; ++i)
                 {
-                    const auto name = CTCore::Get()->getCreatureFromId<Player>(i, CreatureType::Player)->getName();
+                    const auto name = CTCore::Get()->getCharacterFromId(i)->getName();
                     if (ImGui::MenuItem(name.c_str())) {}
                 }
                 if (ImGui::MenuItem("More...")) {}
