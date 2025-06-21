@@ -158,7 +158,7 @@ int main()
     auto * actionC = new Action();
     actionC->setName("Whirlwind");
     actionC->setDescription(
-        "Strength Saving Throw: DC 13, one Medium or smaller creature in the elemental’s space. Failure: 24 "
+        "Strength Saving Throw: DC 13, one Medium or smaller creature in the elementalï¿½s space. Failure: 24 "
         "(4d10 + 2) Thunder damage, and the target is pushed up to 20 feet straight away from the elemental "
         "and has the Prone condition. Success: Half damage only.");
     actionC->setLimitType(ActionLimitType::RechargeRoll, 4);
@@ -167,20 +167,20 @@ int main()
     airElemental->addSense(SenseType::Darkvision);
     airElemental->generateSkills();
 
-    //const auto bartId = core->createNPC();
-    //auto bart = core->getNPCFromId(bartId);
+    const auto bartId = core->createCharacter();
+    auto bart = core->getCharacterFromId(bartId);
 
-    //bart->setName("Bart");
-    //bart->markNPC();
-    //bart->setClassType(ClassType::None);
-    //bart->setRaceType(RaceType::Human);
-    //bart->setLevel(1);
-    //bart->setAlignment(MoralityType::Neutral, OrderType::Neutral);
+    bart->setName("Bart");
+    bart->markNPC();
+    bart->setClassType(ClassType::None);
+    bart->setRaceType(RaceType::Human);
+    bart->setLevel(1);
+    bart->setAlignment(MoralityType::Neutral, OrderType::Neutral);
 
-    //bart->setAC(12);
-    //bart->setAbilities({ 10, 10, 10, 10, 10, 10 });
-    //bart->setTaggedSkills({ SkillType::Religion });
-    //bart->generateSkills();
+    bart->setAC(12);
+    bart->setAbilities({ 10, 10, 10, 10, 10, 10 });
+    bart->setTaggedSkills({ SkillType::Religion });
+    bart->generateSkills();
 
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();
