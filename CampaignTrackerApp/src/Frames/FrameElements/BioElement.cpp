@@ -21,7 +21,7 @@ void BioElement::draw()
 void BioElement::drawAbilities()
 {
     ImGui::SeparatorText("Abilities");
-    auto * c = CTCore::Get()->getCreature(creatureId, creatureType);
+    auto * c = static_cast<Creature *>(CTCore::Get()->getEntity(creatureId, entityType));
 
     auto * ab = c->getAbilities();
     auto addAbility = [](const AbilityType at, const Abilities * ab)
@@ -46,7 +46,7 @@ void BioElement::drawAbilities()
 void BioElement::drawSavingThrows()
 {
     ImGui::SeparatorText("Saving Throws");
-    auto * c = CTCore::Get()->getCreature(creatureId, creatureType);
+    auto * c = static_cast<Creature *>(CTCore::Get()->getEntity(creatureId, entityType));
 
     auto addSavingThrow = [&](const AbilityType at)
     {
@@ -69,7 +69,7 @@ void BioElement::drawSavingThrows()
 
 void BioElement::drawHitPoints()
 {
-    auto * c = CTCore::Get()->getCreature(creatureId, creatureType);
+    auto * c = static_cast<Creature *>(CTCore::Get()->getEntity(creatureId, entityType));
 
     ImGui::SeparatorText("Hit Points");
     auto hp = c->getHitPoints();
@@ -153,7 +153,7 @@ void BioElement::drawHitPoints()
 
 void BioElement::drawPassives()
 {
-    auto * c = CTCore::Get()->getCreature(creatureId, creatureType);
+    auto * c = static_cast<Creature *>(CTCore::Get()->getEntity(creatureId, entityType));
 
     ImGui::SeparatorText("Passives");
     auto * passives = c->getPassives();
@@ -164,7 +164,7 @@ void BioElement::drawPassives()
 
 void BioElement::drawOtherDetails()
 {
-    auto * c = CTCore::Get()->getCreature(creatureId, creatureType);
+    auto * c = static_cast<Creature *>(CTCore::Get()->getEntity(creatureId, entityType));
 
     bool addedExtraValues = false;
 

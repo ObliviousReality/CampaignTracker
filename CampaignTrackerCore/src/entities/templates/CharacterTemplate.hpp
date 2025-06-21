@@ -11,7 +11,7 @@
 class CharacterTemplate : public CreatureTemplate
 {
 public:
-    CharacterTemplate(TemplateId id) : CreatureTemplate(id, TemplateType::Character) {}
+    CharacterTemplate(EntityId id) : CreatureTemplate(id, EntityType::CharacterTemplate) {}
 
     ClassType getClassType() const { return classType; }
     void setClassType(ClassType newClassType) { classType = newClassType; }

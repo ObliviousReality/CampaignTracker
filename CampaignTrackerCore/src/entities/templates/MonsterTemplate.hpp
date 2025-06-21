@@ -9,7 +9,7 @@
 class MonsterTemplate : public Template
 {
 public:
-    MonsterTemplate(TemplateId id) : Template(id, TemplateType::Monster) {}
+    MonsterTemplate(EntityId id) : Template(id, EntityType::MonsterTemplate) {}
 
     const int getChallengeRating() const { return challengeRating; }
     void setChallengeRating(const int newCR) { challengeRating = newCR; }

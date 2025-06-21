@@ -6,10 +6,10 @@
 
 #include "imgui.h"
 
-MonsterFrame::MonsterFrame(CreatureId _id) : monsterId(_id)
+MonsterFrame::MonsterFrame(EntityId _id) : monsterId(_id)
 {
     bioElement = std::make_unique<MonsterBioElement>(monsterId);
-    skillsElement = std::make_unique<SkillsElement>(monsterId, CreatureType::Monster);
+    skillsElement = std::make_unique<SkillsElement>(monsterId, EntityType::Monster);
     actionsElement = std::make_unique<ActionsElement>(monsterId);
 }
 

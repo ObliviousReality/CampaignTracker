@@ -21,9 +21,9 @@ public:
     virtual void render() override;
     virtual const std::string getName() override;
 
-    void createCharacterFrame(CreatureId playerId);
+    void createCharacterFrame(EntityId playerId);
 
-    void createMonsterFrame(CreatureId monsterId);
+    void createMonsterFrame(EntityId monsterId);
 
 private:
     bool open = false;

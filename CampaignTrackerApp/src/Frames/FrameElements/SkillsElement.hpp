@@ -5,11 +5,11 @@
 class SkillsElement : public FrameElement
 {
 public:
-    SkillsElement(CreatureId playerId, CreatureType typeIn) : id(playerId), type(typeIn) {}
+    SkillsElement(EntityId playerId, EntityType typeIn) : id(playerId), type(typeIn) {}
     void update() override {}
     void draw() override;
 
 private:
-    CreatureId id;
-    CreatureType type;
+    EntityId id;
+    EntityType type;
 };

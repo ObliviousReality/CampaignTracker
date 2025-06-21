@@ -17,7 +17,7 @@
 class CreatureTemplate : public Template
 {
 public:
-    CreatureTemplate(TemplateId id, TemplateType type) : Template(id, type) {}
+    CreatureTemplate(EntityId id, EntityType type) : Template(id, type) {}
 
     const int getHitPointsMax() const { return hitPointsMax; }
     void setMaxHitPoints(const int newMaxHP) { hitPointsMax = newMaxHP; }

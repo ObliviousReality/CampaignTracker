@@ -7,7 +7,7 @@
 class MonsterBioElement : public BioElement
 {
 public:
-    MonsterBioElement(CreatureId id) : BioElement(id, CreatureType::Monster) {}
+    MonsterBioElement(EntityId id) : BioElement(id, EntityType::Monster) {}
 
     void update() {}
 private:

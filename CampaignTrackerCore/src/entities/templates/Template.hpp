@@ -1,28 +1,17 @@
 #pragma once
 
+#include "entities/Entity.hpp"
+
 #include <string>
 
-using TemplateId = unsigned int;
-
-enum class TemplateType
-{
-    Character,
-    Monster,
-};
-
-class Template
+class Template : public Entity
 {
 public:
-    Template(TemplateId _id, TemplateType _type) : id(_id), type(_type) {}
-
-    const TemplateId getId() const { return id; }
-    const TemplateType getType() const { return type; }
+    Template(EntityId id, EntityType type) : Entity(id, type) {}
 
     void setName(const std::string newName) { name = newName; }
     const std::string & getName() const { return name; }
 
 private:
-    TemplateId id;
-    TemplateType type;
     std::string name;
 };

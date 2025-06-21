@@ -13,7 +13,7 @@ class SkillsElement;
 class CharacterFrame : public Frame
 {
 public:
-    CharacterFrame(CreatureId id);
+    CharacterFrame(EntityId id);
 
     void update() override {}
     void render() override;
@@ -21,7 +21,7 @@ public:
     const std::string getName() override;
 
 private:
-    CreatureId playerId;
+    EntityId playerId;
 
     std::unique_ptr<CharacterBioElement> bioElement;
     std::unique_ptr<SkillsElement> skillsElement;

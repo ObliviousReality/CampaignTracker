@@ -8,10 +8,10 @@
 
 #include <sstream>
 
-CharacterFrame::CharacterFrame(CreatureId id) : playerId(id)
+CharacterFrame::CharacterFrame(EntityId id) : playerId(id)
 {
     bioElement = std::make_unique<CharacterBioElement>(id);
-    skillsElement = std::make_unique<SkillsElement>(id, CreatureType::Character); // TODO: This doesn't need to take id?
+    skillsElement = std::make_unique<SkillsElement>(id, EntityType::Character); // TODO: This doesn't need to take id?
     notesElement = std::make_unique<NotesElement>();
 }
 

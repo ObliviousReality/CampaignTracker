@@ -6,7 +6,7 @@
 
 void MonsterBioElement::drawCoreInfo()
 {
-    auto * monster = CTCore::Get()->getMonsterFromId(getCreatureId());
+    auto * monster = CTCore::Get()->getMonsterFromId(getEntityId());
 
     const auto monsterTypeStr = Core::getMonsterTypeString(monster->getMonsterType());
 
@@ -18,7 +18,7 @@ void MonsterBioElement::drawCoreInfo()
 
 void MonsterBioElement::drawStats()
 {
-    auto * monster = CTCore::Get()->getMonsterFromId(getCreatureId());
+    auto * monster = CTCore::Get()->getMonsterFromId(getEntityId());
 
     ImGui::SeparatorText("Stats");
 

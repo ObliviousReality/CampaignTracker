@@ -61,6 +61,6 @@ void MainFrame::render()
 
 const std::string MainFrame::getName() { return std::string(); }
 
-void MainFrame::createCharacterFrame(CreatureId playerId) { characterFrames.emplace_back(new CharacterFrame(playerId)); }
+void MainFrame::createCharacterFrame(EntityId playerId) { characterFrames.emplace_back(new CharacterFrame(playerId)); }
 
-void MainFrame::createMonsterFrame(CreatureId monsterId) { monsterFrames.emplace_back(new MonsterFrame(monsterId)); }
+void MainFrame::createMonsterFrame(EntityId monsterId) { monsterFrames.emplace_back(new MonsterFrame(monsterId)); }

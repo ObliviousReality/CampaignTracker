@@ -7,9 +7,8 @@ void SkillsElement::draw()
     Creature * creature;
     switch (type)
     {
-        case CreatureType::Character: creature = dynamic_cast<Creature *>(CTCore::Get()->getCharacterFromId(id)); break;
-        case CreatureType::Monster: creature = dynamic_cast<Creature *>(CTCore::Get()->getMonsterFromId(id)); break;
-        case CreatureType::Other: break;
+        case EntityType::Character: creature = dynamic_cast<Creature *>(CTCore::Get()->getCharacterFromId(id)); break;
+        case EntityType::Monster: creature = dynamic_cast<Creature *>(CTCore::Get()->getMonsterFromId(id)); break;
         default: break;
     }
     ImGui::SeparatorText("Skills");

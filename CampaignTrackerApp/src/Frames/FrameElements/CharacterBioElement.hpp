@@ -7,7 +7,7 @@
 class CharacterBioElement : public BioElement
 {
 public:
-    CharacterBioElement(CreatureId id) : BioElement(id, CreatureType::Character) {}
+    CharacterBioElement(EntityId id) : BioElement(id, EntityType::Character) {}
 
     void update() override {}
 

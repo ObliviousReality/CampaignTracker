@@ -7,11 +7,11 @@
 class ActionsElement : public FrameElement
 {
 public:
-    ActionsElement(CreatureId cId) : id(cId) {}
+    ActionsElement(EntityId cId) : id(cId) {}
 
     void update() override {}
     void draw() override;
 
 private:
-    CreatureId id;
+    EntityId id;
 };

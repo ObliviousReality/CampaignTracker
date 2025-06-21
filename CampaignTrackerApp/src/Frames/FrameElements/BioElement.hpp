@@ -7,7 +7,7 @@
 class BioElement : public FrameElement
 {
 public:
-    BioElement(CreatureId id, CreatureType type) : creatureId(id), creatureType(type) {}
+    BioElement(EntityId id, EntityType type) : creatureId(id), entityType(type) {}
     void draw() override;
 
 protected:
@@ -21,9 +21,10 @@ protected:
     virtual void drawSpells() = 0;
     void drawOtherDetails();
 
-    CreatureId getCreatureId() const { return creatureId; }
-    CreatureType getCreatureType() const { return creatureType; }
+    EntityId getEntityId() const { return creatureId; }
+    EntityType getEntityType() const { return entityType; }
+
 private:
-    CreatureId creatureId;
-    CreatureType creatureType;
+    EntityId creatureId;
+    EntityType entityType;
 };

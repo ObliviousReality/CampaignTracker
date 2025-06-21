@@ -6,7 +6,7 @@
 
 #include <cmath>
 
-Character::Character(CreatureId id) : Creature(id, CreatureType::Character)
+Character::Character(EntityId id) : Creature(id, EntityType::Character)
 {
     spellSlotManager = std::make_unique<SpellSlotManager>();
 }

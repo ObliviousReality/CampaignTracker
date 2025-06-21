@@ -8,7 +8,7 @@
 class Monster : public Creature
 {
 public:
-    Monster(CreatureId id) : Creature(id, CreatureType::Monster) {}
+    Monster(EntityId id) : Creature(id, EntityType::Monster) {}
 
     void generateSkills() override;
 

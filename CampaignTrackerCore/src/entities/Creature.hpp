@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Entity.hpp"
+
 #include "data/Alignment.hpp"
 #include "data/Attribute.hpp"
 #include "data/Class.hpp"
@@ -14,23 +16,10 @@
 #include <string>
 #include <vector>
 
-using CreatureId = unsigned int;
-
-enum class CreatureType
-{
-    Character,
-    Monster,
-    Other,
-};
-
-class Creature
+class Creature : public Entity
 {
 public:
-    Creature(const CreatureId newId, const CreatureType t);
-
-    const CreatureId getId() const { return id; }
-
-    const CreatureType getType() const { return type; }
+    Creature(const EntityId newId, const EntityType t);
 
     const std::string getName() const { return name; }
     void setName(const std::string newName) { name = newName; }
@@ -204,8 +193,6 @@ public:
     }
 
 private:
-    CreatureId id;
-    CreatureType type;
     std::string name;
 
     int hitPoints = 0;

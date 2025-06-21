@@ -16,7 +16,7 @@ public:
         NPC,
     };
 
-    Character(CreatureId id);
+    Character(EntityId id);
 
     const ClassType getClassType() const { return classType; }
     const RaceType getRaceType() const { return raceType; }

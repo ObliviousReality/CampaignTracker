@@ -1,5 +1,7 @@
 #pragma once
 
+#include "core/Store.hpp"
+
 #include "entities/Character.hpp"
 #include "entities/Creature.hpp"
 #include "entities/Monster.hpp"
@@ -11,24 +13,6 @@
 #include "data/Sense.hpp"
 
 #include <memory>
-#include <vector>
-
-namespace Details
-{
-    template<typename T>
-    T * findObject(const std::vector<std::unique_ptr<T>> & vector, CreatureId id)
-    {
-        auto item = std::find_if(
-            vector.begin(),
-            vector.end(),
-            [&id](const std::unique_ptr<T> & p) { return p->getId() == id; });
-        if (item != vector.end())
-        {
-            return item->get();
-        }
-        return nullptr;
-    }
-}
 
 class CTCore
 {
@@ -44,26 +28,21 @@ public:
 
     static void PrintHelloWorld();
 
-    CreatureId createCharacter();
+    EntityId createCharacter();
 
-    CreatureId createMonster();
+    EntityId createMonster();
 
-    Player * getCharacterFromId(const CreatureId id) const { return Details::findObject(characters, id); }
+    Character * getCharacterFromId(const EntityId id);
 
-    Monster * getMonsterFromId(const CreatureId id) { return Details::findObject(monsters, id); }
+    Monster * getMonsterFromId(const EntityId id);
 
-    Creature * getCreature(const CreatureId id, const CreatureType type) const;
-
-
-    const CreatureId getNewCreatureId() { return nextFreeId++; }
+    Entity * getEntity(EntityId id, EntityType type) { return store->getObject(id, type); }
+    void createEntity(EntityId id, EntityType type, Entity * ptr) { store->addObject(id, type, ptr); }
 
 private:
     CTCore();
 
     static CTCore * core;
 
-    std::vector<std::unique_ptr<Character>> characters;
-    std::vector<std::unique_ptr<Monster>> monsters;
-
-    CreatureId nextFreeId = 0;
+    std::unique_ptr<Store> store;
 };

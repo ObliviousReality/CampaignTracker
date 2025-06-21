@@ -6,7 +6,7 @@
 
 void CharacterBioElement::drawCoreInfo()
 {
-    auto * player = CTCore::Get()->getCharacterFromId(getCreatureId());
+    auto * player = CTCore::Get()->getCharacterFromId(getEntityId());
     const auto race = Core::getRaceString(player->getRaceType());
     const auto clas = Core::getClassString(player->getClassType());
 
@@ -19,7 +19,7 @@ void CharacterBioElement::drawCoreInfo()
 
 void CharacterBioElement::drawStats()
 {
-    auto * player = CTCore::Get()->getCharacterFromId(getCreatureId());
+    auto * player = CTCore::Get()->getCharacterFromId(getEntityId());
     ImGui::SeparatorText("Stats");
 
     ImGui::Button(("Init\n +" + std::to_string(player->getInitiative())).c_str());
@@ -39,7 +39,7 @@ void CharacterBioElement::drawStats()
 
 void CharacterBioElement::drawSpells()
 {
-    auto * player = CTCore::Get()->getCharacterFromId(getCreatureId());
+    auto * player = CTCore::Get()->getCharacterFromId(getEntityId());
     ImGui::SeparatorText("Spell Slots");
 
     auto slots = player->getRemainingSpellSlots();

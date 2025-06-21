@@ -1,41 +1,39 @@
 #include "Core.hpp"
 
+#include "core/Store.hpp"
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 
-CTCore::CTCore() { srand(static_cast<uint>(time(0))); }
+CTCore::CTCore()
+{
+    srand(static_cast<uint>(time(0)));
+    store = std::make_unique<Store>();
+}
 
 void CTCore::PrintHelloWorld() { std::cout << "Hello World!\n"; }
 
-CreatureId CTCore::createCharacter()
+Character * CTCore::getCharacterFromId(const EntityId id)
 {
-    const auto id = getNewCreatureId();
-    characters.emplace_back(std::make_unique<Player>(id));
+    return static_cast<Character *>(getEntity(id, EntityType::Character));
+}
+
+Monster * CTCore::getMonsterFromId(const EntityId id)
+{
+    return static_cast<Monster *>(getEntity(id, EntityType::Monster));
+}
+
+EntityId CTCore::createCharacter()
+{
+    const auto id = store->getNextFreeId(EntityType::Character);
+    createEntity(id, EntityType::Character, new Player(id));
     return id;
 }
 
-CreatureId CTCore::createMonster()
+EntityId CTCore::createMonster()
 {
-    const auto id = getNewCreatureId();
-
-    monsters.emplace_back(std::make_unique<Monster>(id));
+    const auto id = store->getNextFreeId(EntityType::Monster);
+    createEntity(id, EntityType::Monster, new Monster(id));
     return id;
-}
-
-Creature * CTCore::getCreature(const CreatureId id, const CreatureType type) const
-{
-    switch (type)
-    {
-        case CreatureType::Character:
-        {
-            return Details::findObject(characters, id);
-        }
-        case CreatureType::Monster:
-        {
-            return Details::findObject(monsters, id);
-        }
-        default: break;
-    }
-    return nullptr;
 }
