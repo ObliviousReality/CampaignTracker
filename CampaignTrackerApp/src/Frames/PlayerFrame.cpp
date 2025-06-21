@@ -1,7 +1,7 @@
 #include "PlayerFrame.hpp"
 
-#include "FrameElements/PlayerBioElement.hpp"
 #include "FrameElements/NotesElement.hpp"
+#include "FrameElements/PlayerBioElement.hpp"
 #include "FrameElements/SkillsElement.hpp"
 
 #include "imgui.h"
@@ -19,8 +19,16 @@ void PlayerFrame::render()
 {
     auto * player = CTCore::Get()->getCreatureFromId<Player>(playerId, CreatureType::Player);
     ImGui::BeginChild(player->getName().c_str(), ImVec2(234, ImGui::GetContentRegionAvail().y));
+    std::string titleText;
 
-    const auto titleText = player->getName() + " (" + (player->getHumanName()) + ")";
+    if (player->getCharacterType() == Character::Type::NPC)
+    {
+        titleText = player->getName() + " (NPC)";
+    }
+    else
+    {
+        titleText = player->getName() + " (" + (player->getHumanName()) + ")";
+    }
     ImGui::SeparatorText(titleText.c_str());
     auto & style = ImGui::GetStyle();
     auto oldPadding = style.FramePadding;

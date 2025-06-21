@@ -3,6 +3,7 @@
 
 enum class ClassType : unsigned int
 {
+    None,
     Barbarian,
     Bard,
     Cleric,
@@ -25,6 +26,7 @@ namespace Core
     {
         switch (ct)
         {
+            case ClassType::None: return "None";
             case ClassType::Barbarian: return "Barbarian";
             case ClassType::Bard: return "Bard";
             case ClassType::Cleric: return "Cleric";

@@ -23,8 +23,8 @@ CreatureId CTCore::createMonster()
     return id;
 }
 
-Creature * CTCore::getCreature(const CreatureId id, const CreatureType type) const { 
-
+Creature * CTCore::getCreature(const CreatureId id, const CreatureType type) const
+{
     switch (type)
     {
         case CreatureType::Player:
@@ -37,4 +37,5 @@ Creature * CTCore::getCreature(const CreatureId id, const CreatureType type) con
         }
         default: break;
     }
+    return nullptr;
 }

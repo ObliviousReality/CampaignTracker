@@ -164,9 +164,23 @@ int main()
     actionC->setLimitType(ActionLimitType::RechargeRoll, 4);
     airElemental->addAction(actionC);
 
-
     airElemental->addSense(SenseType::Darkvision);
     airElemental->generateSkills();
+
+    //const auto bartId = core->createNPC();
+    //auto bart = core->getNPCFromId(bartId);
+
+    //bart->setName("Bart");
+    //bart->markNPC();
+    //bart->setClassType(ClassType::None);
+    //bart->setRaceType(RaceType::Human);
+    //bart->setLevel(1);
+    //bart->setAlignment(MoralityType::Neutral, OrderType::Neutral);
+
+    //bart->setAC(12);
+    //bart->setAbilities({ 10, 10, 10, 10, 10, 10 });
+    //bart->setTaggedSkills({ SkillType::Religion });
+    //bart->generateSkills();
 
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();

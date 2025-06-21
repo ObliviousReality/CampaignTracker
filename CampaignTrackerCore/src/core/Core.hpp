@@ -48,6 +48,8 @@ public:
 
     CreatureId createMonster();
 
+    Player * getPlayerFromId(const CreatureId id) const { return Details::findObject(players, id); }
+
     Monster * getMonsterFromId(const CreatureId id) { return Details::findObject(monsters, id); }
 
     Creature * getCreature(const CreatureId id, const CreatureType type) const;
@@ -61,7 +63,6 @@ public:
             {
                 return Details::findObject(players, id);
             }
-            case CreatureType::NPC:
             case CreatureType::Monster:
             case CreatureType::Other:
             default: return nullptr;
@@ -77,7 +78,6 @@ private:
     static CTCore * core;
 
     std::vector<std::unique_ptr<Player>> players;
-    // std::vector<std::unique_ptr<NPC>> npcs;
     std::vector<std::unique_ptr<Monster>> monsters;
 
     CreatureId nextFreeId = 0;

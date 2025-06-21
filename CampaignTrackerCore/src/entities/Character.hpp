@@ -10,6 +10,12 @@
 class Character : public Creature
 {
 public:
+    enum class Type
+    {
+        Player,
+        NPC,
+    };
+
     Character(CreatureId id);
 
     const ClassType getClassType() const { return classType; }
@@ -67,6 +73,12 @@ public:
     const std::string & getHumanName() const { return humanPlayerName; }
     void setHumanName(std::string hName) { humanPlayerName = hName; }
 
+    const Type getCharacterType() const { return characterType; }
+    void setCharacterType(Type newType) { characterType = newType; }
+
+    void markNPC() { characterType = Type::NPC; }
+    void markPlayer() { characterType = Type::Player; }
+
 private:
     void generateHP();
 
@@ -78,7 +90,10 @@ private:
     std::unique_ptr<SpellSlotManager> spellSlotManager;
 
     int level = 1;
-    std::string humanPlayerName;
+    std::string humanPlayerName = {};
+
+    Type characterType = Type::Player;
 };
 
 using Player = Character;
+using NPC = Character;
