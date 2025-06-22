@@ -188,12 +188,12 @@ int main()
 
     auto mainWindow = std::make_unique<MainFrame>();
 
-    mainWindow->createCharacterFrame(berthogId);
-    mainWindow->createCharacterFrame(elysiaId);
-    mainWindow->createCharacterFrame(gulthandorId);
-    mainWindow->createCharacterFrame(natalieId);
+    auto objIt = core->getIterator(EntityType::Character);
+    for (const auto id : objIt)
+    {
+        mainWindow->createCharacterFrame(id);
+    }
     mainWindow->createMonsterFrame(airElementalId);
-    mainWindow->createCharacterFrame(bartId);
 
     int sliderVal = 0;
     while (ApplicationManager::Get()->isAppRunning())

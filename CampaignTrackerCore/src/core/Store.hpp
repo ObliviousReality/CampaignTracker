@@ -5,11 +5,24 @@
 #include <array>
 #include <map>
 #include <memory>
+#include <set>
+
+namespace
+{
+    using EntityMap = std::map<EntityId, std::unique_ptr<Entity>>;
+}
 
 struct ObjectMap
 {
-    std::map<EntityId, std::unique_ptr<Entity>> objectMap;
+    EntityMap objectMap;
     EntityId nextFreeId = 0;
+};
+
+struct ObjectIterator
+{
+    std::set<EntityId>::const_iterator begin() { return set.begin(); }
+    std::set<EntityId>::const_iterator end() { return set.end(); }
+    std::set<EntityId> set = {};
 };
 
 class Store
@@ -21,6 +34,8 @@ public:
     void addObject(EntityId id, EntityType type, Entity * ptr);
 
     EntityId getNextFreeId(EntityType type);
+
+    ObjectIterator getIterator(EntityType type);
 
 private:
     ObjectMap * getMap(EntityType type);

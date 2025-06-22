@@ -32,7 +32,7 @@ public:
 
     EntityId createMonster();
 
-    template <typename T>
+    template<typename T>
     EntityId createObject(const EntityType type)
     {
         const auto id = store->getNextFreeId(type);
@@ -46,6 +46,8 @@ public:
 
     Entity * getEntity(EntityId id, EntityType type) { return store->getObject(id, type); }
     void createEntity(EntityId id, EntityType type, Entity * ptr) { store->addObject(id, type, ptr); }
+
+    ObjectIterator getIterator(EntityType type) { return store->getIterator(type); }
 
 private:
     CTCore();
