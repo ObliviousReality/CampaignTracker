@@ -167,7 +167,7 @@ int main()
     airElemental->addSense(SenseType::Darkvision);
     airElemental->generateSkills();
 
-    const auto bartId = core->createCharacter();
+    const auto bartId = core->createObject<Character>(EntityType::Character);
     auto bart = core->getCharacterFromId(bartId);
 
     bart->setName("Bart");

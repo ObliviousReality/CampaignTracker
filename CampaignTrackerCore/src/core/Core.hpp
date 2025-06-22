@@ -32,6 +32,14 @@ public:
 
     EntityId createMonster();
 
+    template <typename T>
+    EntityId createObject(const EntityType type)
+    {
+        const auto id = store->getNextFreeId(type);
+        createEntity(id, type, new T(id));
+        return id;
+    }
+
     Character * getCharacterFromId(const EntityId id);
 
     Monster * getMonsterFromId(const EntityId id);
