@@ -167,7 +167,7 @@ int main()
     airElemental->addSense(SenseType::Darkvision);
     airElemental->generateSkills();
 
-    const auto bartId = core->createObject<Character>(EntityType::Character);
+    const auto bartId = core->createCharacter(CreatureType::NPC);
     auto bart = core->getCharacterFromId(bartId);
 
     bart->setName("Bart");
@@ -186,20 +186,12 @@ int main()
     window->createWindow();
     window->initImGui();
 
-    auto mainWindow = std::make_unique<MainFrame>();
-
-    auto objIt = core->getIterator(EntityType::Character);
-    for (const auto id : objIt)
-    {
-        mainWindow->createCharacterFrame(id);
-    }
-    mainWindow->createMonsterFrame(airElementalId);
-
     int sliderVal = 0;
     while (ApplicationManager::Get()->isAppRunning())
     {
         window->startFrame();
-        mainWindow->render();
+        ApplicationManager::Get()->update();
+        ApplicationManager::Get()->render();
 #if defined(DEBUG)
         ImGui::ShowDemoWindow();
 #endif

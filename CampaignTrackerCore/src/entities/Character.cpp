@@ -6,9 +6,13 @@
 
 #include <cmath>
 
-Character::Character(EntityId id) : Creature(id, EntityType::Character)
+Character::Character(EntityId id, CreatureType ct) : Creature(id, EntityType::Character, ct)
 {
     spellSlotManager = std::make_unique<SpellSlotManager>();
+    if (ct == CreatureType::NPC)
+    {
+        markNPC();
+    }
 }
 
 void Character::generateSkills()

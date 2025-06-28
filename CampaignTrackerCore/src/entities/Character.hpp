@@ -16,7 +16,7 @@ public:
         NPC,
     };
 
-    Character(EntityId id);
+    Character(EntityId id, CreatureType ct = CreatureType::Player);
 
     const ClassType getClassType() const { return classType; }
     const RaceType getRaceType() const { return raceType; }

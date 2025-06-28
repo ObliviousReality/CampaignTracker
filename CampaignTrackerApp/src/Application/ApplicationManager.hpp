@@ -1,5 +1,9 @@
 #pragma once
 
+#include "WindowManager.hpp"
+
+#include <memory>
+
 class ApplicationManager
 {
 public:
@@ -16,11 +20,17 @@ public:
 
     void setAppRunning(const bool newState) { appRunning = newState; }
 
+    void update() { windowManager->update(); }
+    void render() { windowManager->render(); }
+
+    WindowManager * getWindowManager() { return windowManager.get(); }
+
 private:
-    ApplicationManager() {}
+    ApplicationManager() { windowManager = std::make_unique<WindowManager>(); }
 
     static ApplicationManager * appManager;
 
+    std::unique_ptr<WindowManager> windowManager;
+
     bool appRunning = true;
 };
-

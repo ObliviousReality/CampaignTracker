@@ -28,7 +28,7 @@ public:
 
     static void PrintHelloWorld();
 
-    EntityId createCharacter();
+    EntityId createCharacter(CreatureType ct = CreatureType::Player);
 
     EntityId createMonster();
 
@@ -50,6 +50,8 @@ public:
     ObjectIterator getIterator(EntityType type) { return store->getIterator(type); }
 
     unsigned int getObjectCount(EntityType type) { return store->getObjectCount(type); }
+
+    EntityType creatureTypeToEntityType(CreatureType ct);
 
 private:
     CTCore();

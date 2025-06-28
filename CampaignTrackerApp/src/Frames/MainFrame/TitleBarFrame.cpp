@@ -2,9 +2,9 @@
 
 #include "Application/ApplicationManager.hpp"
 
-#include "core/Core.hpp"
+#include "entities/Creature.hpp"
 
-void TitleBarFrame::update() {}
+#include "core/Core.hpp"
 
 void TitleBarFrame::render()
 {
@@ -53,9 +53,10 @@ void TitleBarFrame::render()
         }
         if (ImGui::BeginMenu("View"))
         {
-            if (ImGui::MenuItem("Player Library")) {}
-            if (ImGui::MenuItem("NPC Library")) {}
-            if (ImGui::MenuItem("Monster Manual")) {}
+            const auto windowManager = ApplicationManager::Get()->getWindowManager();
+            ImGui::MenuItem("Player Library", nullptr, &windowManager->getBrowserState(CreatureType::Player));
+            ImGui::MenuItem("NPC Library", nullptr, &windowManager->getBrowserState(CreatureType::NPC));
+            ImGui::MenuItem("Monster Manual", nullptr, &windowManager->getBrowserState(CreatureType::Monster));
             if (ImGui::MenuItem("Saved Encounters")) {}
             ImGui::Separator();
             if (ImGui::MenuItem("Dice Well", nullptr, &diceWellOpen)) {}

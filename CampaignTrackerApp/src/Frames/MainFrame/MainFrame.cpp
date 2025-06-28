@@ -9,6 +9,18 @@ MainFrame::MainFrame()
 {
     titleBar = std::make_unique<TitleBarFrame>();
     tabBar = std::make_unique<TabBarFrame>();
+
+    auto charIt = CTCore::Get()->getIterator(EntityType::Character);
+    for (const auto id : charIt)
+    {
+        createCharacterFrame(id);
+    }
+
+    auto monstIt = CTCore::Get()->getIterator(EntityType::Monster);
+    for (const auto id : monstIt)
+    {
+        createMonsterFrame(id);
+    }
 }
 
 void MainFrame::update() {}
@@ -16,7 +28,8 @@ void MainFrame::update() {}
 void MainFrame::render()
 {
     const ImGuiWindowFlags flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove
-                                 | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar;
+                                 | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar
+                                 | ImGuiWindowFlags_NoBringToFrontOnFocus;
 
     const auto * viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(useWorkArea ? viewport->WorkPos : viewport->Pos);
@@ -26,6 +39,11 @@ void MainFrame::render()
         titleBar->render();
         tabBar->render();
         const auto numFrames = characterFrames.size() + monsterFrames.size();
+        if (!numFrames)
+        {
+            ImGui::End();
+            return;
+        }
         const float totalWidth = (233.0f) * numFrames;
         const auto tableFlags = ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY | ImGuiTableFlags_SizingStretchSame
                               | ImGuiTableFlags_BordersInnerV

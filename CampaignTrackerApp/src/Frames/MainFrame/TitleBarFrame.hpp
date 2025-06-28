@@ -2,12 +2,16 @@
 
 #include "Frames/Frame.hpp"
 
+#include "Frames/EntityBrowser/EntityBrowser.hpp"
+
 #include <imgui.h>
+
+#include <memory>
 
 class TitleBarFrame : public Frame
 {
 public:
-    void update() override;
+    void update() override {}
     void render() override;
 
     const ImVec2 getSize() const { return titleBarSize; }
