@@ -4,7 +4,7 @@
 #include "FrameElements/NotesElement.hpp"
 #include "FrameElements/SkillsElement.hpp"
 
-#include "imgui.h"
+#include <imgui.h>
 
 #include <sstream>
 
@@ -62,5 +62,3 @@ void CharacterFrame::render()
     style.FramePadding = oldPadding;
     ImGui::EndChild();
 }
-
-const std::string CharacterFrame::getName() { return {}; }

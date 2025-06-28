@@ -2,7 +2,7 @@
 
 #include "Core/Core.hpp"
 
-#include "Frames/MainFrame.hpp"
+#include "Frames/MainFrame/MainFrame.hpp"
 
 #include "Render/Win32/WinWindow.hpp"
 

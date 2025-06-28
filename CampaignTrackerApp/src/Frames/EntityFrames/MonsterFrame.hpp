@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Frame.hpp"
+#include "Frames/Frame.hpp"
 
 #include "core/Core.hpp"
 
@@ -16,7 +16,6 @@ public:
     MonsterFrame(EntityId _id);
     void update() override {}
     void render() override;
-    const std::string getName() override { return {}; }
 
 private:
     EntityId monsterId;

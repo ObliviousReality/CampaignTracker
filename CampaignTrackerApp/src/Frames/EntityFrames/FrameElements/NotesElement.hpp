@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FrameElement.hpp"
+#include "Frames/FrameElement.hpp"
 
 constexpr const int TextBoxSize = 1024 * 16;
 

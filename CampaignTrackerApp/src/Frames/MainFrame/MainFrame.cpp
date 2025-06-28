@@ -1,7 +1,7 @@
 #include "MainFrame.hpp"
 
-#include "Frames/CharacterFrame.hpp"
-#include "Frames/MonsterFrame.hpp"
+#include "Frames/EntityFrames/CharacterFrame.hpp"
+#include "Frames/EntityFrames/MonsterFrame.hpp"
 
 #include "imgui.h"
 
@@ -58,8 +58,6 @@ void MainFrame::render()
         ImGui::End();
     }
 }
-
-const std::string MainFrame::getName() { return std::string(); }
 
 void MainFrame::createCharacterFrame(EntityId playerId) { characterFrames.emplace_back(new CharacterFrame(playerId)); }
 

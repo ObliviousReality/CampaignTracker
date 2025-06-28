@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Frame.hpp"
+#include "Frames/Frame.hpp"
 
 #include "core/Core.hpp"
 
-#include "Frames/TabBarFrame.hpp"
-#include "Frames/TitleBarFrame.hpp"
+#include "Frames/MainFrame/TabBarFrame.hpp"
+#include "Frames/MainFrame/TitleBarFrame.hpp"
 
 #include <memory>
 #include <vector>
@@ -19,7 +19,6 @@ public:
     MainFrame();
     virtual void update() override;
     virtual void render() override;
-    virtual const std::string getName() override;
 
     void createCharacterFrame(EntityId playerId);
 

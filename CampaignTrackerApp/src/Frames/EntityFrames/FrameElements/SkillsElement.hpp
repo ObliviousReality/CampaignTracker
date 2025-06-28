@@ -1,4 +1,6 @@
-#include "FrameElement.hpp"
+#pragma once
+
+#include "Frames/FrameElement.hpp"
 
 #include "core/Core.hpp"
 

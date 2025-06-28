@@ -94,5 +94,3 @@ void TitleBarFrame::render()
         ImGui::EndMenuBar();
     }
 }
-
-const std::string TitleBarFrame::getName() { return std::string(); }

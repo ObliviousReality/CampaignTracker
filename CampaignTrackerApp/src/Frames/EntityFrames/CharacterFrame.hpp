@@ -18,8 +18,6 @@ public:
     void update() override {}
     void render() override;
 
-    const std::string getName() override;
-
 private:
     EntityId playerId;
 
