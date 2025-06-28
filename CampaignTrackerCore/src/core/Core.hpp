@@ -49,6 +49,8 @@ public:
 
     ObjectIterator getIterator(EntityType type) { return store->getIterator(type); }
 
+    unsigned int getObjectCount(EntityType type) { return store->getObjectCount(type); }
+
 private:
     CTCore();
 

@@ -44,4 +44,6 @@ ObjectIterator Store::getIterator(EntityType type)
     return it;
 }
 
+unsigned int Store::getObjectCount(EntityType type) { return getMap(type)->objectMap.size(); }
+
 ObjectMap * Store::getMap(EntityType type) { return objectMaps[static_cast<int>(type)].get(); }

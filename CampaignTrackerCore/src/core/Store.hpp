@@ -37,6 +37,8 @@ public:
 
     ObjectIterator getIterator(EntityType type);
 
+    unsigned int getObjectCount(EntityType type);
+
 private:
     ObjectMap * getMap(EntityType type);
 
