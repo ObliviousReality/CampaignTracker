@@ -9,13 +9,13 @@
 class EntityBrowser : public Frame
 {
 public:
-    EntityBrowser(CreatureType t, bool & winOpen) : Frame(), type(t), windowOpen(winOpen) { update(); }
-
+    EntityBrowser(CreatureType t, bool & winOpen);
     void update() override;
     void render() override;
 
 private:
     CreatureType type;
+    EntityType eType;
     std::set<EntityId> ids;
 
     bool & windowOpen;
