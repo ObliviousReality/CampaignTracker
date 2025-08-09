@@ -7,6 +7,7 @@
 #include "Render/Win32/WinWindow.hpp"
 
 #include "entities/Character.hpp"
+#include "entities/templates/MonsterTemplate.hpp"
 
 #include <memory>
 
@@ -181,6 +182,30 @@ int main()
     bart->setAbilities({ 10, 10, 10, 10, 10, 10 });
     bart->setTaggedSkills({ SkillType::Religion });
     bart->generateSkills();
+
+
+    const auto goblinTemplateId = core->createMonsterTemplate();
+    auto * goblinTemplate = static_cast<MonsterTemplate *>(core->getEntity(goblinTemplateId, EntityType::MonsterTemplate));
+
+    goblinTemplate->setName("Goblin Warrior");
+    goblinTemplate->setMonsterType(MonsterType::Fey);
+    goblinTemplate->setChallengeRating(1); // wrong! should be 0.25
+    goblinTemplate->setSpeed(30);
+
+    auto * goblinActionOne = new Action();
+    goblinActionOne->setName("Scimitar");
+    goblinActionOne->setDescription("Melee Attack Roll: +4, reach 5ft.\nHit: 5 (1d6 + 2) Slashing Damange, plus 2 (1d4) Slashing Damage if the attack roll had advantage.");
+    goblinTemplate->addAction(goblinActionOne);
+
+    auto * goblinActionTwo = new Action();
+    goblinActionTwo->setName("Shortbow");
+    goblinActionTwo->setDescription("Ranged Attack Roll: +4, range 80/320ft.\nHit: 5 (1d6 + 2) Piercing Damage, plus 2 (1d4) Piercing Damage if the attack roll had advantage.");
+    goblinTemplate->addAction(goblinActionTwo);
+
+    auto * goblinBonusAction = new Action();
+    goblinBonusAction->setName("Nimble Escape");
+    goblinBonusAction->setDescription("The Goblin takes the Disengage or Hide action.");
+    goblinTemplate->addBonusAction(goblinBonusAction);
 
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();
