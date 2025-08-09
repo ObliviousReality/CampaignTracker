@@ -32,6 +32,8 @@ public:
 
     EntityId createMonster();
 
+    EntityId createMonsterTemplate();
+
     template<typename T>
     EntityId createObject(const EntityType type)
     {

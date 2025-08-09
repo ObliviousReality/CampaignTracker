@@ -2,6 +2,8 @@
 
 #include "core/Store.hpp"
 
+#include "entities/templates/MonsterTemplate.hpp"
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -47,5 +49,12 @@ EntityId CTCore::createMonster()
 {
     const auto id = store->getNextFreeId(EntityType::Monster);
     createEntity(id, EntityType::Monster, new Monster(id));
+    return id;
+}
+
+EntityId CTCore::createMonsterTemplate()
+{ 
+    const auto id = store->getNextFreeId(EntityType::MonsterTemplate);
+    createEntity(id, EntityType::MonsterTemplate, new MonsterTemplate(id));
     return id;
 }
