@@ -1,6 +1,37 @@
 #include "Creature.hpp"
 
+#include "core/Core.hpp"
+
+#include "templates/Template.hpp"
+
 #include <array>
+
+void Creature::constructFromTemplate(EntityId id)
+{
+    auto * t = static_cast<Template *>(CTCore::Get()->getEntity(id, Core::entityTypeToTemplateType(getType())));
+
+    if (!t)
+    {
+        //!ASSERT()
+        return;
+    }
+
+    setMaxHitPoints(t->getHitPointsMax());
+    setAC(t->getAC());
+    setSpeed(t->getSpeed());
+    setAbilities(t->getAbilities());
+    setAdvantages(t->getSkillAdvantages());
+    setDisadvantages(t->getSkillDisadvantages());
+    setAdvantages(t->getAbilityAdvantages());
+    setDisadvantages(t->getAbilityDisadvantages());
+    setConditions(t->getConditions());
+    setImmunities(t->getConditionImmunities());
+    setImmunities(t->getDamageTypeImmunities());
+    setResistances(t->getResistances());
+    setVulnerabilities(t->getVulnerabilities());
+    setSenses(t->getSenses());
+    setAlignment(t->getAlignment());
+}
 
 void Creature::setTaggedSkills(const std::vector<SkillType> & skills, const int tagLevel)
 {

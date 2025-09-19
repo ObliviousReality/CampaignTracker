@@ -183,29 +183,52 @@ int main()
     bart->setTaggedSkills({ SkillType::Religion });
     bart->generateSkills();
 
-
     const auto goblinTemplateId = core->createMonsterTemplate();
-    auto * goblinTemplate = static_cast<MonsterTemplate *>(core->getEntity(goblinTemplateId, EntityType::MonsterTemplate));
+    auto * goblinTemplate =
+        static_cast<MonsterTemplate *>(core->getEntity(goblinTemplateId, EntityType::MonsterTemplate));
 
     goblinTemplate->setName("Goblin Warrior");
     goblinTemplate->setMonsterType(MonsterType::Fey);
     goblinTemplate->setChallengeRating(1); // wrong! should be 0.25
+    goblinTemplate->setAlignment(MoralityType::Neutral, OrderType::Chaotic);
+    goblinTemplate->setAC(15);
+    goblinTemplate->setMaxHitPoints(10);
     goblinTemplate->setSpeed(30);
+    goblinTemplate->setAbilities({ 8, 15, 10, 10, 8, 8 });
+    goblinTemplate->addSense(SenseType::Darkvision);
 
     auto * goblinActionOne = new Action();
     goblinActionOne->setName("Scimitar");
-    goblinActionOne->setDescription("Melee Attack Roll: +4, reach 5ft.\nHit: 5 (1d6 + 2) Slashing Damange, plus 2 (1d4) Slashing Damage if the attack roll had advantage.");
+    goblinActionOne->setDescription("Melee Attack Roll: +4, reach 5ft.\nHit: 5 (1d6 + 2) Slashing Damange, plus 2 "
+                                    "(1d4) Slashing Damage if the attack roll had advantage.");
     goblinTemplate->addAction(goblinActionOne);
 
     auto * goblinActionTwo = new Action();
     goblinActionTwo->setName("Shortbow");
-    goblinActionTwo->setDescription("Ranged Attack Roll: +4, range 80/320ft.\nHit: 5 (1d6 + 2) Piercing Damage, plus 2 (1d4) Piercing Damage if the attack roll had advantage.");
+    goblinActionTwo->setDescription("Ranged Attack Roll: +4, range 80/320ft.\nHit: 5 (1d6 + 2) Piercing Damage, plus 2 "
+                                    "(1d4) Piercing Damage if the attack roll had advantage.");
     goblinTemplate->addAction(goblinActionTwo);
 
     auto * goblinBonusAction = new Action();
     goblinBonusAction->setName("Nimble Escape");
     goblinBonusAction->setDescription("The Goblin takes the Disengage or Hide action.");
     goblinTemplate->addBonusAction(goblinBonusAction);
+
+    const auto goblinOneId = core->createMonster();
+    const auto goblinTwoId = core->createMonster();
+    const auto goblinThreeId = core->createMonster();
+
+    auto * g1 = static_cast<Monster *>(core->getEntity(goblinOneId, EntityType::Monster));
+    auto * g2 = static_cast<Monster *>(core->getEntity(goblinTwoId, EntityType::Monster));
+    auto * g3 = static_cast<Monster *>(core->getEntity(goblinThreeId, EntityType::Monster));
+
+    g1->constructFromTemplate(goblinTemplateId);
+    g2->constructFromTemplate(goblinTemplateId);
+    g3->constructFromTemplate(goblinTemplateId);
+
+    g1->setName("Goblin One");
+    g2->setName("Goblin Two");
+    g3->setName("Goblin Three");
 
     std::unique_ptr<WinWindow> window = std::make_unique<WinWindow>();
     window->createWindow();

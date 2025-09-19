@@ -9,6 +9,29 @@ enum class EntityType
     NUM_ENTITY_TYPES,
 };
 
+namespace Core
+{
+    static EntityType entityTypeToTemplateType(EntityType t)
+    {
+        switch (t)
+        {
+            case EntityType::Character: return EntityType::CharacterTemplate;
+            case EntityType::Monster: return EntityType::MonsterTemplate;
+            default: return t;
+        }
+    }
+
+    static EntityType templateTypeToEntityType(EntityType t)
+    {
+        switch (t)
+        {
+            case EntityType::CharacterTemplate: return EntityType::Character;
+            case EntityType::MonsterTemplate: return EntityType::Monster;
+            default: return t;
+        }
+    }
+}
+
 using EntityId = unsigned int;
 
 class Entity

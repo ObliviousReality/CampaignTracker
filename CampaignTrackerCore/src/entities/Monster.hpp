@@ -10,6 +10,8 @@ class Monster : public Creature
 public:
     Monster(EntityId id) : Creature(id, EntityType::Monster, CreatureType::Monster) {}
 
+    void constructFromTemplate(EntityId templateId) override;
+
     void generateSkills() override;
 
     void setMonsterTypeName(const std::string newName) { monsterTypeName = newName; }
@@ -27,9 +29,16 @@ public:
     void addReaction(Action * action) { reactions.emplace_back(action); }
 
     const std::vector<Action *> & getActions() const { return actions; }
+    void setActions(const std::vector<Action *> & acts) { actions = acts; }
+
     const std::vector<Action *> & getBonusActions() const { return bonusActions; }
+    void setBonusActions(const std::vector<Action *> & acts) { actions = acts; }
+
     const std::vector<Action *> & getReactions() const { return reactions; }
+    void setReactions(const std::vector<Action *> & acts) { actions = acts; }
+
     const std::vector<Action *> & getLegendaryActions() const { return legendaryActions; }
+    void setLegendaryActions(const std::vector<Action *> & acts) { actions = acts; }
 
 private:
     std::string monsterTypeName;

@@ -18,6 +18,8 @@ public:
 
     Character(EntityId id, CreatureType ct = CreatureType::Player);
 
+    void constructFromTemplate(EntityId id) override {}
+
     const ClassType getClassType() const { return classType; }
     const RaceType getRaceType() const { return raceType; }
 

@@ -16,6 +16,8 @@
 #include <string>
 #include <vector>
 
+class Template;
+
 enum class CreatureType
 {
     Player,
@@ -29,6 +31,8 @@ class Creature : public Entity
 {
 public:
     Creature(const EntityId newId, const EntityType t, CreatureType ct) : Entity(newId, t), creatureType(ct) {}
+
+    virtual void constructFromTemplate(EntityId id);
 
     void setName(const std::string & newName) { name = newName; }
     const std::string & getName() const { return name; }
