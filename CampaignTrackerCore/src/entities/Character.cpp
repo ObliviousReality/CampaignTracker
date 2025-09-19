@@ -33,7 +33,7 @@ void Character::generateHP()
 
     auto baseHP = Core::getDiceValue(dice);
     auto subsequentHP = Core::getDiceAverageValueR(dice);
-    const auto conMod = getAbilityModifier(AbilityType::Constitution);
+    const auto conMod = getModifier(AbilityType::Constitution);
     subsequentHP += conMod;
     baseHP += conMod;
 

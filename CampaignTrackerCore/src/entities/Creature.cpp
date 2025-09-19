@@ -2,27 +2,11 @@
 
 #include <array>
 
-Creature::Creature(const EntityId id, const EntityType t, const CreatureType ct) : Entity(id, t), creatureType(ct)
-{
-    abilities = std::make_unique<Abilities>();
-    skills = std::make_unique<Skills>();
-    passives = std::make_unique<PassiveSkills>();
-}
-
 void Creature::setTaggedSkills(const std::vector<SkillType> & skills, const int tagLevel)
 {
     for (const auto skill : skills)
     {
         setTaggedSkill(skill, tagLevel);
-    }
-}
-
-void Creature::setAbilities(const std::array<int, static_cast<size_t>(AbilityType::NUM_ABILITIES)> & abilities) const
-{
-    int count = 0;
-    for (const auto ab : abilities)
-    {
-        setAbility(static_cast<AbilityType>(count++), ab);
     }
 }
 
@@ -41,11 +25,11 @@ void Creature::generateSkills()
     { setSkill(st, base + (prof * getTaggedSkillLevel(st))); };
 
     // Str skills
-    const auto str = abilities->getModifier(AbilityType::Strength);
+    const auto str = getModifier(AbilityType::Strength);
     setSkillLevel(SkillType::Athletics, str);
 
     // Dex skills
-    const auto dex = abilities->getModifier(AbilityType::Dexterity);
+    const auto dex = getModifier(AbilityType::Dexterity);
     setSkillLevel(SkillType::Acrobatics, dex);
     setSkillLevel(SkillType::SleightOfHand, dex);
     setSkillLevel(SkillType::Stealth, dex);
@@ -53,7 +37,7 @@ void Creature::generateSkills()
     // no con skills
 
     // Int skills
-    const auto intel = abilities->getModifier(AbilityType::Intelligence);
+    const auto intel = getModifier(AbilityType::Intelligence);
     setSkillLevel(SkillType::Arcana, intel);
     setSkillLevel(SkillType::History, intel);
     setSkillLevel(SkillType::Investigation, intel);
@@ -61,7 +45,7 @@ void Creature::generateSkills()
     setSkillLevel(SkillType::Religion, intel);
 
     // Wis skills
-    const auto wis = abilities->getModifier(AbilityType::Wisdom);
+    const auto wis = getModifier(AbilityType::Wisdom);
     setSkillLevel(SkillType::AnimalHandling, wis);
     setSkillLevel(SkillType::Insight, wis);
     setSkillLevel(SkillType::Medicine, wis);
@@ -69,7 +53,7 @@ void Creature::generateSkills()
     setSkillLevel(SkillType::Survival, wis);
 
     // Cha skills
-    const auto cha = abilities->getModifier(AbilityType::Charisma);
+    const auto cha = getModifier(AbilityType::Charisma);
     setSkillLevel(SkillType::Deception, cha);
     setSkillLevel(SkillType::Intimidation, cha);
     setSkillLevel(SkillType::Performance, cha);
@@ -79,16 +63,16 @@ void Creature::generateSkills()
 
     auto getPassiveSkill = [&](const SkillType st)
     {
-        auto mod = (skills->getSkill(st));
+        auto mod = (getSkill(st));
         auto ad = (hasAdvantage(st) ? 5 : 0);
         auto dd(hasDisadvantage(st) ? 5 : 0);
 
         return 10 + mod + ad - dd;
     };
 
-    passives->perception = getPassiveSkill(SkillType::Perception);
-    passives->insight = getPassiveSkill(SkillType::Insight);
-    passives->investigation = getPassiveSkill(SkillType::Investigation);
+    setPassiveSkill(PassiveSkillType::Perception, getPassiveSkill(SkillType::Perception));
+    setPassiveSkill(PassiveSkillType::Insight, getPassiveSkill(SkillType::Insight));
+    setPassiveSkill(PassiveSkillType::Investigation, getPassiveSkill(SkillType::Investigation));
 
-    setInitiative(abilities->getModifier(AbilityType::Dexterity));
+    setInitiative(getModifier(AbilityType::Dexterity));
 }

@@ -28,56 +28,68 @@ enum class CreatureType
 class Creature : public Entity
 {
 public:
-    Creature(const EntityId newId, const EntityType t, CreatureType ct);
+    Creature(const EntityId newId, const EntityType t, CreatureType ct) : Entity(newId, t), creatureType(ct) {}
 
-    const std::string getName() const { return name; }
-    void setName(const std::string newName) { name = newName; }
+    void setName(const std::string & newName) { name = newName; }
+    const std::string & getName() const { return name; }
 
-    const CreatureType getCreatureType() const { return creatureType; }
+    // not set, comes from constructor
+    CreatureType getCreatureType() const { return creatureType; }
 
-    const int getHitPoints() const { return hitPoints; }
-    const int getHitPointsMax() const { return hitPointsMax; }
-    const int getTempHitPoints() const { return tempHitPoints; }
-    const int getTotalHitPoints() const { return hitPoints + tempHitPoints; }
-    const int getAC() const { return armourClass; }
-    const int getSpeed() const { return speed; }
-    const int getInitiative() const { return initiative; }
-    const int getProficiency() const { return proficiency; }
+    void setHitPoints(int newHP) { hitPoints = newHP; }
+    int getHitPoints() const { return hitPoints; }
 
-    void setHitPoints(const int newHP) { hitPoints = newHP; }
-    void setMaxHitPoints(const int newMaxHP) { hitPointsMax = newMaxHP; }
-    void setTempHitPoint(const int newTempHP) { tempHitPoints = newTempHP; }
-    void setAC(const int newAC) { armourClass = newAC; }
-    void setSpeed(const int newSpeed) { speed = newSpeed; }
-    void setSpeedModifier(const int speedMod) { speed += speedMod; }
+    void setMaxHitPoints(int newMaxHP) { hitPointsMax = newMaxHP; }
+    int getHitPointsMax() const { return hitPointsMax; }
 
-    void setInitiative(const int newInitiative) { initiative = newInitiative; }
-    void setProficiency(const int newProf) { proficiency = newProf; }
+    void setTempHitPoint(int newTempHP) { tempHitPoints = newTempHP; }
+    int getTempHitPoints() const { return tempHitPoints; }
 
-    const int getAbility(const AbilityType at) const { return abilities->getAbility(at); }
-    const int getAbilityModifier(const AbilityType at) const { return abilities->getModifier(at); }
-    const int getSkill(const SkillType st) const { return skills->getSkill(st); }
-    const int getPassiveAbility(const PassiveSkillType pst) { return passives->getPassiveSkill(pst); }
+    // no set as this is calculated
+    int getTotalHitPoints() const { return hitPoints + tempHitPoints; }
 
-    void setAbility(const AbilityType at, const int val) const { return abilities->setAbility(at, val); }
+    void setAC(int newAC) { armourClass = newAC; }
+    int getAC() const { return armourClass; }
 
-    void setAbilities(const std::array<int, static_cast<size_t>(AbilityType::NUM_ABILITIES)> & abilities) const;
+    void setSpeed(int newSpeed) { speed = newSpeed; }
+    int getSpeed() const { return speed; }
 
-    void setSkill(const SkillType st, const int val) const { return skills->setSkill(st, val); }
-    void setPassiveAbility(const PassiveSkillType pst, const int val) { return passives->setPassiveSkill(pst, val); }
+    void setSpeedModifier(int speedMod) { speed += speedMod; }
+    // no get
 
-    const bool hasAdvantage(const AbilityType at) { return abilityAdvantages.find(at) != abilityAdvantages.end(); }
-    const bool hasAdvantage(const SkillType st) { return skillAdvantages.find(st) != skillAdvantages.end(); }
-    const bool hasInitiativeAdvantage() { return initiativeAdvantage; }
+    void setInitiative(int newInitiative) { initiative = newInitiative; }
+    int getInitiative() const { return initiative; }
 
-    const bool hasDisadvantage(const AbilityType at)
-    {
-        return abilityDisadvantages.find(at) != abilityDisadvantages.end();
-    }
-    const bool hasDisadvantage(const SkillType st) { return skillDisadvantages.find(st) != skillDisadvantages.end(); }
-    const bool hasInitiativeDisadvantage() { return initiativeDisadvantage; }
+    void setProficiency(int newProf) { proficiency = newProf; }
+    int getProficiency() const { return proficiency; }
 
-    void setAdvantage(const AbilityType at, const bool val)
+    void setAbility(AbilityType at, int val) { abilities[static_cast<int>(at)] = val; }
+    int getAbility(AbilityType at) const { return abilities.at(static_cast<int>(at)); }
+
+    void setAbilities(const Abilities & newAbilities) { abilities = newAbilities; }
+    const Abilities & getAbilities() { return abilities; }
+
+    void setSkill(SkillType st, int val) { skills[static_cast<int>(st)] = val; }
+    int getSkill(SkillType st) const { return skills.at(static_cast<int>(st)); }
+
+    void setSkills(const Skills & newSkills) { skills = newSkills; }
+    const Skills & getSkills() const { return skills; }
+
+    void setPassiveSkill(PassiveSkillType pst, int val) { passives[static_cast<int>(pst)] = val; }
+    int getPassiveSkill(PassiveSkillType pst) const { return passives[static_cast<int>(pst)]; }
+
+    void setPassives(const Passives & newPassives) { passives = newPassives; }
+    const Passives & getPassives() const { return passives; }
+
+    bool hasAdvantage(AbilityType at) { return abilityAdvantages.find(at) != abilityAdvantages.end(); }
+    bool hasAdvantage(SkillType st) { return skillAdvantages.find(st) != skillAdvantages.end(); }
+    bool hasInitiativeAdvantage() const { return initiativeAdvantage; }
+
+    bool hasDisadvantage(AbilityType at) { return abilityDisadvantages.find(at) != abilityDisadvantages.end(); }
+    bool hasDisadvantage(SkillType st) const { return skillDisadvantages.find(st) != skillDisadvantages.end(); }
+    bool hasInitiativeDisadvantage() const { return initiativeDisadvantage; }
+
+    void setAdvantage(AbilityType at, bool val)
     {
         if (val)
         {
@@ -89,7 +101,7 @@ public:
         }
     }
 
-    void setAdvantage(const SkillType st, const bool val)
+    void setAdvantage(SkillType st, bool val)
     {
         if (val)
         {
@@ -100,9 +112,14 @@ public:
             skillAdvantages.erase(st);
         }
     }
-    void setInitiativeAdvantage(const bool val) { initiativeAdvantage = val; }
+    void setInitiativeAdvantage(bool val) { initiativeAdvantage = val; }
 
-    void setDisadvantage(const AbilityType at, const bool val)
+    void setAdvantages(const std::set<AbilityType> & newAbilities) { abilityAdvantages = newAbilities; }
+    const std::set<AbilityType> & getAbilityAdvantages() const { return abilityAdvantages; }
+    void setAdvantages(const std::set<SkillType> & newSkills) { skillAdvantages = newSkills; }
+    const std::set<SkillType> & getSkillAdvantages() const { return skillAdvantages; }
+
+    void setDisadvantage(AbilityType at, bool val)
     {
         if (val)
         {
@@ -114,7 +131,7 @@ public:
         }
     }
 
-    void setDisadvantage(const SkillType st, const bool val)
+    void setDisadvantage(SkillType st, bool val)
     {
         if (val)
         {
@@ -125,85 +142,96 @@ public:
             skillDisadvantages.erase(st);
         }
     }
-    void setInitiativeDisadvantage(const bool val) { initiativeDisadvantage = val; }
+    void setInitiativeDisadvantage(bool val) { initiativeDisadvantage = val; }
 
-    void addCondition(const ConditionType ct) { conditions.emplace(ct); }
-    void removeCondition(const ConditionType ct) { conditions.erase(ct); }
-    const bool hasCondition(const ConditionType ct) { return conditions.find(ct) != conditions.end(); }
-
-    void addImmunity(const ConditionType ct) { conditionImmunities.emplace(ct); }
-    void removeImmunity(const ConditionType ct) { conditionImmunities.erase(ct); }
-    const bool hasImmunity(const ConditionType ct) { return conditionImmunities.find(ct) != conditionImmunities.end(); }
-
-    void addImmunity(const DamageType dt) { damageTypeImmunities.emplace(dt); }
-    void removeImmunity(const DamageType dt) { damageTypeImmunities.erase(dt); }
-    const bool hasImmunity(const DamageType dt) { return damageTypeImmunities.find(dt) != damageTypeImmunities.end(); }
-
-    void addResistance(const DamageType dt) { resistances.emplace(dt); }
-    void removeResistance(const DamageType dt) { resistances.erase(dt); }
-    const bool hasResistance(const DamageType dt) { return resistances.find(dt) != resistances.end(); }
-
-    void addVulnerability(const DamageType dt) { vulnerabilities.emplace(dt); }
-    void removeVulnerability(const DamageType dt) { vulnerabilities.erase(dt); }
-    const bool hasVulnerability(const DamageType dt) { return vulnerabilities.find(dt) != vulnerabilities.end(); }
-
-    void addSense(const SenseType st) { senses.emplace(st); }
-    void removeSense(const SenseType st) { senses.erase(st); }
-    const bool hasSense(const SenseType st) { return senses.find(st) != senses.end(); }
-
-    const Abilities * const getAbilities() const { return abilities.get(); }
-    const Skills * const getSkills() const { return skills.get(); }
-    const PassiveSkills * const getPassives() const { return passives.get(); }
-
-    const std::set<SkillType> & getSkillAdvantages() const { return skillAdvantages; }
-    const std::set<AbilityType> & getAbilityAdvantages() const { return abilityAdvantages; }
-
-    const std::set<SkillType> & getSkillDisadvantages() const { return skillDisadvantages; }
+    void setDisadvantages(const std::set<AbilityType> & newAbilities) { abilityDisadvantages = newAbilities; }
     const std::set<AbilityType> & getAbilityDisadvantages() const { return abilityDisadvantages; }
+    void setDisadvantages(const std::set<SkillType> & newSkills) { skillDisadvantages = newSkills; }
+    const std::set<SkillType> & getSkillDisadvantages() const { return skillDisadvantages; }
 
+    void addCondition(ConditionType ct) { conditions.emplace(ct); }
+    void removeCondition(ConditionType ct) { conditions.erase(ct); }
+    bool hasCondition(ConditionType ct) { return conditions.find(ct) != conditions.end(); }
+
+    void setConditions(const std::set<ConditionType> & newConditions) { conditions = newConditions; }
     const std::set<ConditionType> & getConditions() const { return conditions; }
 
-    const std::set<ConditionType> & getConditionImmunities() const { return conditionImmunities; }
-    const std::set<DamageType> & getDamageTypeImmunities() const { return damageTypeImmunities; }
+    void addImmunity(ConditionType ct) { conditionImmunities.emplace(ct); }
+    void removeImmunity(ConditionType ct) { conditionImmunities.erase(ct); }
+    bool hasImmunity(ConditionType ct) { return conditionImmunities.find(ct) != conditionImmunities.end(); }
 
+    void setImmunities(const std::set<ConditionType> & newImmunities) { conditionImmunities = newImmunities; }
+    const std::set<ConditionType> & getConditionImmunities() const { return conditionImmunities; }
+
+    void addImmunity(DamageType dt) { damageTypeImmunities.emplace(dt); }
+    void removeImmunity(DamageType dt) { damageTypeImmunities.erase(dt); }
+    bool hasImmunity(DamageType dt) { return damageTypeImmunities.find(dt) != damageTypeImmunities.end(); }
+
+    void setImmunities(const std::set<DamageType> & newImmunities) { damageTypeImmunities = newImmunities; }
+    const std::set<DamageType> & getDamageImmunities() const { return damageTypeImmunities; }
+
+    void addResistance(DamageType dt) { resistances.emplace(dt); }
+    void removeResistance(DamageType dt) { resistances.erase(dt); }
+    bool hasResistance(DamageType dt) { return resistances.find(dt) != resistances.end(); }
+
+    void setResistances(const std::set<DamageType> & newResistances) { resistances = newResistances; }
     const std::set<DamageType> & getResistances() const { return resistances; }
+
+    void addVulnerability(DamageType dt) { vulnerabilities.emplace(dt); }
+    void removeVulnerability(DamageType dt) { vulnerabilities.erase(dt); }
+    bool hasVulnerability(DamageType dt) { return vulnerabilities.find(dt) != vulnerabilities.end(); }
+
+    void setVulnerabilities(const std::set<DamageType> & newVulnerabilities) { vulnerabilities = newVulnerabilities; }
     const std::set<DamageType> & getVulnerabilities() const { return vulnerabilities; }
 
+    void addSense(SenseType st) { senses.emplace(st); }
+    void removeSense(SenseType st) { senses.erase(st); }
+    bool hasSense(SenseType st) { return senses.find(st) != senses.end(); }
+
+    void setSenses(const std::set<SenseType> & newSenses) { senses = newSenses; }
     const std::set<SenseType> & getSenses() const { return senses; }
 
-    const std::pair<MoralityType, OrderType> getAlignment() const { return { morality, order }; }
-
-    void setAlignment(const MoralityType newMorality, const OrderType newOrder)
+    void setAlignment(const std::pair<MoralityType, OrderType> & alignment)
+    {
+        setAlignment(alignment.first, alignment.second);
+    }
+    void setAlignment(MoralityType newMorality, OrderType newOrder)
     {
         morality = newMorality;
         order = newOrder;
     }
+    std::pair<MoralityType, OrderType> getAlignment() const { return { morality, order }; }
 
-    void setTaggedSkill(const SkillType st, const int tagLevel = 1) { taggedSkills[st] = tagLevel; }
-    void setTaggedSkills(const std::vector<SkillType> & skills, const int tagLevel = 1);
+    void setTaggedSkill(SkillType st, int tagLevel = 1) { taggedSkills[st] = tagLevel; }
+    void setTaggedSkills(const std::vector<SkillType> & skills, int tagLevel = 1);
+    int getTaggedSkillLevel(SkillType st) const { return taggedSkills.count(st) ? taggedSkills.at(st) : 0; }
 
-    const int getTaggedSkillLevel(const SkillType st) const { return taggedSkills.count(st) ? taggedSkills.at(st) : 0; }
-
-    const int getSkillModifier(const SkillType st) const
+    int getSkillModifier(SkillType st) const
     {
-        return skills->getModifier(st) + (getProficiency() * getTaggedSkillLevel(st));
+        return Core::getModifier(skills[static_cast<int>(st)] + (getProficiency() * getTaggedSkillLevel(st)));
     }
 
-    virtual void generateSkills();
-
     void setTaggedSavingThrows(const std::vector<AbilityType> & savingThrows, const int tagLevel = 1);
-    void setTaggedSavingThrow(const AbilityType at, const int tagLevel = 1) { taggedSavingThrows[at] = tagLevel; }
-    const int getTaggedSavingThrowLevel(const AbilityType at) const
+    void setTaggedSavingThrow(AbilityType at, int tagLevel = 1) { taggedSavingThrows[at] = tagLevel; }
+    int getTaggedSavingThrowLevel(AbilityType at) const
     {
         return taggedSavingThrows.count(at) ? taggedSavingThrows.at(at) : 0;
     }
 
-    const int getSavingThrowModifier(const AbilityType at)
+    int getSavingThrowModifier(AbilityType at)
     {
-        return abilities->getModifier(at) + (getProficiency() * getTaggedSavingThrowLevel(at));
+        return Core::getModifier(abilities[static_cast<int>(at)]) + (getProficiency() * getTaggedSavingThrowLevel(at));
     }
 
+    int getModifier(AbilityType at) { return getModifierInternal(abilities.at(static_cast<int>(at))); }
+    int getModifier(SkillType at) { return getModifierInternal(skills[static_cast<int>(at)]); }
+    int getModifier(PassiveSkillType at) { return getModifierInternal(passives[static_cast<int>(at)]); }
+
+    virtual void generateSkills();
+
 private:
+    int getModifierInternal(int value) { return Core::getModifier(value); }
+
     CreatureType creatureType;
     std::string name;
 
@@ -215,9 +243,9 @@ private:
     int proficiency = 0;
     int tempHitPoints = 0;
 
-    std::unique_ptr<Abilities> abilities;
-    std::unique_ptr<Skills> skills;
-    std::unique_ptr<PassiveSkills> passives;
+    Abilities abilities = {};
+    Skills skills = {};
+    Passives passives = {};
 
     std::set<SkillType> skillAdvantages;
     std::set<SkillType> skillDisadvantages;

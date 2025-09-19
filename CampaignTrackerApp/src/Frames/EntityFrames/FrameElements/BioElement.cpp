@@ -23,10 +23,10 @@ void BioElement::drawAbilities()
     ImGui::SeparatorText("Abilities");
     auto * c = static_cast<Creature *>(CTCore::Get()->getEntity(creatureId, entityType));
 
-    auto * ab = c->getAbilities();
-    auto addAbility = [](const AbilityType at, const Abilities * ab)
+    const auto & ab = c->getAbilities();
+    auto addAbility = [&ab](const AbilityType at)
     {
-        const auto val = ab->getModifier(at);
+        const auto val = Core::getModifier(ab[static_cast<int>(at)]);
         const auto text = Core::getAbilityShortString(at) + "\n " + (val >= 0 ? '+' : '-') + std::to_string(abs(val));
         ImGui::Button(text.c_str());
         if (at != AbilityType::Charisma)
@@ -35,12 +35,12 @@ void BioElement::drawAbilities()
         }
     };
 
-    addAbility(AbilityType::Strength, ab);
-    addAbility(AbilityType::Dexterity, ab);
-    addAbility(AbilityType::Constitution, ab);
-    addAbility(AbilityType::Intelligence, ab);
-    addAbility(AbilityType::Wisdom, ab);
-    addAbility(AbilityType::Charisma, ab);
+    addAbility(AbilityType::Strength);
+    addAbility(AbilityType::Dexterity);
+    addAbility(AbilityType::Constitution);
+    addAbility(AbilityType::Intelligence);
+    addAbility(AbilityType::Wisdom);
+    addAbility(AbilityType::Charisma);
 }
 
 void BioElement::drawSavingThrows()
@@ -156,10 +156,10 @@ void BioElement::drawPassives()
     auto * c = static_cast<Creature *>(CTCore::Get()->getEntity(creatureId, entityType));
 
     ImGui::SeparatorText("Passives");
-    auto * passives = c->getPassives();
-    ImGui::Text(("Perception: " + std::to_string(passives->perception)).c_str());
-    ImGui::Text(("Investigation: " + std::to_string(passives->investigation)).c_str());
-    ImGui::Text(("Insight: " + std::to_string(passives->insight)).c_str());
+    const auto & passives = c->getPassives();
+    ImGui::Text(("Perception: " + std::to_string(c->getPassiveSkill(PassiveSkillType::Perception))).c_str());
+    ImGui::Text(("Investigation: " + std::to_string(c->getPassiveSkill(PassiveSkillType::Investigation))).c_str());
+    ImGui::Text(("Insight: " + std::to_string(c->getPassiveSkill(PassiveSkillType::Insight))).c_str());
 }
 
 void BioElement::drawOtherDetails()
@@ -196,7 +196,7 @@ void BioElement::drawOtherDetails()
         }
         immunityStream << Core::getConditionString(con).c_str();
     }
-    for (const auto dt : c->getDamageTypeImmunities())
+    for (const auto dt : c->getDamageImmunities())
     {
         if (count++)
         {
