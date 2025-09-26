@@ -20,10 +20,31 @@ void Monster::constructFromTemplate(EntityId templateId)
     setChallengeRating(t->getChallengeRating());
     setSpeed(t->getSpeed());
 
-    setActions(t->getActions());
-    setBonusActions(t->getBonusActions());
-    setReactions(t->getReactions());
-    setLegendaryActions(t->getLegendaryActions());
+    auto * core = CTCore::Get();
+
+    for (const auto templateId : t->getActions())
+    {
+        auto id = core->createActionFromTemplate(templateId);
+        addAction(id);
+    }
+
+    for (const auto templateId : t->getBonusActions())
+    {
+        auto id = core->createActionFromTemplate(templateId);
+        addBonusAction(id);
+    }
+
+    for (const auto templateId : t->getReactions())
+    {
+        auto id = core->createActionFromTemplate(templateId);
+        addReaction(id);
+    }
+
+    for (const auto templateId : t->getLegendaryActions())
+    {
+        auto id = core->createActionFromTemplate(templateId);
+        addLegendaryAction(id);
+    }
 
     Creature::constructFromTemplate(templateId);
 

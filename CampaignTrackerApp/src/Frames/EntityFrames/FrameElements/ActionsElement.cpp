@@ -9,8 +9,9 @@ void ActionsElement::draw()
     if (actions.size())
     {
         ImGui::SeparatorText("Actions");
-        for (auto action : actions)
+        for (auto actionId : actions)
         {
+            auto * action = static_cast<Action*>(CTCore::Get()->getEntity(actionId, EntityType::Action));
             const auto canDoAction = action->canDoAction();
             if (!canDoAction)
             {

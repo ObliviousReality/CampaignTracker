@@ -34,6 +34,10 @@ public:
 
     EntityId createMonsterTemplate();
 
+    EntityId createAction();
+    EntityId createActionFromTemplate(EntityId);
+    EntityId createActionTemplate();
+
     template<typename T>
     EntityId createObject(const EntityType type)
     {

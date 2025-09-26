@@ -2,8 +2,9 @@
 
 #include "Template.hpp"
 
-#include "data/Action.hpp"
 #include "data/MonsterType.hpp"
+
+#include "entities/Action.hpp"
 
 #include <string>
 #include <vector>
@@ -16,32 +17,32 @@ public:
     const int getChallengeRating() const { return challengeRating; }
     void setChallengeRating(const int newCR) { challengeRating = newCR; }
 
-    const std::vector<Action *> & getActions() const { return actions; }
-    void setActions(const std::vector<Action *> & acts) { actions = acts; }
+    const Actions & getActions() const { return actions; }
+    void setActions(const Actions & acts) { actions = acts; }
 
-    const std::vector<Action *> & getBonusActions() const { return bonusActions; }
-    void setBonusActions(const std::vector<Action *> & acts) { actions = acts; }
+    const Actions & getBonusActions() const { return bonusActions; }
+    void setBonusActions(const Actions & acts) { bonusActions = acts; }
 
-    const std::vector<Action *> & getReactions() const { return reactions; }
-    void setReactions(const std::vector<Action *> & acts) { actions = acts; }
+    const Actions & getReactions() const { return reactions; }
+    void setReactions(const Actions & acts) { reactions = acts; }
 
-    const std::vector<Action *> & getLegendaryActions() const { return legendaryActions; }
-    void setLegendaryActions(const std::vector<Action *> & acts) { actions = acts; }
+    const Actions & getLegendaryActions() const { return legendaryActions; }
+    void setLegendaryActions(const Actions & acts) { legendaryActions = acts; }
 
     void setMonsterType(const MonsterType newMonsterType) { monsterType = newMonsterType; }
     const MonsterType getMonsterType() const { return monsterType; }
 
-    void addAction(Action * action) { actions.emplace_back(action); }
-    void addBonusAction(Action * action) { bonusActions.emplace_back(action); }
-    void addLegendaryAction(Action * action) { legendaryActions.emplace_back(action); }
-    void addReaction(Action * action) { reactions.emplace_back(action); }
+    void addActionTemplate(EntityId action) { actions.emplace(action); }
+    void addBonusActionTemplate(EntityId action) { bonusActions.emplace(action); }
+    void addLegendaryActionTemplate(EntityId action) { legendaryActions.emplace(action); }
+    void addReactionTemplate(EntityId action) { reactions.emplace(action); }
 
 private:
     int challengeRating = 0;
     MonsterType monsterType;
 
-    std::vector<Action *> actions = {};
-    std::vector<Action *> bonusActions = {};
-    std::vector<Action *> legendaryActions = {};
-    std::vector<Action *> reactions = {};
+    Actions actions = {};
+    Actions bonusActions = {};
+    Actions legendaryActions = {};
+    Actions reactions = {};
 };

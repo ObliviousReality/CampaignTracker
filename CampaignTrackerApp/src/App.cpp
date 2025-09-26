@@ -7,6 +7,8 @@
 #include "Render/Win32/WinWindow.hpp"
 
 #include "entities/Character.hpp"
+
+#include "entities/templates/ActionTemplate.hpp"
 #include "entities/templates/MonsterTemplate.hpp"
 
 #include <memory>
@@ -144,26 +146,30 @@ int main()
     airElemental->addImmunity(ConditionType::Restrained);
     airElemental->addImmunity(ConditionType::Unconscious);
 
-    Action * actionA = new Action();
+    auto actionId = core->createAction();
+
+    auto * actionA = static_cast<Action *>(core->getEntity(actionId, EntityType::Action));
     actionA->setName("Multiattack");
     actionA->setDescription("The elemental takes two Thunderous Slam attacks");
     actionA->setLimitType(ActionLimitType::PerDay, 2);
-    airElemental->addAction(actionA);
+    airElemental->addAction(actionId);
 
-    auto * actionB = new Action();
+    actionId = core->createAction();
+    auto * actionB = static_cast<Action *>(core->getEntity(actionId, EntityType::Action));
     actionB->setName("Thunderous Slam");
     actionB->setDescription("Melee Attack Roll: +8, reach 10ft. Hit 14 (2d8 + 5) Thunder damage.");
     actionB->setLimitType(ActionLimitType::RechargeShortRest);
-    airElemental->addAction(actionB);
+    airElemental->addAction(actionId);
 
-    auto * actionC = new Action();
+    actionId = core->createAction();
+    auto * actionC = static_cast<Action *>(core->getEntity(actionId, EntityType::Action));
     actionC->setName("Whirlwind");
     actionC->setDescription(
         "Strength Saving Throw: DC 13, one Medium or smaller creature in the elemental�s space. Failure: 24 "
         "(4d10 + 2) Thunder damage, and the target is pushed up to 20 feet straight away from the elemental "
         "and has the Prone condition. Success: Half damage only.");
     actionC->setLimitType(ActionLimitType::RechargeRoll, 4);
-    airElemental->addAction(actionC);
+    airElemental->addAction(actionId);
 
     airElemental->addSense(SenseType::Darkvision);
     airElemental->generateSkills();
@@ -197,22 +203,25 @@ int main()
     goblinTemplate->setAbilities({ 8, 15, 10, 10, 8, 8 });
     goblinTemplate->addSense(SenseType::Darkvision);
 
-    auto * goblinActionOne = new Action();
+    actionId = core->createActionTemplate();
+    auto * goblinActionOne = static_cast<ActionTemplate *>(core->getEntity(actionId, EntityType::ActionTemplate));
     goblinActionOne->setName("Scimitar");
     goblinActionOne->setDescription("Melee Attack Roll: +4, reach 5ft.\nHit: 5 (1d6 + 2) Slashing Damange, plus 2 "
                                     "(1d4) Slashing Damage if the attack roll had advantage.");
-    goblinTemplate->addAction(goblinActionOne);
+    goblinTemplate->addActionTemplate(actionId);
 
-    auto * goblinActionTwo = new Action();
+    actionId = core->createActionTemplate();
+    auto * goblinActionTwo = static_cast<Action *>(core->getEntity(actionId, EntityType::ActionTemplate));
     goblinActionTwo->setName("Shortbow");
     goblinActionTwo->setDescription("Ranged Attack Roll: +4, range 80/320ft.\nHit: 5 (1d6 + 2) Piercing Damage, plus 2 "
                                     "(1d4) Piercing Damage if the attack roll had advantage.");
-    goblinTemplate->addAction(goblinActionTwo);
+    goblinTemplate->addActionTemplate(actionId);
 
-    auto * goblinBonusAction = new Action();
+    actionId = core->createActionTemplate();
+    auto * goblinBonusAction = static_cast<Action *>(core->getEntity(actionId, EntityType::ActionTemplate));
     goblinBonusAction->setName("Nimble Escape");
     goblinBonusAction->setDescription("The Goblin takes the Disengage or Hide action.");
-    goblinTemplate->addBonusAction(goblinBonusAction);
+    goblinTemplate->addBonusActionTemplate(actionId);
 
     const auto goblinOneId = core->createMonster();
     const auto goblinTwoId = core->createMonster();

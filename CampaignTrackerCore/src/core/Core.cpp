@@ -2,6 +2,7 @@
 
 #include "core/Store.hpp"
 
+#include "entities/templates/ActionTemplate.hpp"
 #include "entities/templates/MonsterTemplate.hpp"
 
 #include <iostream>
@@ -53,8 +54,31 @@ EntityId CTCore::createMonster()
 }
 
 EntityId CTCore::createMonsterTemplate()
-{ 
+{
     const auto id = store->getNextFreeId(EntityType::MonsterTemplate);
     createEntity(id, EntityType::MonsterTemplate, new MonsterTemplate(id));
+    return id;
+}
+
+EntityId CTCore::createAction()
+{
+    const auto id = store->getNextFreeId(EntityType::Action);
+    createEntity(id, EntityType::Action, new Action(id));
+    return id;
+}
+
+EntityId CTCore::createActionFromTemplate(EntityId templateId)
+{
+    const auto id = store->getNextFreeId(EntityType::Action);
+    auto * action = new Action(id);
+    action->constructFromTemplate(templateId);
+    createEntity(id, EntityType::Action, action);
+    return id;
+}
+
+EntityId CTCore::createActionTemplate()
+{
+    const auto id = store->getNextFreeId(EntityType::ActionTemplate);
+    createEntity(id, EntityType::ActionTemplate, new ActionTemplate(id));
     return id;
 }

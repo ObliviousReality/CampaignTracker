@@ -6,6 +6,8 @@ enum class EntityType
     Monster,
     CharacterTemplate,
     MonsterTemplate,
+    Action,
+    ActionTemplate,
     NUM_ENTITY_TYPES,
 };
 
